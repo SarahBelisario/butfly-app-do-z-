@@ -7,11 +7,10 @@
     "@emotion/styled": "^11.6.0",
     "@mui/lab": "^5.0.0-alpha.68",
     "@mui/material": "^5.4.1",
-    "@types/node": "^16.7.13",
-    "@types/react": "^17.0.39",
-    "@types/react-dom": "^17.0.9",
+    "chart.js": "^3.7.1",
     "framer-motion": "^6.2.6",
     "react": "^17.0.2",
+    "react-chartjs-2": "^4.0.1",
     "react-dom": "^17.0.2",
     "react-hook-form": "^7.27.0",
     "react-icons": "^4.3.1",
@@ -23,7 +22,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "typecheck": "tsc",
+    "typecheck:watch": "tsc -w"
   },
   "eslintConfig": {
     "extends": [
@@ -42,5 +43,11 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/node": "^16.7.13",
+    "@types/react": "^17.0.39",
+    "@types/react-dom": "^17.0.9",
+    "@types/react-icons": "^3.0.0"
   }
 }
