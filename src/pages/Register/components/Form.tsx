@@ -4,6 +4,7 @@ import {
   InputAdornment,
   TextField,
   Typography,
+  useTheme,
 } from "@mui/material";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -21,6 +22,7 @@ export default function Form(props: any) {
     setIsLoading(false);
     navigate("/login");
   };
+  const { palette } = useTheme()
 
   return (
     <form onSubmit={handleSubmit(submit)} {...props}>
@@ -104,7 +106,7 @@ export default function Form(props: any) {
       </LoadingButton>
 
       <Typography
-        color="#4a4a4a"
+        color={palette.text.secondary}
         fontWeight="light"
         sx={{
           mt: 2,
@@ -143,7 +145,7 @@ export default function Form(props: any) {
       </Typography>
 
       <Typography
-        color="#4a4a4a"
+        color={palette.text.secondary}
         fontWeight="light"
         sx={{
           mt: 2,

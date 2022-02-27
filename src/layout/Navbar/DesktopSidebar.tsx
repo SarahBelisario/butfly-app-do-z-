@@ -5,6 +5,7 @@ import { PageLogo } from './components/PageLogo'
 import { SearchInput } from './components/SearchInput'
 import { User } from './components/User'
 
+
 export function DesktopSidebar() {
   const isMobile = useMediaQuery('(max-width:600px)')
   return (
@@ -30,6 +31,6 @@ export function DesktopSidebar() {
         <Divider color="white" sx={{ opacity: 0.5, my: 2 }} />
         <User />
       </Box>
-    </motion.div>
+    </motion.div >
   )
 }

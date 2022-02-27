@@ -1,11 +1,12 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, useTheme } from "@mui/material";
 import React from "react";
 import Form from "./components/Form";
 import LeftContainer from "./LeftContainer";
 
 export function Register() {
+  const { palette } = useTheme()
   return (
-    <Box p={0} display="flex" height="100vh" style={{ background: "#f5f9ff" }}>
+    <Box p={0} display="flex" height="100vh" style={{ background: palette.background.default }}>
       <LeftContainer />
       <Box
         display="flex"
@@ -18,7 +19,7 @@ export function Register() {
       >
         <Box display="flex" flexDirection={"column"}>
           <Typography
-            color="#4a4a4a"
+            color={palette.text.primary}
             fontWeight="light"
             textAlign="left"
             sx={{ ml: 1, mb: 0, fontSize: 24, fontWeight: "light" }}
@@ -26,7 +27,7 @@ export function Register() {
             Inicie grátis, absolutamente grátis!
           </Typography>
           <Typography
-            color="#4a4a4a"
+            color={palette.text.secondary}
             fontWeight="light"
             textAlign="left"
             sx={{ ml: 1, mb: 4, fontSize: 14, fontWeight: "light" }}

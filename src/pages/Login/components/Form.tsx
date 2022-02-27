@@ -1,5 +1,5 @@
 import { LoadingButton } from '@mui/lab'
-import { IconButton, InputAdornment, TextField, Typography } from '@mui/material'
+import { IconButton, InputAdornment, TextField, Typography, useTheme } from '@mui/material'
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { IoEyeOffOutline, IoEyeOutline } from 'react-icons/io5'
@@ -12,6 +12,7 @@ export default function Form(props: any) {
   const [showPassword, setShowPassword] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [isLogged, setIsLogged] = useState(false)
+  const { palette } = useTheme()
   const submit = async (data: any) => {
     setIsLogged(true)
     setIsLoading(true)
@@ -64,7 +65,7 @@ export default function Form(props: any) {
         {isLogged ? (
           <motion.div
             style={{
-              background: '#6200ff',
+              background: palette.primary.main,
               position: 'absolute',
               borderRadius: 5000,
               width: 0,
@@ -84,7 +85,7 @@ export default function Form(props: any) {
       </LoadingButton>
 
       <Typography
-        color="#4a4a4a"
+        color={palette.text.primary}
         fontWeight="light"
         sx={{
           mt: 2,
