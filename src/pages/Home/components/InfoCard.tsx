@@ -29,7 +29,7 @@ const InfoCard = ({ title, value, compareValue, isBetter = 'greater', ...rest }:
 
     if (isBetter === 'greater') {
       if (getPercent(value, compareValue) > 0) {
-        return colors = {
+        colors = {
           background: `${palette.success.main}20`,
           foreground: palette.success.main,
           icon: <TiArrowSortedUp color={palette.success.main} />
@@ -37,7 +37,7 @@ const InfoCard = ({ title, value, compareValue, isBetter = 'greater', ...rest }:
       }
 
       if (getPercent(value, compareValue) < 0) {
-        return colors = {
+        colors = {
           background: `${palette.error.main}20`,
           foreground: palette.error.main,
           icon: <TiArrowSortedDown color={palette.error.main} />
@@ -47,7 +47,7 @@ const InfoCard = ({ title, value, compareValue, isBetter = 'greater', ...rest }:
 
     if (isBetter === 'lower') {
       if (getPercent(value, compareValue) < 0) {
-        return colors = {
+        colors = {
           background: `${palette.success.main}20`,
           foreground: palette.success.main,
           icon: <TiArrowSortedDown color={palette.success.main} />
@@ -55,18 +55,23 @@ const InfoCard = ({ title, value, compareValue, isBetter = 'greater', ...rest }:
       }
 
       if (getPercent(value, compareValue) > 0) {
-        return colors = {
+        colors = {
           background: `${palette.error.main}20`,
           foreground: palette.error.main,
           icon: <TiArrowSortedUp color={palette.error.main} />
         }
       }
     }
-    return colors = {
-      background: '#dddddd20',
-      foreground: '#dddddd',
-      icon: <TiMinus color="#dddddd" />
+
+    if (getPercent(value, compareValue) === 0) {
+      colors = {
+        background: '#dddddd20',
+        foreground: '#dddddd',
+        icon: <TiMinus color="#dddddd" />
+      }
     }
+
+    return colors
   }
 
   return (
