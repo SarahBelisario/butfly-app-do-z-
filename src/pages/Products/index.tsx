@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { ContentCard } from '../../components/ContentCard'
 import Table from '../../components/Table'
 import { ApiInstance } from '../../services/axios'
+import { productMapper } from './resolver/ProductMapper'
 
 
 const columns: { field: string, label: string, type?: 'currency' | 'date' }[] = [
@@ -22,8 +23,9 @@ export function Products() {
     if (page > totalPages) return
     await ApiInstance.get(`/products?page=${page}&limit=25`)
       .then(response => {
+        const newProducts = productMapper(response.data)
         setPage(page + 1)
-        setProducts([...products, ...response.data])
+        setProducts([...products, ...newProducts])
       })
   }
 
