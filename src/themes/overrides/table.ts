@@ -7,14 +7,22 @@ export const table: Components = {
         width: '100%',
         borderRadius: 10,
       },
-
+    }
+  },
+  MuiTableHead: {
+    styleOverrides: {
+      root: {
+        '& th': {
+          fontWeight: 'bold'
+        },
+      }
     }
   },
   MuiTableBody: {
     styleOverrides: {
       root: {
         '& td': {
-          fontWeight: 'lighter'
+          fontWeight: 'light'
         },
       },
     }

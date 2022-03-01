@@ -4,8 +4,8 @@ import { Navbar } from '../layout/Navbar'
 import { Home } from '../pages/Home'
 import { Login } from '../pages/Login'
 import { NotFound } from '../pages/NotFound'
-import Products from '../pages/Products'
 import { Register } from '../pages/Register'
+import { Products } from '../pages/Products'
 
 export function Routes() {
   return (
