@@ -15,7 +15,7 @@ const columns: { field: string, label: string, type?: 'currency' | 'date' }[] = 
 export function Products() {
   const [products, setProducts] = useState<any>([])
   const [page, setPage] = useState(1)
-  const [totalPages, setTotalPages] = useState(4)
+  const [totalPages] = useState(4)
   const { palette } = useTheme()
 
   const fetchData = async () => {
@@ -29,6 +29,7 @@ export function Products() {
 
   useEffect(() => {
     fetchData()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (
