@@ -1,16 +1,22 @@
-import { useTheme } from '@mui/material';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow, useTheme
+} from '@mui/material';
 import React, { useRef, useState } from 'react';
 import { useDebouncedCallback } from 'use-debounce';
+import { ActionsPopper } from './ActionsPopper';
 import { currencyFormat, dateFormat, dateTimeFormat } from './functions';
 
 export default function TableComponent({ rows, columns, fetchMore }: { rows: Row[], columns: Column[], fetchMore?: () => Promise<void> }) {
   const { palette } = useTheme()
+  const [selectedRow, setSelectedRow] = useState({})
+  const [popperIsOpen, setPopperIsOpen] = useState(false)
+  const [selectedIndex, setSelectedIndex] = useState(-1)
+  const [anchorEl, setAnchorEl] = useState<null | any>(null);
   const [fetchInProgress, setFetchInProgress] = useState(false)
   const ref: any = useRef()
 
@@ -25,6 +31,17 @@ export default function TableComponent({ rows, columns, fetchMore }: { rows: Row
         .catch(() => setFetchInProgress(false))
     }
   }, 50)
+
+  const tableRightClick = (event: any, { row: rowData, index }: { row: any, index: number }) => {
+    event.preventDefault();
+    const { clientX, clientY } = event;
+    const virtualElement = { getBoundingClientRect: () => ({ width: 0, height: 0, top: clientY, right: clientX, bottom: clientY, left: clientX }) };
+    setAnchorEl(virtualElement);
+    setSelectedRow(rowData)
+    setSelectedIndex(index)
+    setPopperIsOpen(true)
+    event.preventDefault()
+  }
 
   const getValue = ({ value, type }: { value?: number | string, type: 'currency' | 'date' | 'datetime' | 'string' }) => {
     const map = {
@@ -48,10 +65,14 @@ export default function TableComponent({ rows, columns, fetchMore }: { rows: Row
           </TableRow>
         </TableHead>
         <TableBody>
+          <ActionsPopper anchorEl={anchorEl} popperIsOpen={popperIsOpen} setPopperIsOpen={setPopperIsOpen} />
           {rows.map((row, index) => (
-            <TableRow key={index}>
+            <TableRow key={index} selected={selectedIndex === index}
+              onContextMenu={event => tableRightClick(event, { row, index })}>
               {columns.map(column => (
-                <TableCell sx={{ color: palette.text.primary }}>
+                <TableCell
+                  sx={{ color: palette.text.primary }}
+                >
                   {column.type ? getValue({ value: row[column.field], type: column.type }) : row[column.field]}
                 </TableCell>
               ))}

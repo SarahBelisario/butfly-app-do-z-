@@ -6,7 +6,8 @@ import { ThemeContext } from './themes/ThemeContext'
 import { availableThemes, light, dark } from './themes'
 import { SpeedDial, SpeedDialAction } from '@mui/material'
 import { IoIosColorPalette } from 'react-icons/io'
-
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
 
 export function App() {
   const userTheme = localStorage.getItem('theme')
@@ -16,6 +17,7 @@ export function App() {
   return (
     <ThemeContext.Provider value={value}>
       <ThemeProvider theme={availableThemes[theme]}>
+        <ToastContainer limit={3} theme={'colored'} />
         <SpeedDial
           ariaLabel='theme-selector'
           style={{ position: 'absolute', right: 16, bottom: 16 }}
