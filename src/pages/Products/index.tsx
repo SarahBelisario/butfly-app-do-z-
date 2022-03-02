@@ -15,17 +15,24 @@ const columns: { field: string, label: string, type?: 'currency' | 'date' }[] = 
 
 export function Products() {
   const [products, setProducts] = useState<any>([])
-  const [page, setPage] = useState(1)
-  const [totalPages] = useState(4)
+  const [page, setPage] = useState(0)
+  const [totalPages, setTotalPages] = useState(null)
   const { palette } = useTheme()
 
   const fetchData = async () => {
-    if (page > totalPages) return
-    await ApiInstance.get(`/products?page=${page}&limit=25`)
+    if (totalPages && page >= totalPages) return
+    await ApiInstance.get(`/products`, {
+      params: {
+        page: !page ? 1 : Number(page) + 1
+      }
+    })
       .then(response => {
-        const newProducts = productMapper(response.data)
-        setPage(page + 1)
+        const newProducts = productMapper(response.data.rows)
+        setPage(response.data.page)
+        setTotalPages(response.data.totalPages)
         setProducts([...products, ...newProducts])
+      }).catch(error => {
+        console.log('erro', error)
       })
   }
 

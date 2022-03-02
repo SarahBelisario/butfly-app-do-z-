@@ -59,8 +59,8 @@ export default function TableComponent({ rows, columns, fetchMore }: { rows: Row
       <Table stickyHeader >
         <TableHead>
           <TableRow>
-            {columns.map(column => (
-              <TableCell sx={{ background: palette.background.paper }}>{column.label}</TableCell>
+            {columns.map((column, index) => (
+              <TableCell key={index} sx={{ background: palette.background.paper }}>{column.label}</TableCell>
             ))}
           </TableRow>
         </TableHead>
@@ -69,8 +69,9 @@ export default function TableComponent({ rows, columns, fetchMore }: { rows: Row
           {rows.map((row, index) => (
             <TableRow key={index} selected={selectedIndex === index}
               onContextMenu={event => tableRightClick(event, { row, index })}>
-              {columns.map(column => (
+              {columns.map((column, index) => (
                 <TableCell
+                  key={index}
                   sx={{ color: palette.text.primary }}
                 >
                   {column.type ? getValue({ value: row[column.field], type: column.type }) : row[column.field]}

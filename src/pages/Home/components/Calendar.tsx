@@ -24,6 +24,7 @@ export function CalendarBar(props: BoxProps) {
         let isToday = date.getDay() === new Date().getDay()
         return (
           <Box
+            key={index}
             sx={{
               background: isToday ? 'rgba(232, 67, 67, .80)' : '#00000000',
               borderRadius: 4,

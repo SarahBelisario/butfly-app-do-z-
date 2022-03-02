@@ -26,8 +26,8 @@ export function Home(props: any) {
           </ContentCard>
         </Grid>
 
-        {[1, 2, 3].map(() => (
-          <Grid item xs={12} md={4}>
+        {[1, 2, 3].map((key, index) => (
+          <Grid item xs={12} md={4} key={index}>
             <ContentCard p={4}>
               <InfoCard title={'Gastos mensais (Jan/2022)'} value={1400} compareValue={1300} isBetter={'greater'} />
             </ContentCard>

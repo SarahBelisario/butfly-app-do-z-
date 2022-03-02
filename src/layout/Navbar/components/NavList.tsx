@@ -1,4 +1,5 @@
 import {
+  Box,
   Collapse,
   List,
   ListItemButton,
@@ -26,32 +27,32 @@ const availableRoutes: {
   selectedInRoutes?: string[]
   subItems?: { label: string; path: string }[]
 }[] = [
-  { Icon: BsBarChartFill, label: 'Dashboard', path: '/', isCollapse: false },
-  {
-    Icon: BsCartFill,
-    label: 'Produtos',
-    path: '/produtos',
-    isCollapse: true,
-    subItems: [
-      { label: 'Compras', path: '/produtos/compras' },
-      { label: 'Estoque', path: '/produtos/estoque' },
-    ],
-  },
-  {
-    Icon: FaDollarSign,
-    label: 'Vendas',
-    path: '/vendas',
-    isCollapse: true,
-    subItems: [{ label: 'Listar', path: '/vendas/listar' }],
-  },
-  {
-    Icon: RiSettings2Fill,
-    label: 'Serviços',
-    path: '/serviços',
-    isCollapse: true,
-    subItems: [{ label: 'Listar', path: '/serviços/listar' }],
-  },
-]
+    { Icon: BsBarChartFill, label: 'Dashboard', path: '/', isCollapse: false },
+    {
+      Icon: BsCartFill,
+      label: 'Produtos',
+      path: '/produtos',
+      isCollapse: true,
+      subItems: [
+        { label: 'Compras', path: '/produtos/compras' },
+        { label: 'Estoque', path: '/produtos/estoque' },
+      ],
+    },
+    {
+      Icon: FaDollarSign,
+      label: 'Vendas',
+      path: '/vendas',
+      isCollapse: true,
+      subItems: [{ label: 'Listar', path: '/vendas/listar' }],
+    },
+    {
+      Icon: RiSettings2Fill,
+      label: 'Serviços',
+      path: '/serviços',
+      isCollapse: true,
+      subItems: [{ label: 'Listar', path: '/serviços/listar' }],
+    },
+  ]
 
 export function NavList(props: NavListProps) {
   const theme = props.theme
@@ -81,7 +82,7 @@ export function NavList(props: NavListProps) {
   return (
     <List component="nav" {...props}>
       {availableRoutes.map(({ label, Icon, subItems, path, isCollapse }, index) => (
-        <>
+        <Box key={index}>
           <ListItemButton
             key={index}
             onClick={() => handleCollapse(index, isCollapse, path)}
@@ -147,7 +148,7 @@ export function NavList(props: NavListProps) {
               ))}
             </List>
           </Collapse>
-        </>
+        </Box>
       ))}
     </List>
   )

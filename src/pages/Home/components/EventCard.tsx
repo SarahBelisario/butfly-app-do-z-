@@ -19,8 +19,8 @@ const EventCard = ({ events }: EventCardProps) => {
       <Typography fontWeight="light" fontSize="14px" color="lightgray">
         Eventos recentes
       </Typography>
-      {events.map(event => (
-        <Box sx={{ display: 'flex', alignItems: 'center', p: 2 }}>
+      {events.map((event, index) => (
+        <Box key={index} sx={{ display: 'flex', alignItems: 'center', p: 2 }}>
           <FaDollarSign style={{ fontSize: 24, color: palette.secondary.main }} />
           <Box>
             <Typography sx={{ ml: 2, fontSize: 16, fontWeight: 'normal', color: palette.text.primary }}>
