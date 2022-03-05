@@ -4,7 +4,7 @@ import React from 'react'
 
 export function ContentCard(props: BoxProps) {
   const isMobile = useMediaQuery('(max-width:600px)')
-  const theme = useTheme();
+  const theme = useTheme()
   return (
     <Box
       {...props}
@@ -14,7 +14,7 @@ export function ContentCard(props: BoxProps) {
         py: 4,
         px: isMobile ? 2 : 4,
         background: theme.palette.background.paper,
-        ...props.sx,
+        ...props.sx
       }}
     >
       {props.children}

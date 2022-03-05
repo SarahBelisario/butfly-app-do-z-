@@ -6,7 +6,7 @@ import {
   ListItemIcon,
   ListItemText,
   ListProps,
-  useMediaQuery,
+  useMediaQuery
 } from '@mui/material'
 import React, { useState } from 'react'
 import { MdExpandLess, MdExpandMore } from 'react-icons/md'
@@ -27,32 +27,32 @@ const availableRoutes: {
   selectedInRoutes?: string[]
   subItems?: { label: string; path: string }[]
 }[] = [
-    { Icon: BsBarChartFill, label: 'Dashboard', path: '/', isCollapse: false },
-    {
-      Icon: BsCartFill,
-      label: 'Produtos',
-      path: '/produtos',
-      isCollapse: true,
-      subItems: [
-        { label: 'Compras', path: '/produtos/compras' },
-        { label: 'Estoque', path: '/produtos/estoque' },
-      ],
-    },
-    {
-      Icon: FaDollarSign,
-      label: 'Vendas',
-      path: '/vendas',
-      isCollapse: true,
-      subItems: [{ label: 'Listar', path: '/vendas/listar' }],
-    },
-    {
-      Icon: RiSettings2Fill,
-      label: 'Serviços',
-      path: '/serviços',
-      isCollapse: true,
-      subItems: [{ label: 'Listar', path: '/serviços/listar' }],
-    },
-  ]
+  { Icon: BsBarChartFill, label: 'Dashboard', path: '/', isCollapse: false },
+  {
+    Icon: BsCartFill,
+    label: 'Produtos',
+    path: '/produtos',
+    isCollapse: true,
+    subItems: [
+      { label: 'Compras', path: '/produtos/compras' },
+      { label: 'Estoque', path: '/produtos/estoque' }
+    ]
+  },
+  {
+    Icon: FaDollarSign,
+    label: 'Vendas',
+    path: '/vendas',
+    isCollapse: true,
+    subItems: [{ label: 'Listar', path: '/vendas/listar' }]
+  },
+  {
+    Icon: RiSettings2Fill,
+    label: 'Serviços',
+    path: '/serviços',
+    isCollapse: true,
+    subItems: [{ label: 'Listar', path: '/serviços/listar' }]
+  }
+]
 
 export function NavList(props: NavListProps) {
   const theme = props.theme
@@ -91,24 +91,17 @@ export function NavList(props: NavListProps) {
               justifyContent: isMobile ? 'center' : 'flex-start',
               mb: 1,
               transition: '.5s',
-              background: isSelected(path) ? 'rgba(0, 0, 0, 0.15)' : '',
-            }}
-          >
+              background: isSelected(path) ? 'rgba(0, 0, 0, 0.15)' : ''
+            }}>
             <ListItemIcon
               sx={{
                 display: 'flex',
-                justifyContent: isMobile ? 'center' : 'flex-start',
-              }}
-            >
+                justifyContent: isMobile ? 'center' : 'flex-start'
+              }}>
               <Icon style={{ color: theme }} />
             </ListItemIcon>
             <ListItemText sx={{ color: theme }} primary={label} />
-            {isCollapse &&
-              (expandedIndex === index ? (
-                <MdExpandLess color={theme} />
-              ) : (
-                <MdExpandMore color={theme} />
-              ))}
+            {isCollapse && (expandedIndex === index ? <MdExpandLess color={theme} /> : <MdExpandMore color={theme} />)}
           </ListItemButton>
           <Collapse
             in={expandedIndex === index}
@@ -117,9 +110,8 @@ export function NavList(props: NavListProps) {
             sx={{
               mb: 1,
               borderRadius: 2,
-              transition: '.5s',
-            }}
-          >
+              transition: '.5s'
+            }}>
             <List component="div" disablePadding>
               {subItems?.map(({ label, path }, index) => (
                 <ListItemButton
@@ -127,20 +119,18 @@ export function NavList(props: NavListProps) {
                   sx={{
                     display: 'flex',
                     justifyContent: isMobile ? 'center' : 'flex-start',
-                    background: isSelected(path) ? 'rgba(0, 0, 0, 0.15)' : '',
+                    background: isSelected(path) ? 'rgba(0, 0, 0, 0.15)' : ''
                   }}
                   onClick={() => {
                     setSelectedPath(path)
                     navigate(path)
-                  }}
-                >
+                  }}>
                   <ListItemIcon
                     sx={{
                       display: isMobile ? 'flex' : 'block',
                       justifyContent: 'center',
-                      pl: 2,
-                    }}
-                  >
+                      pl: 2
+                    }}>
                     <GoPrimitiveDot style={{ color: theme }} />
                   </ListItemIcon>
                   <ListItemText sx={{ color: isMobile ? 'initial' : theme }} primary={label} />

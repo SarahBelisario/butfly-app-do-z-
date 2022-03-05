@@ -4,17 +4,18 @@ import { ContentCard } from '../../components/ContentCard'
 import Table from '../../components/Table'
 import { ApiInstance } from '../../services/axios'
 import { productMapper } from './resolver/ProductMapper'
+import { FormattedProducts } from './types/products'
 
-
-const columns: { field: string, label: string, type?: 'currency' | 'date' }[] = [
-  { field: 'name', label: 'Nome', },
+const columns: { field: string; label: string; type?: 'currency' | 'date'; hidden?: boolean }[] = [
+  { field: 'id', label: 'Id', hidden: true },
+  { field: 'name', label: 'Nome' },
   { field: 'quantity', label: 'Quantidade' },
   { field: 'price', label: 'Valor', type: 'currency' },
   { field: 'createdAt', label: 'Data de criação', type: 'date' }
 ]
 
 export function Products() {
-  const [products, setProducts] = useState<any>([])
+  const [products, setProducts] = useState<FormattedProducts[]>([])
   const [page, setPage] = useState(0)
   const [totalPages, setTotalPages] = useState(null)
   const { palette } = useTheme()
@@ -26,19 +27,23 @@ export function Products() {
         page: !page ? 1 : Number(page) + 1
       }
     })
-      .then(response => {
-        const newProducts = productMapper(response.data.rows)
+      .then((response) => {
+        const newProducts = response.data.rows
         setPage(response.data.page)
         setTotalPages(response.data.totalPages)
         setProducts([...products, ...newProducts])
-      }).catch(error => {
+      })
+      .catch((error) => {
         console.log('erro', error)
       })
   }
 
+  const handleClickRow = async (data: unknown) => {
+    console.log(data)
+  }
+
   useEffect(() => {
     fetchData()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (
@@ -49,8 +54,8 @@ export function Products() {
       <Typography ml={2} mt={2} sx={{ fontSize: '16px', color: palette.text.secondary, fontWeight: 'light' }}>
         Gerencie e controle seus produtos de forma simples.
       </Typography>
-      <ContentCard mt={3} sx={{ p: 0, height: '100%', overflow: 'hidden' }} >
-        <Table rows={products} columns={columns} fetchMore={fetchData} />
+      <ContentCard mt={3} sx={{ p: 0, height: '100%', overflow: 'hidden' }}>
+        <Table rows={productMapper(products)} columns={columns} fetchMore={fetchData} onClickRow={handleClickRow} />
       </ContentCard>
     </Box>
   )

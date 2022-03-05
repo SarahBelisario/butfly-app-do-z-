@@ -1,37 +1,49 @@
-import {
-  ClickAwayListener,
-  Fade,
-  MenuItem,
-  MenuList,
-  Paper,
-  Popper,
-  PopperProps
-} from '@mui/material';
-import React from 'react';
-import { AiFillDelete } from 'react-icons/ai';
-import { MdEdit } from 'react-icons/md';
+import { ClickAwayListener, Fade, MenuItem, MenuList, Paper, Popper, PopperProps } from '@mui/material'
+import React from 'react'
 
 interface ActionsPopperProps extends Omit<PopperProps, 'open'> {
   popperIsOpen: boolean
   setPopperIsOpen: (value: boolean) => void
+  actions: {
+    [field: string]: {
+      icon: React.FC<any>
+      label: any
+      function: (rowData: any) => void
+    }
+  }
   anchorEl: any
+  rowData: { [field: string]: any }
 }
 
-export function ActionsPopper({ popperIsOpen, setPopperIsOpen, anchorEl, ...props }: ActionsPopperProps) {
-
+export function ActionsPopper({
+  popperIsOpen,
+  setPopperIsOpen,
+  anchorEl,
+  actions,
+  rowData,
+  ...props
+}: ActionsPopperProps) {
   return (
     <Popper open={popperIsOpen} anchorEl={anchorEl} transition placement="bottom-start" {...props}>
       {({ TransitionProps }) => (
         <ClickAwayListener onClickAway={() => setPopperIsOpen(false)}>
           <Fade {...TransitionProps}>
-            <Paper >
+            <Paper>
               <MenuList autoFocus>
-                <MenuItem><MdEdit style={{ marginRight: 12 }} />Editar</MenuItem>
-                <MenuItem sx={{ color: 'red' }} ><AiFillDelete style={{ marginRight: 12 }} />Deletar</MenuItem>
+                {Object.keys(actions).map((action, index) => {
+                  const ActionIcon: React.FC<any> = actions[action].icon
+                  return (
+                    <MenuItem key={index} onClick={() => actions[action].function(rowData)}>
+                      <ActionIcon style={{ marginRight: 12 }} />
+                      {actions[action].label}
+                    </MenuItem>
+                  )
+                })}
               </MenuList>
             </Paper>
           </Fade>
         </ClickAwayListener>
-      )}</Popper>
+      )}
+    </Popper>
   )
 }

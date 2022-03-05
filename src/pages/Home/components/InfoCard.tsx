@@ -1,8 +1,4 @@
-import {
-  Box,
-  BoxProps,
-  Chip, Typography, useTheme
-} from '@mui/material'
+import { Box, BoxProps, Chip, Typography, useTheme } from '@mui/material'
 import React from 'react'
 import { TiArrowSortedDown, TiArrowSortedUp, TiMinus } from 'react-icons/ti'
 import { currencyFormat } from '../../../utils/currencyFormat'
@@ -16,7 +12,7 @@ interface InfoCardProps extends BoxProps {
 const InfoCard = ({ title, value, compareValue, isBetter = 'greater', ...rest }: InfoCardProps) => {
   const { palette } = useTheme()
   const getPercent = (value: number, compareValue: number) => {
-    let percent = (value - compareValue) / compareValue
+    const percent = (value - compareValue) / compareValue
     return percent
   }
 
@@ -24,7 +20,7 @@ const InfoCard = ({ title, value, compareValue, isBetter = 'greater', ...rest }:
     let colors = {
       background: '',
       foreground: '',
-      icon: <></>,
+      icon: <></>
     }
 
     if (isBetter === 'greater') {
@@ -89,7 +85,8 @@ const InfoCard = ({ title, value, compareValue, isBetter = 'greater', ...rest }:
           icon={getColors()?.icon}
         />
       </Box>
-    </>)
+    </>
+  )
 }
 
 export default InfoCard

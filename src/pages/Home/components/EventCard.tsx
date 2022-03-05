@@ -6,9 +6,9 @@ import ptBR from 'date-fns/locale/pt-BR'
 
 interface EventCardProps {
   events: {
-    icon: string,
-    title: string,
-    description?: string,
+    icon: string
+    title: string
+    description?: string
     date: Date | string
   }[]
 }

@@ -11,27 +11,14 @@ export function LineChart() {
     <Chart
       type="bar"
       data={{
-        labels: [
-          'Jan',
-          'Fev',
-          'Mar',
-          'Abr',
-          'Mai',
-          'Jun',
-          'Jul',
-          'Ago',
-          'Set',
-          'Out',
-          'Nov',
-          'Dez',
-        ],
+        labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
         datasets: [
           {
             type: 'line',
             label: 'Caixa',
             data: [10, 124, 149, 80, 97, 99, 10, 124, 149, 80, 97, 99],
             backgroundColor: palette.warning.main,
-            borderColor: palette.warning.main,
+            borderColor: palette.warning.main
           },
           {
             label: 'Entradas',
@@ -39,7 +26,7 @@ export function LineChart() {
             fill: true,
             backgroundColor: palette.success.main,
             borderWidth: 0,
-            borderRadius: 5,
+            borderRadius: 5
           },
           {
             label: 'Saídas',
@@ -47,19 +34,19 @@ export function LineChart() {
             fill: true,
             backgroundColor: palette.error.main,
             borderWidth: 0,
-            borderRadius: 5,
-          },
-        ],
+            borderRadius: 5
+          }
+        ]
       }}
       options={{
         elements: {
           line: { tension: 0.4 },
-          point: { pointStyle: 'circle', radius: 4, borderWidth: 4 },
+          point: { pointStyle: 'circle', radius: 4, borderWidth: 4 }
         },
         scales: {
           x: { stacked: true, grid: { display: false } },
-          y: { stacked: true, grid: { display: false } },
-        },
+          y: { stacked: true, grid: { display: false } }
+        }
       }}
     />
   )

@@ -17,15 +17,12 @@ export function SearchInput(props: SearchInputProps) {
     '& .MuiOutlinedInput-root': {
       '& fieldset': { borderColor: props.theme },
       '&:hover fieldset': { borderColor: props.theme },
-      '&.Mui-focused fieldset': { borderColor: props.theme },
-    },
+      '&.Mui-focused fieldset': { borderColor: props.theme }
+    }
   })
 
   return (
-    <Box
-      sx={{ background: props.theme === 'white' ? '#00000026' : '', borderRadius: 2 }}
-      {...props}
-    >
+    <Box sx={{ background: props.theme === 'white' ? '#00000026' : '', borderRadius: 2 }} {...props}>
       <StyledTextField label="Pesquisar..." fullWidth>
         SearchInput
       </StyledTextField>

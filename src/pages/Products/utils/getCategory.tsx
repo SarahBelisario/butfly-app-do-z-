@@ -1,6 +1,6 @@
-import { AiFillStar } from 'react-icons/ai';
-import { IoIosBicycle } from "react-icons/io";
-import { IoCarSport, IoFastFoodOutline, IoHelpOutline } from "react-icons/io5";
+import { AiFillStar } from 'react-icons/ai'
+import { IoIosBicycle } from 'react-icons/io'
+import { IoCarSport, IoFastFoodOutline, IoHelpOutline } from 'react-icons/io5'
 
 type AvailableIconProps = 'food' | 'car' | 'bicycle'
 
@@ -16,4 +16,4 @@ const getCategory = (icon: AvailableIconProps | string) => {
   return availableIcons[icon]
 }
 
-export { getCategory };
+export { getCategory }

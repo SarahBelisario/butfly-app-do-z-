@@ -5,19 +5,24 @@ import { useForm } from 'react-hook-form'
 import { IoEyeOffOutline, IoEyeOutline } from 'react-icons/io5'
 import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
+import { ApiInstance } from '../../../services/axios'
 
 export default function Form(props: any) {
   const navigate = useNavigate()
   const { register, handleSubmit } = useForm()
   const [showPassword, setShowPassword] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
-  const [isLogged, setIsLogged] = useState(false)
+  const [isLogged] = useState(false)
   const { palette } = useTheme()
   const submit = async (data: any) => {
-    setIsLogged(true)
     setIsLoading(true)
-    await new Promise(resolve => setTimeout(resolve, 1000))
-    navigate('/')
+    await ApiInstance.post('/login', { email: data.email, password: data.password })
+      .then((response) => {
+        navigate('/')
+      })
+      .catch((error) => {
+        console.log(error)
+      })
   }
 
   return (
@@ -45,7 +50,7 @@ export default function Form(props: any) {
                 {showPassword ? <IoEyeOutline /> : <IoEyeOffOutline />}
               </IconButton>
             </InputAdornment>
-          ),
+          )
         }}
         required
         fullWidth
@@ -59,8 +64,7 @@ export default function Form(props: any) {
         variant="contained"
         type="submit"
         sx={{ mt: 2, position: 'relative' }}
-        loading={isLoading}
-      >
+        loading={isLoading}>
         Login
         {isLogged ? (
           <motion.div
@@ -69,13 +73,13 @@ export default function Form(props: any) {
               position: 'absolute',
               borderRadius: 5000,
               width: 0,
-              height: 0,
+              height: 0
             }}
             whileInView={{
               width: '300vh',
               height: '300vh',
               zIndex: 1,
-              placeItems: 'center',
+              placeItems: 'center'
             }}
             transition={{ ease: [0.86, 0.03, 0.1, 1], duration: 2 }}
           />
@@ -91,9 +95,8 @@ export default function Form(props: any) {
           mt: 2,
           fontSize: 13,
           fontWeight: 'normal',
-          textAlign: 'center',
-        }}
-      >
+          textAlign: 'center'
+        }}>
         É novo por aqui?
         <Typography
           onClick={() => navigate('/registro')}
@@ -105,9 +108,8 @@ export default function Form(props: any) {
             fontSize: 13,
             fontWeight: 'bold',
             textAlign: 'center',
-            cursor: 'pointer',
-          }}
-        >
+            cursor: 'pointer'
+          }}>
           Registre-se
         </Typography>
       </Typography>

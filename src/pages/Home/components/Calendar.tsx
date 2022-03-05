@@ -13,7 +13,7 @@ export function CalendarBar(props: BoxProps) {
     const dateArr = []
     dateArr.push(addDays(today, 0))
     for (let i = 1; i <= range; i++) {
-      dateArr.unshift(addDays(new Date(), (i * -1)))
+      dateArr.unshift(addDays(new Date(), i * -1))
       dateArr.push(addDays(new Date(), i))
     }
     return dateArr
@@ -21,7 +21,7 @@ export function CalendarBar(props: BoxProps) {
   return (
     <Box {...props} sx={{ display: 'flex', justifyContent: 'space-between', ...props.sx }}>
       {getDates().map((date, index) => {
-        let isToday = date.getDay() === new Date().getDay()
+        const isToday = date.getDay() === new Date().getDay()
         return (
           <Box
             key={index}
@@ -29,12 +29,15 @@ export function CalendarBar(props: BoxProps) {
               background: isToday ? 'rgba(232, 67, 67, .80)' : '#00000000',
               borderRadius: 4,
               p: 2
-            }}
-          >
+            }}>
             <Box key={index} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
               <Typography
-                sx={{ fontWeight: 'light', fontSize: '12px', textTransform: 'capitalize', color: isToday ? 'white' : theme.palette.text.secondary }}
-              >
+                sx={{
+                  fontWeight: 'light',
+                  fontSize: '12px',
+                  textTransform: 'capitalize',
+                  color: isToday ? 'white' : theme.palette.text.secondary
+                }}>
                 {format(date, 'MMM', { locale: ptBr })}
               </Typography>
               <Typography sx={{ fontSize: '20px', color: isToday ? 'white' : theme.palette.text.primary }}>
@@ -43,8 +46,7 @@ export function CalendarBar(props: BoxProps) {
             </Box>
           </Box>
         )
-      }
-      )}
+      })}
     </Box>
   )
 }

@@ -1,7 +1,4 @@
-import {
-  Box, Grid,
-  Typography, useTheme
-} from '@mui/material'
+import { Box, Grid, Typography, useTheme } from '@mui/material'
 import React from 'react'
 import { CalendarBar } from './components/Calendar'
 import { ContentCard } from '../../components/ContentCard'
@@ -36,12 +33,14 @@ export function Home(props: any) {
 
         <Grid item xs={12} md={4} sx={{ display: 'flex', maxHeight: 500 }}>
           <ContentCard p={4} sx={{ width: '100%', overflowY: 'scroll' }}>
-            <EventCard events={[{ title: 'Nova venda registrada', description: 'Descrição', icon: 'Ícone', date: '2021-01-01' }]} />
+            <EventCard
+              events={[{ title: 'Nova venda registrada', description: 'Descrição', icon: 'Ícone', date: '2021-01-01' }]}
+            />
           </ContentCard>
         </Grid>
 
-        <Grid item xs={12} md={8} sx={{ display: 'flex', }}>
-          <ContentCard p={4} sx={{ width: '100%', maxWidth: '100%' }} >
+        <Grid item xs={12} md={8} sx={{ display: 'flex' }}>
+          <ContentCard p={4} sx={{ width: '100%', maxWidth: '100%' }}>
             <LineChart />
           </ContentCard>
         </Grid>

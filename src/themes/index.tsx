@@ -1,7 +1,7 @@
-import { dark } from "./Dark";
-import { light } from "./Light";
+import { Theme } from '@mui/material'
+import { dark } from './Dark'
+import { light } from './Light'
 
-const availableThemes: any = { light: light, dark: dark }
+const availableThemes: { [field: string]: Theme } = { light, dark }
 
-export { availableThemes, light, dark };
-
+export { availableThemes, light, dark }
