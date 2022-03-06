@@ -1,17 +1,18 @@
 import { LoadingButton } from '@mui/lab'
 import { IconButton, InputAdornment, TextField, Typography, useTheme } from '@mui/material'
-import React, { useState } from 'react'
+import React, { FormHTMLAttributes, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { IoEyeOffOutline, IoEyeOutline } from 'react-icons/io5'
 import { useNavigate } from 'react-router-dom'
 
-export default function Form(props: any) {
+export default function Form(props: FormHTMLAttributes<HTMLFormElement>) {
   const navigate = useNavigate()
   const { register, handleSubmit } = useForm()
   const [showPassword, setShowPassword] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
-  const submit = async (data: any) => {
+  const submit = async (data: { [field: string]: string }) => {
     setIsLoading(true)
+    console.log(data)
     await new Promise((resolve) => setTimeout(resolve, 3000))
     setIsLoading(false)
     navigate('/login')
@@ -85,7 +86,8 @@ export default function Form(props: any) {
           fontSize: 13,
           fontWeight: 'normal',
           textAlign: 'center'
-        }}>
+        }}
+      >
         Ao se registrar, você concordará com os{' '}
         <Typography
           component="span"
@@ -95,7 +97,8 @@ export default function Form(props: any) {
             fontSize: 13,
             fontWeight: 'normal',
             textAlign: 'center'
-          }}>
+          }}
+        >
           termos de serviços{' '}
         </Typography>
         e a{' '}
@@ -107,7 +110,8 @@ export default function Form(props: any) {
             fontSize: 13,
             fontWeight: 'normal',
             textAlign: 'center'
-          }}>
+          }}
+        >
           política de privacidade
         </Typography>{' '}
         da Webstock.
@@ -121,7 +125,8 @@ export default function Form(props: any) {
           fontSize: 13,
           fontWeight: 'normal',
           textAlign: 'center'
-        }}>
+        }}
+      >
         Já tem uma conta?
         <Typography
           onClick={() => navigate('/login')}
@@ -134,7 +139,8 @@ export default function Form(props: any) {
             fontWeight: 'bold',
             textAlign: 'center',
             cursor: 'pointer'
-          }}>
+          }}
+        >
           Login
         </Typography>
       </Typography>

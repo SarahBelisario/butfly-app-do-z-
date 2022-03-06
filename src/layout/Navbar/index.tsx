@@ -22,13 +22,15 @@ export function Navbar(props: any) {
         height: '100vh',
         overflow: 'auto',
         overflowX: 'hidden'
-      }}>
+      }}
+    >
       {!isMobile && <DesktopSidebar />}
-      {isMobile && isOpen && <MobileNavbar isOpen={isOpen} setIsOpen={setIsOpen} />}
+      {isMobile && isOpen && <MobileNavbar setIsOpen={setIsOpen} />}
       <motion.div
         animate={{ x: ['2000px', '0px'] }}
         transition={{ ease: [0.86, 0.03, 0.1, 1], duration: 1 }}
-        style={{ flex: 1, display: 'flex', flexDirection: 'column', maxWidth: '100%' }}>
+        style={{ flex: 1, display: 'flex', flexDirection: 'column', maxWidth: '100%' }}
+      >
         {isMobile && (
           <Box sx={{ display: 'flex', alignItems: 'space-between', px: 2 }}>
             <Box my="auto">
@@ -62,7 +64,8 @@ export function Navbar(props: any) {
             background: theme.palette.background.default,
             overflowY: 'auto',
             flex: 1
-          }}>
+          }}
+        >
           <Box style={{ maxWidth: '100%', display: 'flex', flexDirection: 'column', height: '100%' }}>
             <Outlet />
           </Box>

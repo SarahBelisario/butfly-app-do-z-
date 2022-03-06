@@ -29,7 +29,8 @@ export function CalendarBar(props: BoxProps) {
               background: isToday ? 'rgba(232, 67, 67, .80)' : '#00000000',
               borderRadius: 4,
               p: 2
-            }}>
+            }}
+          >
             <Box key={index} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
               <Typography
                 sx={{
@@ -37,7 +38,8 @@ export function CalendarBar(props: BoxProps) {
                   fontSize: '12px',
                   textTransform: 'capitalize',
                   color: isToday ? 'white' : theme.palette.text.secondary
-                }}>
+                }}
+              >
                 {format(date, 'MMM', { locale: ptBr })}
               </Typography>
               <Typography sx={{ fontSize: '20px', color: isToday ? 'white' : theme.palette.text.primary }}>

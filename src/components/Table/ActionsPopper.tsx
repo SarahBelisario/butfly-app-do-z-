@@ -6,8 +6,8 @@ interface ActionsPopperProps extends Omit<PopperProps, 'open'> {
   setPopperIsOpen: (value: boolean) => void
   actions: {
     [field: string]: {
-      icon: React.FC<any>
-      label: any
+      icon: React.FC
+      label: string | number
       function: (rowData: any) => void
     }
   }

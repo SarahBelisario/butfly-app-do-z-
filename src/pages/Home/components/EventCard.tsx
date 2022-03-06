@@ -16,7 +16,7 @@ const EventCard = ({ events }: EventCardProps) => {
   const { palette } = useTheme()
   return (
     <>
-      <Typography fontWeight="light" fontSize="14px" color="lightgray">
+      <Typography fontWeight="light" fontSize="14px" color={palette.text.secondary}>
         Eventos recentes
       </Typography>
       {events.map((event, index) => (

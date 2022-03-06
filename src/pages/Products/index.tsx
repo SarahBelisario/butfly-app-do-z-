@@ -5,6 +5,7 @@ import Table from '../../components/Table'
 import { ApiInstance } from '../../services/axios'
 import { productMapper } from './resolver/ProductMapper'
 import { FormattedProducts } from './types/products'
+import { useNavigate } from 'react-router-dom'
 
 const columns: { field: string; label: string; type?: 'currency' | 'date'; hidden?: boolean }[] = [
   { field: 'id', label: 'Id', hidden: true },
@@ -19,6 +20,7 @@ export function Products() {
   const [page, setPage] = useState(0)
   const [totalPages, setTotalPages] = useState(null)
   const { palette } = useTheme()
+  const navigate = useNavigate()
 
   const fetchData = async () => {
     if (totalPages && page >= totalPages) return
@@ -38,8 +40,8 @@ export function Products() {
       })
   }
 
-  const handleClickRow = async (data: unknown) => {
-    console.log(data)
+  const handleClickRow = (data: { [field: string]: string | number }) => {
+    navigate(`/produtos/${data.id}`)
   }
 
   useEffect(() => {

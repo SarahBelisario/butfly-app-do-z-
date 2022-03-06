@@ -5,7 +5,7 @@ import { SearchInput } from './components/SearchInput'
 import { IoMdClose } from 'react-icons/io'
 import { AnimatePresence, motion } from 'framer-motion'
 
-export function MobileNavbar({ isOpen, setIsOpen }: { isOpen: boolean; setIsOpen: (open: boolean) => void }) {
+export function MobileNavbar({ setIsOpen }: { setIsOpen: (open: boolean) => void }) {
   return (
     <AnimatePresence exitBeforeEnter>
       <motion.div
@@ -20,7 +20,8 @@ export function MobileNavbar({ isOpen, setIsOpen }: { isOpen: boolean; setIsOpen
         }}
         animate={{ x: ['-100vw', '0vw'] }}
         transition={{ ease: [0.86, 0.03, 0.1, 1], duration: 1 }}
-        exit={{ x: ['-0vw', '-100vw'] }}>
+        exit={{ x: ['-0vw', '-100vw'] }}
+      >
         <Box sx={{ p: 4 }}>
           <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 4 }}>
             <Typography fontWeight={'light'} fontSize={24}>

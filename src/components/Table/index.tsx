@@ -21,12 +21,11 @@ export default function TableComponent({
       function: (rowData: string) => void
     }
   }
-  onClickRow: (rowData: unknown) => void
+  onClickRow: (rowData: { [field: string]: string | number }) => void
 }) {
   const { palette } = useTheme()
   const [selectedRow, setSelectedRow] = useState({})
   const [popperIsOpen, setPopperIsOpen] = useState(false)
-  const [selectedIndex, setSelectedIndex] = useState(-1)
   const [anchorEl, setAnchorEl] = useState<null | any>(null)
   const [fetchInProgress, setFetchInProgress] = useState(false)
   const ref: any = useRef()
@@ -42,26 +41,6 @@ export default function TableComponent({
         .catch(() => setFetchInProgress(false))
     }
   }, 50)
-
-  const tableRightClick = (event: any, { row: rowData, index }: { row: any; index: number }) => {
-    event.preventDefault()
-    const { clientX, clientY } = event
-    const virtualElement = {
-      getBoundingClientRect: () => ({
-        width: 0,
-        height: 0,
-        top: clientY,
-        right: clientX,
-        bottom: clientY,
-        left: clientX
-      })
-    }
-    setAnchorEl(virtualElement)
-    setSelectedRow(rowData)
-    setSelectedIndex(index)
-    setPopperIsOpen(true)
-    event.preventDefault()
-  }
 
   const getValue = ({
     value,
@@ -106,11 +85,7 @@ export default function TableComponent({
             />
           )}
           {rows.map((row, index) => (
-            <TableRow
-              key={index}
-              onContextMenu={(event) => tableRightClick(event, { row, index })}
-              onClick={() => onClickRow(row)}
-            >
+            <TableRow key={index} onClick={() => onClickRow(row)}>
               {columns.map((column, index) => {
                 if (column.hidden) return
                 return (

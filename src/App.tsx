@@ -22,7 +22,8 @@ export function App() {
           ariaLabel="theme-selector"
           style={{ position: 'absolute', right: 16, bottom: 16 }}
           FabProps={{ color: 'secondary' }}
-          icon={<IoIosColorPalette />}>
+          icon={<IoIosColorPalette />}
+        >
           <SpeedDialAction
             key={'Light'}
             onClick={() => {

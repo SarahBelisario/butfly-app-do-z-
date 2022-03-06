@@ -64,7 +64,8 @@ export default function Form(props: any) {
         variant="contained"
         type="submit"
         sx={{ mt: 2, position: 'relative' }}
-        loading={isLoading}>
+        loading={isLoading}
+      >
         Login
         {isLogged ? (
           <motion.div
@@ -96,7 +97,8 @@ export default function Form(props: any) {
           fontSize: 13,
           fontWeight: 'normal',
           textAlign: 'center'
-        }}>
+        }}
+      >
         É novo por aqui?
         <Typography
           onClick={() => navigate('/registro')}
@@ -109,7 +111,8 @@ export default function Form(props: any) {
             fontWeight: 'bold',
             textAlign: 'center',
             cursor: 'pointer'
-          }}>
+          }}
+        >
           Registre-se
         </Typography>
       </Typography>

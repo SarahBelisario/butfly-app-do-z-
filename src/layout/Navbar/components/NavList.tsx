@@ -9,10 +9,10 @@ import {
   useMediaQuery
 } from '@mui/material'
 import React, { useState } from 'react'
-import { MdExpandLess, MdExpandMore } from 'react-icons/md'
+import { MdExpandLess, MdExpandMore, MdPointOfSale } from 'react-icons/md'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { BsBarChartFill, BsCartFill } from 'react-icons/bs'
-import { FaDollarSign } from 'react-icons/fa'
+import { FaDollarSign, FaShoppingCart } from 'react-icons/fa'
 import { RiSettings2Fill } from 'react-icons/ri'
 import { GoPrimitiveDot } from 'react-icons/go'
 
@@ -28,16 +28,8 @@ const availableRoutes: {
   subItems?: { label: string; path: string }[]
 }[] = [
   { Icon: BsBarChartFill, label: 'Dashboard', path: '/', isCollapse: false },
-  {
-    Icon: BsCartFill,
-    label: 'Produtos',
-    path: '/produtos',
-    isCollapse: true,
-    subItems: [
-      { label: 'Compras', path: '/produtos/compras' },
-      { label: 'Estoque', path: '/produtos/estoque' }
-    ]
-  },
+  { Icon: MdPointOfSale, label: 'Frente de caixa', path: '/frente-de-caixa', isCollapse: false },
+  { Icon: FaShoppingCart, label: 'Produtos', path: '/produtos', isCollapse: false },
   {
     Icon: FaDollarSign,
     label: 'Vendas',
@@ -92,12 +84,14 @@ export function NavList(props: NavListProps) {
               mb: 1,
               transition: '.5s',
               background: isSelected(path) ? 'rgba(0, 0, 0, 0.15)' : ''
-            }}>
+            }}
+          >
             <ListItemIcon
               sx={{
                 display: 'flex',
                 justifyContent: isMobile ? 'center' : 'flex-start'
-              }}>
+              }}
+            >
               <Icon style={{ color: theme }} />
             </ListItemIcon>
             <ListItemText sx={{ color: theme }} primary={label} />
@@ -111,7 +105,8 @@ export function NavList(props: NavListProps) {
               mb: 1,
               borderRadius: 2,
               transition: '.5s'
-            }}>
+            }}
+          >
             <List component="div" disablePadding>
               {subItems?.map(({ label, path }, index) => (
                 <ListItemButton
@@ -124,13 +119,15 @@ export function NavList(props: NavListProps) {
                   onClick={() => {
                     setSelectedPath(path)
                     navigate(path)
-                  }}>
+                  }}
+                >
                   <ListItemIcon
                     sx={{
                       display: isMobile ? 'flex' : 'block',
                       justifyContent: 'center',
                       pl: 2
-                    }}>
+                    }}
+                  >
                     <GoPrimitiveDot style={{ color: theme }} />
                   </ListItemIcon>
                   <ListItemText sx={{ color: isMobile ? 'initial' : theme }} primary={label} />
