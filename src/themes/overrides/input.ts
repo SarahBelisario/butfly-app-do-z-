@@ -1,6 +1,13 @@
 import { Components } from '@mui/material'
 
 export const inputs: Components = {
+  MuiInputBase: {
+    styleOverrides: {
+      root: {
+        height: 46
+      }
+    }
+  },
   MuiOutlinedInput: {
     styleOverrides: {
       root: {
