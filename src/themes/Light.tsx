@@ -4,6 +4,7 @@ import { inputs } from './overrides/input'
 import { list } from './overrides/list'
 import { table } from './overrides/table'
 import { dialog } from './overrides/dialog'
+import { autocomplete } from './overrides/autocomplete'
 
 const light = createTheme({
   palette: {
@@ -18,6 +19,7 @@ const light = createTheme({
   },
   components: {
     ...inputs,
+    ...autocomplete,
     ...buttons,
     ...list,
     ...table,
