@@ -1,9 +1,15 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { createContext } from 'react'
+import light from './Light'
+
+type AvailableThemes = 'light' | 'dark' | 'unicorn'
 
 const ThemeContext = createContext({
   theme: 'light',
-  setTheme: (theme: string) => {}
+  muiTheme: light.muiTheme,
+  genericPalette: light.themePalette,
+  setTheme: (theme: AvailableThemes) => {
+    return theme
+  }
 })
 export { ThemeContext }

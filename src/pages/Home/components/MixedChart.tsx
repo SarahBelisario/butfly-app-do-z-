@@ -17,8 +17,8 @@ export function LineChart() {
             type: 'line',
             label: 'Caixa',
             data: [10, 124, 149, 80, 97, 99, 10, 124, 149, 80, 97, 99],
-            backgroundColor: palette.warning.main,
-            borderColor: palette.warning.main
+            backgroundColor: palette.warning.dark,
+            borderColor: palette.warning.dark
           },
           {
             label: 'Entradas',

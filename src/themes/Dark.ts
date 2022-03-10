@@ -1,18 +1,20 @@
-import createTheme from '@mui/material/styles/createTheme'
+import { createTheme } from '@mui/material/styles'
 import { buttons } from './overrides/button'
 import { inputs } from './overrides/input'
 import { list } from './overrides/list'
 import { table } from './overrides/table'
 import { dialog } from './overrides/dialog'
 import { autocomplete } from './overrides/autocomplete'
+import { GenericPaletteProps } from './types/Theme'
 
-const light = createTheme({
+const muiTheme = createTheme({
   palette: {
-    primary: { main: '#6200ff' },
-    secondary: { main: '#f62681' },
-    success: { main: '#0eccc9' },
-    background: { default: '#f5f9ff', paper: '#ffffff' },
-    text: { primary: '#000', secondary: '#999' }
+    primary: { main: '#03fcf8' },
+    secondary: { main: '#03fcf8' },
+    success: { main: '#03fcf8' },
+    mode: 'dark',
+    background: { default: '#303030', paper: '#404040' },
+    text: { primary: '#ffffff', secondary: '#dedede' }
   },
   typography: {
     fontFamily: `"Roboto", "Helvetica", "Arial", sans-serif`
@@ -36,4 +38,11 @@ const light = createTheme({
   }
 })
 
-export { light }
+const themePalette: GenericPaletteProps = {
+  title: 'Escuro',
+  navbar: { background: '#6200ff' },
+  body: { background: '#303030' },
+  card: { background: '#404040' }
+}
+
+export default { muiTheme, themePalette }
