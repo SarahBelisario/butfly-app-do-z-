@@ -9,7 +9,7 @@ const ThemeContext = createContext({
   muiTheme: light.muiTheme,
   genericPalette: light.themePalette,
   setTheme: (theme: AvailableThemes) => {
-    return theme
+    void theme
   }
 })
 export { ThemeContext }
