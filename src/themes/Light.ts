@@ -27,7 +27,6 @@ const muiTheme = createTheme({
     MuiPaper: {
       styleOverrides: {
         root: {
-          background: 'primary',
           border: '.5px solid #f9f9f9',
           borderRadius: 10,
           boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.05)'
@@ -40,6 +39,10 @@ const muiTheme = createTheme({
           background: 'rgba(255,255,255, .15)',
           boxShadow: '0 4px 30px rgba(0, 0, 0, 0.1)',
           backdropFilter: 'blur(12px)'
+        },
+        invisible: {
+          background: 'none',
+          backdropFilter: 'none'
         }
       }
     }
