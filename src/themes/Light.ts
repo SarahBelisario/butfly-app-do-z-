@@ -1,12 +1,11 @@
 import createTheme from '@mui/material/styles/createTheme'
+import { autocomplete } from './overrides/autocomplete'
 import { buttons } from './overrides/button'
+import { dialog } from './overrides/dialog'
 import { inputs } from './overrides/input'
 import { list } from './overrides/list'
 import { table } from './overrides/table'
-import { dialog } from './overrides/dialog'
-import { autocomplete } from './overrides/autocomplete'
 import { GenericPaletteProps } from './types/Theme'
-
 const muiTheme = createTheme({
   palette: {
     primary: { main: '#6200ff' },
@@ -25,6 +24,16 @@ const muiTheme = createTheme({
     ...list,
     ...table,
     ...dialog,
+    MuiPaper: {
+      styleOverrides: {
+        root: {
+          background: 'primary',
+          border: '.5px solid #f9f9f9',
+          borderRadius: 10,
+          boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.05)'
+        }
+      }
+    },
     MuiBackdrop: {
       styleOverrides: {
         root: {
