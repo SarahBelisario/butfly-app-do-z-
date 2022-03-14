@@ -18,7 +18,7 @@ export function DesktopSidebar() {
           display: 'flex',
           flexDirection: 'column',
           width: isMobile ? 80 : 300,
-          alignItems: 'center'
+          alignItems: 'center',
         }}
       >
         <PageLogo sx={{ display: 'flex', alignItems: 'center', mt: 5 }} />

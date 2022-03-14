@@ -23,7 +23,7 @@ export function Navbar(props: any) {
         background: genericPalette.navbar.background,
         height: '100vh',
         overflow: 'auto',
-        overflowX: 'hidden'
+        overflowX: 'hidden',
       }}
     >
       {!isMobile && <DesktopSidebar />}
@@ -46,7 +46,7 @@ export function Navbar(props: any) {
                 display: 'flex',
                 justifyContent: 'space-between',
                 alignItems: 'center',
-                my: 1.5
+                my: 1.5,
               }}
             />
             <Box my="auto">
@@ -65,7 +65,7 @@ export function Navbar(props: any) {
             backdropFilter: 'blur(7px)',
             overflowY: 'auto',
             flex: 1,
-            ...genericPalette.body
+            ...genericPalette.body,
           }}
         >
           <Box style={{ maxWidth: '100%', display: 'flex', flexDirection: 'column', height: '100%' }}>

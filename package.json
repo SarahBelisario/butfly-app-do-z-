@@ -16,6 +16,7 @@
     "react-dom": "^17.0.2",
     "react-hook-form": "^7.27.0",
     "react-icons": "^4.3.1",
+    "react-number-format": "^4.9.1",
     "react-router-dom": "^6.2.1",
     "react-scripts": "5.0.0",
     "react-toastify": "^8.2.0",
@@ -23,7 +24,7 @@
     "use-debounce": "^7.0.1"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "dev": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
@@ -32,12 +33,6 @@
     "lint": "eslint .",
     "lint:fix": "eslint --fix",
     "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
   },
   "browserslist": {
     "production": [
@@ -56,11 +51,9 @@
     "@types/react": "^17.0.39",
     "@types/react-dom": "^17.0.9",
     "@types/react-icons": "^3.0.0",
-    "@typescript-eslint/eslint-plugin": "^5.13.0",
-    "@typescript-eslint/parser": "^5.13.0",
-    "eslint": "^8.10.0",
-    "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-prettier": "^4.0.0",
+    "@typescript-eslint/eslint-plugin": "^5.14.0",
+    "@typescript-eslint/parser": "^5.14.0",
+    "eslint": "^8.11.0",
     "eslint-plugin-react": "^7.29.3",
     "prettier": "^2.5.1"
   }

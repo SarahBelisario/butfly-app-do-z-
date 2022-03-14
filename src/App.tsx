@@ -22,7 +22,7 @@ export function App() {
     theme,
     genericPalette: availableThemes[theme].themePalette,
     muiTheme: availableThemes[theme].muiTheme,
-    setTheme
+    setTheme,
   }
 
   return (
@@ -35,7 +35,7 @@ export function App() {
           FabProps={{ color: 'secondary' }}
           icon={<IoIosColorPalette fontSize="22px" />}
         >
-          {Object.keys(availableThemes).map((theme) => (
+          {Object.keys(availableThemes).map(theme => (
             <SpeedDialAction
               key={theme}
               onClick={() => {
@@ -45,8 +45,8 @@ export function App() {
               FabProps={{
                 style: {
                   color: 'white',
-                  background: availableThemes[theme].muiTheme.palette.primary.main
-                }
+                  background: availableThemes[theme].muiTheme.palette.primary.main,
+                },
               }}
               icon={<IoIosColorPalette />}
               tooltipTitle={availableThemes[theme].themePalette.title}

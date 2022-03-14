@@ -1,13 +1,4 @@
-import {
-  Box,
-  Collapse,
-  List,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
-  ListProps,
-  useMediaQuery
-} from '@mui/material'
+import { Box, Collapse, List, ListItemButton, ListItemIcon, ListItemText, ListProps, useMediaQuery } from '@mui/material'
 import React, { useState } from 'react'
 import { MdExpandLess, MdExpandMore, MdPointOfSale } from 'react-icons/md'
 import { useLocation, useNavigate } from 'react-router-dom'
@@ -35,15 +26,15 @@ const availableRoutes: {
     label: 'Vendas',
     path: '/vendas',
     isCollapse: true,
-    subItems: [{ label: 'Listar', path: '/vendas/listar' }]
+    subItems: [{ label: 'Listar', path: '/vendas/listar' }],
   },
   {
     Icon: RiSettings2Fill,
     label: 'Serviços',
     path: '/serviços',
     isCollapse: true,
-    subItems: [{ label: 'Listar', path: '/serviços/listar' }]
-  }
+    subItems: [{ label: 'Listar', path: '/serviços/listar' }],
+  },
 ]
 
 export function NavList(props: NavListProps) {
@@ -83,13 +74,13 @@ export function NavList(props: NavListProps) {
               justifyContent: isMobile ? 'center' : 'flex-start',
               mb: 1,
               transition: '.5s',
-              background: isSelected(path) ? 'rgba(0, 0, 0, 0.15)' : ''
+              background: isSelected(path) ? 'rgba(0, 0, 0, 0.15)' : '',
             }}
           >
             <ListItemIcon
               sx={{
                 display: 'flex',
-                justifyContent: isMobile ? 'center' : 'flex-start'
+                justifyContent: isMobile ? 'center' : 'flex-start',
               }}
             >
               <Icon style={{ color: theme }} />
@@ -104,7 +95,7 @@ export function NavList(props: NavListProps) {
             sx={{
               mb: 1,
               borderRadius: 2,
-              transition: '.5s'
+              transition: '.5s',
             }}
           >
             <List component="div" disablePadding>
@@ -114,7 +105,7 @@ export function NavList(props: NavListProps) {
                   sx={{
                     display: 'flex',
                     justifyContent: isMobile ? 'center' : 'flex-start',
-                    background: isSelected(path) ? 'rgba(0, 0, 0, 0.15)' : ''
+                    background: isSelected(path) ? 'rgba(0, 0, 0, 0.15)' : '',
                   }}
                   onClick={() => {
                     setSelectedPath(path)
@@ -125,7 +116,7 @@ export function NavList(props: NavListProps) {
                     sx={{
                       display: isMobile ? 'flex' : 'block',
                       justifyContent: 'center',
-                      pl: 2
+                      pl: 2,
                     }}
                   >
                     <GoPrimitiveDot style={{ color: theme }} />

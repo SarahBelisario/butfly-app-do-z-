@@ -1,26 +1,35 @@
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material'
+import { useContext } from 'react'
+import { CheckoutContext } from '../../index'
 
-interface ProductProps {
-  name: string
-}
 interface RemoveProductProps {
   open: boolean
-  handleSetOpen: () => void
-  product: ProductProps | null
+  setOpen: (boolean) => void
 }
-export function RemoveProduct({ open, handleSetOpen, product }: RemoveProductProps) {
+
+export function RemoveProduct({ open, setOpen }: RemoveProductProps) {
+  const { selectedProduct, removeProduct } = useContext(CheckoutContext)
+
   return (
-    <Dialog open={open} onClose={handleSetOpen}>
-      <DialogTitle>Deseja remover este produto?</DialogTitle>
-      <DialogContent>
-        <DialogContentText>Você está removendo o produto &quot;{product?.name}&quot;</DialogContentText>
-      </DialogContent>
-      <DialogActions>
-        <Button onClick={handleSetOpen}>Cancelar</Button>
-        <Button autoFocus color="error" variant="contained">
-          Remover
-        </Button>
-      </DialogActions>
+    <Dialog open={open} onClose={() => setOpen(false)}>
+      {selectedProduct && (
+        <>
+          <DialogTitle>Deseja remover este produto?</DialogTitle>
+          <DialogContent>
+            <DialogContentText>Você está removendo o produto &quot;{selectedProduct.product.name}&quot;</DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={() => setOpen(false)}>Cancelar</Button>
+            <Button autoFocus color="error" variant="contained" onClick={() => {
+              removeProduct(selectedProduct.product.uid)
+              setOpen(false)
+            }
+            }>
+              Remover
+            </Button>
+          </DialogActions>
+        </>
+      )}
     </Dialog>
   )
 }

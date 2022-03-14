@@ -4,41 +4,41 @@ export const inputs: Components = {
   MuiInputBase: {
     styleOverrides: {
       root: {
-        height: 46
-      }
-    }
+        height: 46,
+      },
+    },
   },
   MuiOutlinedInput: {
     styleOverrides: {
       root: {
         fontSize: '13px',
-        borderRadius: 8
+        borderRadius: 8,
       },
       input: {
         padding: '16px 14px',
         height: 46,
-        boxSizing: 'border-box'
-      }
-    }
+        boxSizing: 'border-box',
+      },
+    },
   },
   MuiInputLabel: {
     styleOverrides: {
       root: {
-        fontSize: '13px'
+        fontSize: '13px',
       },
       shrink: {
-        transform: 'translate(14px, -6px) scale(.8) !important'
+        transform: 'translate(14px, -6px) scale(.8) !important',
       },
       outlined: {
-        transform: 'translate(14px, 14px) scale(1)'
-      }
-    }
+        transform: 'translate(14px, 14px) scale(1)',
+      },
+    },
   },
   MuiTextField: {
     styleOverrides: {
       root: {
-        borderRadius: 16
-      }
-    }
-  }
+        borderRadius: 16,
+      },
+    },
+  },
 }

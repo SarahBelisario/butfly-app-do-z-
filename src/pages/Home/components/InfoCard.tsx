@@ -20,7 +20,7 @@ const InfoCard = ({ title, value, compareValue, isBetter = 'greater', ...rest }:
     let colors = {
       background: '',
       foreground: '',
-      icon: <></>
+      icon: <></>,
     }
 
     if (isBetter === 'greater') {
@@ -28,7 +28,7 @@ const InfoCard = ({ title, value, compareValue, isBetter = 'greater', ...rest }:
         colors = {
           background: `${palette.success.main}20`,
           foreground: palette.success.main,
-          icon: <TiArrowSortedUp color={palette.success.main} />
+          icon: <TiArrowSortedUp color={palette.success.main} />,
         }
       }
 
@@ -36,7 +36,7 @@ const InfoCard = ({ title, value, compareValue, isBetter = 'greater', ...rest }:
         colors = {
           background: `${palette.error.main}20`,
           foreground: palette.error.main,
-          icon: <TiArrowSortedDown color={palette.error.main} />
+          icon: <TiArrowSortedDown color={palette.error.main} />,
         }
       }
     }
@@ -46,7 +46,7 @@ const InfoCard = ({ title, value, compareValue, isBetter = 'greater', ...rest }:
         colors = {
           background: `${palette.success.main}20`,
           foreground: palette.success.main,
-          icon: <TiArrowSortedDown color={palette.success.main} />
+          icon: <TiArrowSortedDown color={palette.success.main} />,
         }
       }
 
@@ -54,7 +54,7 @@ const InfoCard = ({ title, value, compareValue, isBetter = 'greater', ...rest }:
         colors = {
           background: `${palette.error.main}20`,
           foreground: palette.error.main,
-          icon: <TiArrowSortedUp color={palette.error.main} />
+          icon: <TiArrowSortedUp color={palette.error.main} />,
         }
       }
     }
@@ -63,7 +63,7 @@ const InfoCard = ({ title, value, compareValue, isBetter = 'greater', ...rest }:
       colors = {
         background: '#dddddd20',
         foreground: '#dddddd',
-        icon: <TiMinus color="#dddddd" />
+        icon: <TiMinus color="#dddddd" />,
       }
     }
 

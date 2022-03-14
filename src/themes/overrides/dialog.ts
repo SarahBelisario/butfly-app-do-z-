@@ -4,8 +4,8 @@ export const dialog: Components = {
   MuiDialog: {
     styleOverrides: {
       paper: {
-        borderRadius: 10
-      }
-    }
-  }
+        borderRadius: 10,
+      },
+    },
+  },
 }

@@ -23,13 +23,9 @@ const EventCard = ({ events }: EventCardProps) => {
         <Box key={index} sx={{ display: 'flex', alignItems: 'center', p: 2 }}>
           <FaDollarSign style={{ fontSize: 24, color: palette.secondary.main }} />
           <Box>
-            <Typography sx={{ ml: 2, fontSize: 16, fontWeight: 'normal', color: palette.text.primary }}>
-              {event.title}
-            </Typography>
+            <Typography sx={{ ml: 2, fontSize: 16, fontWeight: 'normal', color: palette.text.primary }}>{event.title}</Typography>
             {event.description && (
-              <Typography sx={{ ml: 2, fontSize: 12, fontWeight: 'light', color: palette.text.secondary }}>
-                {event.description}
-              </Typography>
+              <Typography sx={{ ml: 2, fontSize: 12, fontWeight: 'light', color: palette.text.secondary }}>{event.description}</Typography>
             )}
             <Typography sx={{ ml: 2, fontSize: 12, fontWeight: 'light', color: palette.text.secondary }}>
               {formatDistance(new Date(event.date), new Date(), { addSuffix: true, locale: ptBR })}

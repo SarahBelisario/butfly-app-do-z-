@@ -1,15 +1,18 @@
 import { Box, BoxProps, Grid, IconButton, Tooltip, Typography, useTheme } from '@mui/material'
+import { useContext } from 'react'
 import { IoMdCart } from 'react-icons/io'
 import { MdDelete, MdEdit, MdReceipt } from 'react-icons/md'
-import { ProductProps } from '../../../types/ProductProps'
+import { CheckoutContext } from '..'
+import { ProductListProps } from '../types/products'
 
 interface ProductCardProps extends BoxProps {
-  product: ProductProps
-  onRemoveProduct: (product: ProductProps) => void
+  product: ProductListProps
+  openRemoveProduct: (boolean) => void
 }
 
-export function ProductCard({ product, onRemoveProduct, ...props }: ProductCardProps) {
+export function ProductCard({ product, openRemoveProduct, ...props }: ProductCardProps) {
   const { palette } = useTheme()
+  const { setSelectedProduct } = useContext(CheckoutContext)
   return (
     <Box flex="1" position="relative" overflow="hidden" {...props}>
       <Box
@@ -17,7 +20,7 @@ export function ProductCard({ product, onRemoveProduct, ...props }: ProductCardP
           opacity: 0,
           transition: '.5s',
           '&:hover': {
-            opacity: 1
+            opacity: 1,
           },
           display: 'flex',
           width: '100%',
@@ -28,7 +31,7 @@ export function ProductCard({ product, onRemoveProduct, ...props }: ProductCardP
           background: 'rgba(255, 255, 255, 0.05)',
           borderRadius: 3,
           backdropFilter: 'blur(10px)',
-          cursor: 'pointer'
+          cursor: 'pointer',
         }}
       >
         <Tooltip title="Visualizar resumo">
@@ -43,27 +46,38 @@ export function ProductCard({ product, onRemoveProduct, ...props }: ProductCardP
           </IconButton>
         </Tooltip>
 
-        <Tooltip title="Remover item" onClick={() => onRemoveProduct(product)}>
+        <Tooltip title="Remover item" onClick={() => {
+          openRemoveProduct(true)
+          setSelectedProduct(product)
+        }}>
           <IconButton sx={{ mx: 2 }} color="error">
             <MdDelete />
           </IconButton>
         </Tooltip>
       </Box>
-      <Grid container sx={{ borderRadius: 3, background: palette.background.default, height: 80, padding: 2 }}>
+      <Grid
+        container
+        sx={{
+          borderRadius: 3,
+          background: palette.background.default,
+          height: 80,
+          padding: 2,
+        }}
+      >
         <Grid item xs={1} my="auto" mx={1} fontSize={20}>
           <IoMdCart color={palette.text.primary} />
         </Grid>
         <Grid item my="auto" ml={1}>
           <Typography fontSize={14} color={palette.text.primary}>
-            {product.name}
+            {product.product.name}
           </Typography>
           <Typography fontSize={10} color={palette.text.secondary}>
-            Camisetas
+            {product.product.category.name}
           </Typography>
         </Grid>
         <Grid item xs={3} my="auto" ml="auto">
           <Typography fontSize={12} fontWeight="bold" color={palette.success.main}>
-            R$ 82,90 x3
+            R$ {product.amount} x{product.quantity}
           </Typography>
         </Grid>
       </Grid>

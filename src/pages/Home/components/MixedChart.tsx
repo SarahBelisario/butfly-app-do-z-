@@ -18,7 +18,7 @@ export function LineChart() {
             label: 'Caixa',
             data: [10, 124, 149, 80, 97, 99, 10, 124, 149, 80, 97, 99],
             backgroundColor: palette.warning.dark,
-            borderColor: palette.warning.dark
+            borderColor: palette.warning.dark,
           },
           {
             label: 'Entradas',
@@ -26,7 +26,7 @@ export function LineChart() {
             fill: true,
             backgroundColor: palette.success.main,
             borderWidth: 0,
-            borderRadius: 5
+            borderRadius: 5,
           },
           {
             label: 'Saídas',
@@ -34,19 +34,19 @@ export function LineChart() {
             fill: true,
             backgroundColor: palette.error.main,
             borderWidth: 0,
-            borderRadius: 5
-          }
-        ]
+            borderRadius: 5,
+          },
+        ],
       }}
       options={{
         elements: {
           line: { tension: 0.4 },
-          point: { pointStyle: 'circle', radius: 4, borderWidth: 4 }
+          point: { pointStyle: 'circle', radius: 4, borderWidth: 4 },
         },
         scales: {
           x: { stacked: true, grid: { display: false } },
-          y: { stacked: true, grid: { display: false } }
-        }
+          y: { stacked: true, grid: { display: false } },
+        },
       }}
     />
   )

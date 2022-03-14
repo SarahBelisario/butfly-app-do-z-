@@ -6,8 +6,8 @@ export const buttons: Components = {
       root: {
         textTransform: 'none',
         borderRadius: 10,
-        height: 42
-      }
-    }
-  }
+        height: 42,
+      },
+    },
+  },
 }

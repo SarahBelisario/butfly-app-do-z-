@@ -13,7 +13,7 @@ export default function Form(props: FormHTMLAttributes<HTMLFormElement>) {
   const submit = async (data: { [field: string]: string }) => {
     setIsLoading(true)
     console.log(data)
-    await new Promise((resolve) => setTimeout(resolve, 3000))
+    await new Promise(resolve => setTimeout(resolve, 3000))
     setIsLoading(false)
     navigate('/login')
   }
@@ -23,16 +23,7 @@ export default function Form(props: FormHTMLAttributes<HTMLFormElement>) {
     <form onSubmit={handleSubmit(submit)} {...props}>
       <TextField id="name" disabled={isLoading} label="Nome" required fullWidth {...register('name')} />
 
-      <TextField
-        id="email"
-        disabled={isLoading}
-        type="email"
-        label="Email"
-        fullWidth
-        required
-        sx={{ mt: 2 }}
-        {...register('email')}
-      />
+      <TextField id="email" disabled={isLoading} type="email" label="Email" fullWidth required sx={{ mt: 2 }} {...register('email')} />
 
       <TextField
         id="password"
@@ -46,7 +37,7 @@ export default function Form(props: FormHTMLAttributes<HTMLFormElement>) {
                 {showPassword ? <IoEyeOutline /> : <IoEyeOffOutline />}
               </IconButton>
             </InputAdornment>
-          )
+          ),
         }}
         required
         fullWidth
@@ -66,7 +57,7 @@ export default function Form(props: FormHTMLAttributes<HTMLFormElement>) {
                 {showPassword ? <IoEyeOutline /> : <IoEyeOffOutline />}
               </IconButton>
             </InputAdornment>
-          )
+          ),
         }}
         required
         fullWidth
@@ -85,7 +76,7 @@ export default function Form(props: FormHTMLAttributes<HTMLFormElement>) {
           mt: 2,
           fontSize: 13,
           fontWeight: 'normal',
-          textAlign: 'center'
+          textAlign: 'center',
         }}
       >
         Ao se registrar, você concordará com os{' '}
@@ -96,7 +87,7 @@ export default function Form(props: FormHTMLAttributes<HTMLFormElement>) {
             mt: 2,
             fontSize: 13,
             fontWeight: 'normal',
-            textAlign: 'center'
+            textAlign: 'center',
           }}
         >
           termos de serviços{' '}
@@ -109,7 +100,7 @@ export default function Form(props: FormHTMLAttributes<HTMLFormElement>) {
             mt: 2,
             fontSize: 13,
             fontWeight: 'normal',
-            textAlign: 'center'
+            textAlign: 'center',
           }}
         >
           política de privacidade
@@ -124,7 +115,7 @@ export default function Form(props: FormHTMLAttributes<HTMLFormElement>) {
           mt: 2,
           fontSize: 13,
           fontWeight: 'normal',
-          textAlign: 'center'
+          textAlign: 'center',
         }}
       >
         Já tem uma conta?
@@ -138,7 +129,7 @@ export default function Form(props: FormHTMLAttributes<HTMLFormElement>) {
             fontSize: 13,
             fontWeight: 'bold',
             textAlign: 'center',
-            cursor: 'pointer'
+            cursor: 'pointer',
           }}
         >
           Login

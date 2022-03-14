@@ -6,7 +6,7 @@ import { getCategory } from '../utils/getCategory'
 
 export function productMapper(products: Products[]) {
   const productsFormatted: FormattedProducts[] = []
-  products.forEach((product) => {
+  products.forEach(product => {
     const { Icon }: { Icon: IconType; title: string } = getCategory(product.category)
     productsFormatted.push({
       ...product,
@@ -15,7 +15,7 @@ export function productMapper(products: Products[]) {
           <Icon style={{ marginRight: 12, fontSize: 24, opacity: 0.8 }} />
           {product.name}
         </Box>
-      )
+      ),
     })
   })
   return productsFormatted

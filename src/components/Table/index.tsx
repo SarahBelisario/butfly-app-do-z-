@@ -9,7 +9,7 @@ export default function TableComponent({
   columns,
   fetchMore,
   actions,
-  onClickRow
+  onClickRow,
 }: {
   rows: Row[]
   columns: Column[]
@@ -30,7 +30,7 @@ export default function TableComponent({
   const [fetchInProgress, setFetchInProgress] = useState(false)
   const ref: any = useRef()
 
-  const onScroll = useDebouncedCallback((event) => {
+  const onScroll = useDebouncedCallback(event => {
     const target = event.target as HTMLTextAreaElement
     const maxScroll = target.scrollHeight - target.offsetHeight
     const currentScroll = target.scrollTop
@@ -42,18 +42,12 @@ export default function TableComponent({
     }
   }, 50)
 
-  const getValue = ({
-    value,
-    type
-  }: {
-    value?: number | string
-    type: 'currency' | 'date' | 'datetime' | 'string'
-  }) => {
+  const getValue = ({ value, type }: { value?: number | string; type: 'currency' | 'date' | 'datetime' | 'string' }) => {
     const map = {
       currency: (value?: string | number) => currencyFormat(value),
       date: (value?: string | number) => dateFormat(value),
       datetime: (value?: string | number) => dateTimeFormat(value),
-      string: (value?: string | number) => value
+      string: (value?: string | number) => value,
     }
     if (!map[type]) return value
     return map[type](value)

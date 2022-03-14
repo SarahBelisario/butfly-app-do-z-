@@ -6,8 +6,8 @@ export const list: Components = {
       root: {
         height: 42,
         borderRadius: 10,
-        colorScheme: 'primary'
-      }
-    }
-  }
+        colorScheme: 'primary',
+      },
+    },
+  },
 }

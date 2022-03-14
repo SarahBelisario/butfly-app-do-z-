@@ -5,26 +5,26 @@ export const table: Components = {
     styleOverrides: {
       root: {
         width: '100%',
-        borderRadius: 10
-      }
-    }
+        borderRadius: 10,
+      },
+    },
   },
   MuiTableHead: {
     styleOverrides: {
       root: {
         '& th': {
-          fontWeight: 'bold'
-        }
-      }
-    }
+          fontWeight: 'bold',
+        },
+      },
+    },
   },
   MuiTableBody: {
     styleOverrides: {
       root: {
         '& td': {
-          fontWeight: 'light'
-        }
-      }
-    }
-  }
+          fontWeight: 'light',
+        },
+      },
+    },
+  },
 }

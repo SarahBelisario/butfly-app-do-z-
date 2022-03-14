@@ -15,14 +15,7 @@ interface ActionsPopperProps extends Omit<PopperProps, 'open'> {
   rowData: { [field: string]: any }
 }
 
-export function ActionsPopper({
-  popperIsOpen,
-  setPopperIsOpen,
-  anchorEl,
-  actions,
-  rowData,
-  ...props
-}: ActionsPopperProps) {
+export function ActionsPopper({ popperIsOpen, setPopperIsOpen, anchorEl, actions, rowData, ...props }: ActionsPopperProps) {
   return (
     <Popper open={popperIsOpen} anchorEl={anchorEl} transition placement="bottom-start" {...props}>
       {({ TransitionProps }) => (

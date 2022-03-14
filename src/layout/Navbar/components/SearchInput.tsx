@@ -17,8 +17,8 @@ export function SearchInput(props: SearchInputProps) {
     '& .MuiOutlinedInput-root': {
       '& fieldset': { borderColor: props.theme },
       '&:hover fieldset': { borderColor: props.theme },
-      '&.Mui-focused fieldset': { borderColor: props.theme }
-    }
+      '&.Mui-focused fieldset': { borderColor: props.theme },
+    },
   })
 
   return (

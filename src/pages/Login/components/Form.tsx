@@ -17,26 +17,17 @@ export default function Form(props: any) {
   const submit = async (data: any) => {
     setIsLoading(true)
     await ApiInstance.post('/login', { email: data.email, password: data.password })
-      .then((response) => {
+      .then(response => {
         navigate('/')
       })
-      .catch((error) => {
+      .catch(error => {
         console.log(error)
       })
   }
 
   return (
     <form onSubmit={handleSubmit(submit)} {...props}>
-      <TextField
-        id="email"
-        disabled={isLoading}
-        type="email"
-        label="Email"
-        fullWidth
-        required
-        sx={{ mt: 2 }}
-        {...register('email')}
-      />
+      <TextField id="email" disabled={isLoading} type="email" label="Email" fullWidth required sx={{ mt: 2 }} {...register('email')} />
 
       <TextField
         id="password"
@@ -50,7 +41,7 @@ export default function Form(props: any) {
                 {showPassword ? <IoEyeOutline /> : <IoEyeOffOutline />}
               </IconButton>
             </InputAdornment>
-          )
+          ),
         }}
         required
         fullWidth
@@ -58,14 +49,7 @@ export default function Form(props: any) {
         {...register('password')}
       />
 
-      <LoadingButton
-        fullWidth
-        color="primary"
-        variant="contained"
-        type="submit"
-        sx={{ mt: 2, position: 'relative' }}
-        loading={isLoading}
-      >
+      <LoadingButton fullWidth color="primary" variant="contained" type="submit" sx={{ mt: 2, position: 'relative' }} loading={isLoading}>
         Login
         {isLogged ? (
           <motion.div
@@ -74,13 +58,13 @@ export default function Form(props: any) {
               position: 'absolute',
               borderRadius: 5000,
               width: 0,
-              height: 0
+              height: 0,
             }}
             whileInView={{
               width: '300vh',
               height: '300vh',
               zIndex: 1,
-              placeItems: 'center'
+              placeItems: 'center',
             }}
             transition={{ ease: [0.86, 0.03, 0.1, 1], duration: 2 }}
           />
@@ -96,7 +80,7 @@ export default function Form(props: any) {
           mt: 2,
           fontSize: 13,
           fontWeight: 'normal',
-          textAlign: 'center'
+          textAlign: 'center',
         }}
       >
         É novo por aqui?
@@ -110,7 +94,7 @@ export default function Form(props: any) {
             fontSize: 13,
             fontWeight: 'bold',
             textAlign: 'center',
-            cursor: 'pointer'
+            cursor: 'pointer',
           }}
         >
           Registre-se

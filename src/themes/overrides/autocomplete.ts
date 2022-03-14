@@ -4,11 +4,11 @@ export const autocomplete: Components = {
   MuiAutocomplete: {
     styleOverrides: {
       root: {
-        height: 46
+        height: 46,
       },
       input: {
-        height: 16
-      }
-    }
-  }
+        height: 16,
+      },
+    },
+  },
 }

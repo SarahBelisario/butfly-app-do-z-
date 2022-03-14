@@ -10,6 +10,6 @@ const ThemeContext = createContext({
   genericPalette: light.themePalette,
   setTheme: (theme: AvailableThemes) => {
     void theme
-  }
+  },
 })
 export { ThemeContext }
