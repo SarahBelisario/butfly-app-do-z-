@@ -1,6 +1,6 @@
 import { Box, useMediaQuery } from '@mui/material'
 import { BoxProps } from '@mui/system'
-import React, { useContext } from 'react'
+import { useContext } from 'react'
 import { ThemeContext } from '../themes/ThemeContext'
 
 export function ContentCard(props: BoxProps) {

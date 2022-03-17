@@ -1,7 +1,6 @@
 import styled from '@emotion/styled'
 import { Box, TextField } from '@mui/material'
 import { BoxProps } from '@mui/system'
-import React from 'react'
 
 interface SearchInputProps extends BoxProps {
   theme: 'dark' | 'white'

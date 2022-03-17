@@ -1,4 +1,3 @@
-import React from 'react'
 import { Route, Routes as BrowserRouter } from 'react-router-dom'
 import { Navbar } from '../layout/Navbar'
 import { Login } from '../pages/Login'

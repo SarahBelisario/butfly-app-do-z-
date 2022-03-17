@@ -1,6 +1,5 @@
 import { Avatar, IconButton, Typography, useMediaQuery } from '@mui/material'
 import { Box } from '@mui/system'
-import React from 'react'
 import { IoLogOut } from 'react-icons/io5'
 import { useNavigate } from 'react-router-dom'
 

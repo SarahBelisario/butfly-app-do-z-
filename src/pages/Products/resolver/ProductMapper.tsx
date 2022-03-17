@@ -1,5 +1,4 @@
 import { Box } from '@mui/material'
-import React from 'react'
 import { IconType } from 'react-icons'
 import { FormattedProducts, Products } from '../types/products'
 import { getCategory } from '../utils/getCategory'

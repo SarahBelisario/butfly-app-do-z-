@@ -1,5 +1,4 @@
 import { Box, IconButton, Typography } from '@mui/material'
-import React from 'react'
 import { NavList } from './components/NavList'
 import { SearchInput } from './components/SearchInput'
 import { IoMdClose } from 'react-icons/io'

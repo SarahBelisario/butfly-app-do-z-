@@ -1,5 +1,4 @@
 import { ClickAwayListener, Fade, MenuItem, MenuList, Paper, Popper, PopperProps } from '@mui/material'
-import React from 'react'
 
 interface ActionsPopperProps extends Omit<PopperProps, 'open'> {
   popperIsOpen: boolean

@@ -1,5 +1,4 @@
 import { Box, Grid, Typography, useTheme } from '@mui/material'
-import React from 'react'
 import { CalendarBar } from './components/Calendar'
 import { ContentCard } from '../../components/ContentCard'
 import { LineChart } from './components/MixedChart'

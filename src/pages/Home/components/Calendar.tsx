@@ -2,7 +2,6 @@ import { Box, Typography, useMediaQuery, useTheme } from '@mui/material'
 import { BoxProps } from '@mui/system'
 import { addDays, format } from 'date-fns'
 import ptBr from 'date-fns/locale/pt-BR'
-import React from 'react'
 
 export function CalendarBar(props: BoxProps) {
   const isMobile = useMediaQuery('(max-width:600px)')

@@ -1,6 +1,5 @@
 import { Box, Typography, useTheme } from '@mui/material'
 import { formatDistance } from 'date-fns'
-import React from 'react'
 import { FaDollarSign } from 'react-icons/fa'
 import ptBR from 'date-fns/locale/pt-BR'
 

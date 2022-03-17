@@ -1,5 +1,4 @@
 import { Box, Hidden, Typography, useTheme } from '@mui/material'
-import React from 'react'
 
 export default function LeftContainer() {
   const { palette } = useTheme()

@@ -1,12 +1,12 @@
-import React, { useState } from 'react'
-import { ThemeProvider } from '@mui/material/styles'
-import { Routes } from './routes'
-import { ThemeContext } from './themes/ThemeContext'
-import { availableThemes } from './themes'
 import { SpeedDial, SpeedDialAction, Theme } from '@mui/material'
+import { ThemeProvider } from '@mui/material/styles'
+import { useState } from 'react'
 import { IoIosColorPalette } from 'react-icons/io'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import { Routes } from './routes'
+import { availableThemes } from './themes'
+import { ThemeContext } from './themes/ThemeContext'
 import { AvailableThemes, GenericPaletteProps } from './themes/types/Theme'
 
 export function App() {

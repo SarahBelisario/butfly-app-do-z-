@@ -1,5 +1,4 @@
 import { Box, BoxProps, Chip, Typography, useTheme } from '@mui/material'
-import React from 'react'
 import { TiArrowSortedDown, TiArrowSortedUp, TiMinus } from 'react-icons/ti'
 import { currencyFormat } from '../../../utils/currencyFormat'
 

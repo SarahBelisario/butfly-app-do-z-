@@ -1,5 +1,5 @@
 import { Box, Collapse, List, ListItemButton, ListItemIcon, ListItemText, ListProps, useMediaQuery } from '@mui/material'
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { MdExpandLess, MdExpandMore, MdPointOfSale } from 'react-icons/md'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { BsBarChartFill, BsCartFill } from 'react-icons/bs'
@@ -18,24 +18,24 @@ const availableRoutes: {
   selectedInRoutes?: string[]
   subItems?: { label: string; path: string }[]
 }[] = [
-  { Icon: BsBarChartFill, label: 'Dashboard', path: '/', isCollapse: false },
-  { Icon: MdPointOfSale, label: 'Frente de caixa', path: '/frente-de-caixa', isCollapse: false },
-  { Icon: FaShoppingCart, label: 'Produtos', path: '/produtos', isCollapse: false },
-  {
-    Icon: FaDollarSign,
-    label: 'Vendas',
-    path: '/vendas',
-    isCollapse: true,
-    subItems: [{ label: 'Listar', path: '/vendas/listar' }],
-  },
-  {
-    Icon: RiSettings2Fill,
-    label: 'Serviços',
-    path: '/serviços',
-    isCollapse: true,
-    subItems: [{ label: 'Listar', path: '/serviços/listar' }],
-  },
-]
+    { Icon: BsBarChartFill, label: 'Dashboard', path: '/', isCollapse: false },
+    { Icon: MdPointOfSale, label: 'Frente de caixa', path: '/frente-de-caixa', isCollapse: false },
+    { Icon: FaShoppingCart, label: 'Produtos', path: '/produtos', isCollapse: false },
+    {
+      Icon: FaDollarSign,
+      label: 'Vendas',
+      path: '/vendas',
+      isCollapse: true,
+      subItems: [{ label: 'Listar', path: '/vendas/listar' }],
+    },
+    {
+      Icon: RiSettings2Fill,
+      label: 'Serviços',
+      path: '/serviços',
+      isCollapse: true,
+      subItems: [{ label: 'Listar', path: '/serviços/listar' }],
+    },
+  ]
 
 export function NavList(props: NavListProps) {
   const theme = props.theme

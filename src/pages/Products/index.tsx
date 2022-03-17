@@ -1,5 +1,5 @@
 import { Box, Typography, useTheme } from '@mui/material'
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { ContentCard } from '../../components/ContentCard'
 import Table from '../../components/Table'
 import { ApiInstance } from '../../services/axios'
