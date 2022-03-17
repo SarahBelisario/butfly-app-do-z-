@@ -50,17 +50,14 @@ export function Checkout() {
         </Typography>
       </Box>
 
-      <Box display="flex" flexDirection={{ md: 'row' }} mt={3} height="100%">
-        <ContentCard flex={{ xs: 1, md: 0.7 }} mr={{ xs: 0, md: 2 }}>
+      <Box display="flex" flexDirection={{ xs: 'column', lg: 'row' }} mt={3} height="100%">
+        <ContentCard flex={{ xs: 1, md: 0.5 }} mr={{ xs: 0, lg: 2 }}>
           <NewProduct />
         </ContentCard>
-        <ContentCard display="flex" flexDirection="column" flex={{ xs: 1, md: 0.3 }} mt={{ xs: 2, md: 0 }} overflow="scroll" boxSizing="border-box">
-          <Typography fontWeight="light" fontSize="14px" color={palette.text.secondary} mb={4}>
-            Produtos adicionados
-          </Typography>
+        <ContentCard display="flex" flexDirection="column" flex={{ xs: 1, lg: 0.5 }} mt={{ xs: 2, lg: 0 }} overflow="scroll" boxSizing="border-box">
           <ProductList sx={{ flexBasis: '100%', flexGrow: 1 }} />
-          <Button variant="contained" fullWidth>
-            Finalizar
+          <Button variant="contained" sx={{ alignSelf: "flex-end" }}>
+            Continuar
           </Button>
         </ContentCard>
       </Box>

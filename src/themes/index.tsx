@@ -8,8 +8,7 @@ const availableThemes: {
   [field: string]: { muiTheme: Theme; themePalette: GenericPaletteProps }
 } = {
   light,
-  dark,
-  unicorn,
+  dark
 }
 
 export { availableThemes }

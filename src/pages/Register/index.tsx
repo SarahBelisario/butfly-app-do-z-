@@ -22,7 +22,7 @@ export function Register() {
             Inicie grátis, absolutamente grátis!
           </Typography>
           <Typography color={palette.text.secondary} fontWeight="light" textAlign="left" sx={{ ml: 1, mb: 4, fontSize: 14, fontWeight: 'light' }}>
-            Não é necessário cadastro de cartão, na webstock você inicia grátis.
+            Não é necessário cadastro de cartão, na Butfly você inicia grátis.
           </Typography>
           <Form style={{ maxWidth: 500 }} />
         </Box>

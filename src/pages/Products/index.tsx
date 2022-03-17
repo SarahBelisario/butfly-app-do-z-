@@ -36,7 +36,7 @@ export function Products() {
         setProducts([...products, ...newProducts])
       })
       .catch(error => {
-        console.log('erro', error)
+        console.log('error', error)
       })
   }
 

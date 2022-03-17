@@ -105,7 +105,7 @@ export default function Form(props: FormHTMLAttributes<HTMLFormElement>) {
         >
           política de privacidade
         </Typography>{' '}
-        da Webstock.
+        da Butfly.
       </Typography>
 
       <Typography

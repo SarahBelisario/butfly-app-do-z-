@@ -18,7 +18,7 @@ export default function LeftContainer() {
       >
         <Box width="80%">
           <Typography fontSize={30} fontWeight="light" maxWidth="75%" mb={4} color={palette.text.primary}>
-            Com webstock,
+            Com Butfly,
             <br />
             você está no controle.
           </Typography>

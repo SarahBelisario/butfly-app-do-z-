@@ -25,7 +25,7 @@ export function MobileNavbar({ setIsOpen }: { setIsOpen: (open: boolean) => void
         <Box sx={{ p: 4 }}>
           <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 4 }}>
             <Typography fontWeight={'light'} fontSize={24}>
-              Webstock
+              Butfly
             </Typography>
             <IconButton sx={{ color: 'dark' }} onClick={() => setIsOpen(false)}>
               <IoMdClose />

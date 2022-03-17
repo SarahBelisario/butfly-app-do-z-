@@ -62,11 +62,19 @@ const muiTheme = createTheme({
 const themePalette: GenericPaletteProps = {
   title: 'Unicórnio',
   navbar: {
-    background: 'url(https://mir-s3-cdn-cf.behance.net/project_modules/fs/6ab7a786128681.5d909dad4b086.jpg)',
+    background: '#000636',
     backgroundRepeat: 'no-repeat',
   },
-  body: { background: 'rgba(255, 255, 255, 0.65)', backdropFilter: 'blur(5px)' },
-  card: { background: 'rgba(255, 255, 255, 0.35)' },
+  body: {
+    background: 'rgba(255, 255, 255, 0.34)',
+    boxShadow: '0 4px 30px rgba(0, 0, 0, 0.1)',
+    backdropFilter: 'blur(0px)'
+  },
+  card: {
+    background: 'rgba(255, 255, 255, 0.34)',
+    boxShadow: '0 4px 30px rgba(0, 0, 0, 0.1)',
+    backdropFilter: 'blur(0px)'
+  },
 }
 
 export default { muiTheme, themePalette }

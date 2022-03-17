@@ -7,7 +7,7 @@ export function PageLogo(props: BoxProps) {
     <Box {...props}>
       <IoLogOutOutline style={{ fontSize: 32, color: 'white' }}></IoLogOutOutline>
 
-      <Typography sx={{ fontWeight: 1, fontSize: 32, color: 'white', ml: 1 }}>Webstock</Typography>
+      <Typography sx={{ fontWeight: 1, fontSize: 32, color: 'white', ml: 1 }}>Butfly</Typography>
     </Box>
   )
 }

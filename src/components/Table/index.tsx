@@ -1,14 +1,12 @@
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, useTheme } from '@mui/material'
 import React, { useRef, useState } from 'react'
 import { useDebouncedCallback } from 'use-debounce'
-import { ActionsPopper } from './ActionsPopper'
 import { currencyFormat, dateFormat, dateTimeFormat } from './functions'
 
 export default function TableComponent({
   rows,
   columns,
   fetchMore,
-  actions,
   onClickRow,
 }: {
   rows: Row[]
@@ -24,9 +22,6 @@ export default function TableComponent({
   onClickRow: (rowData: { [field: string]: string | number }) => void
 }) {
   const { palette } = useTheme()
-  const [selectedRow, setSelectedRow] = useState({})
-  const [popperIsOpen, setPopperIsOpen] = useState(false)
-  const [anchorEl, setAnchorEl] = useState<null | any>(null)
   const [fetchInProgress, setFetchInProgress] = useState(false)
   const ref: any = useRef()
 
@@ -34,7 +29,7 @@ export default function TableComponent({
     const target = event.target as HTMLTextAreaElement
     const maxScroll = target.scrollHeight - target.offsetHeight
     const currentScroll = target.scrollTop
-    if (!fetchInProgress && fetchMore && maxScroll - currentScroll < 200) {
+    if (!fetchInProgress && fetchMore && maxScroll - currentScroll < 1200) {
       setFetchInProgress(true)
       fetchMore()
         .then(() => setFetchInProgress(false))
@@ -69,15 +64,6 @@ export default function TableComponent({
           </TableRow>
         </TableHead>
         <TableBody>
-          {actions && (
-            <ActionsPopper
-              anchorEl={anchorEl}
-              popperIsOpen={popperIsOpen}
-              setPopperIsOpen={setPopperIsOpen}
-              actions={actions}
-              rowData={selectedRow}
-            />
-          )}
           {rows.map((row, index) => (
             <TableRow key={index} onClick={() => onClickRow(row)}>
               {columns.map((column, index) => {

@@ -10,7 +10,6 @@ import { Delivery } from './DeliveryInfo'
 
 export function NewProduct() {
   const { palette } = useTheme()
-  const [deliveryCollapsed, setDeliveryCollapsed] = useState(true)
   const [products, setProducts] = useState([])
   const [, setProductLoading] = useState(false)
   const { handleSubmit, control } = useForm()
@@ -38,7 +37,7 @@ export function NewProduct() {
         </Typography>
       </Box>
       <Grid container spacing={2}>
-        <Grid item xs={12} md={6}>
+        <Grid item xs={12} >
           <AsyncAutoComplete
             isRequired
             control={control}
@@ -50,7 +49,7 @@ export function NewProduct() {
           />
         </Grid>
 
-        <Grid item xs={6} md={3}>
+        <Grid item xs={6} >
           <Controller
             name="amount"
             control={control}
@@ -77,7 +76,7 @@ export function NewProduct() {
           />
         </Grid>
 
-        <Grid item xs={6} md={3}>
+        <Grid item xs={6} >
           <Controller
             name="quantity"
             control={control}
@@ -104,18 +103,15 @@ export function NewProduct() {
           />
         </Grid>
 
-        <Hidden mdDown>
-          <Grid item xs={false} md={6}></Grid>
-        </Hidden>
 
-        <Grid item xs={3} md={1.5}>
+        <Grid item xs={3}>
           <Select fullWidth>
             <MenuItem value={'percentage'}>%</MenuItem>
             <MenuItem value={'money'}>R$</MenuItem>
           </Select>
         </Grid>
 
-        <Grid item xs={9} md={4.5}>
+        <Grid item xs={9}>
           <NumberFormat
             label="Desconto"
             fullWidth
@@ -136,28 +132,7 @@ export function NewProduct() {
         </Grid>
       </Grid>
 
-      <Box mt={4} mb={4}>
-        <Box
-          display="flex"
-          position="relative"
-          justifyContent="space-between"
-          alignItems="center"
-          sx={{ cursor: 'pointer' }}
-          onClick={() => setDeliveryCollapsed(!deliveryCollapsed)}
-        >
-          <Typography fontWeight="light" fontSize="14px" color={palette.text.secondary}>
-            Transporte/Frete
-          </Typography>
-          <Box display="flex" alignItems="center" height={0}>
-            <BiChevronDown fontSize="18px" style={{ color: palette.text.primary }} />
-          </Box>
-        </Box>
-        <Collapse in={!deliveryCollapsed} timeout="auto" unmountOnExit>
-          <Delivery />
-        </Collapse>
-      </Box>
-
-      <Button variant="contained" sx={{ alignSelf: 'flex-end' }} type="submit">
+      <Button variant="contained" sx={{ alignSelf: 'flex-end', mt: 2 }} type="submit">
         Adicionar produto
       </Button>
     </Box>

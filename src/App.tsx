@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { ThemeProvider } from '@mui/material/styles'
-
 import { Routes } from './routes'
 import { ThemeContext } from './themes/ThemeContext'
 import { availableThemes } from './themes'
@@ -32,26 +31,25 @@ export function App() {
         <SpeedDial
           ariaLabel="theme-selector"
           style={{ position: 'absolute', right: 16, bottom: 16 }}
-          FabProps={{ color: 'secondary' }}
+          FabProps={{ color: 'primary' }}
           icon={<IoIosColorPalette fontSize="22px" />}
         >
-          {Object.keys(availableThemes).map(theme => (
-            <SpeedDialAction
-              key={theme}
-              onClick={() => {
-                localStorage.setItem('theme', theme)
-                setTheme(theme as AvailableThemes)
-              }}
-              FabProps={{
-                style: {
-                  color: 'white',
-                  background: availableThemes[theme].muiTheme.palette.primary.main,
-                },
-              }}
-              icon={<IoIosColorPalette />}
-              tooltipTitle={availableThemes[theme].themePalette.title}
-            />
-          ))}
+          {Object.keys(availableThemes).map(theme => {
+            const title = availableThemes[theme].themePalette.title
+            const primary = availableThemes[theme].themePalette.navbar.background
+            const secondary = availableThemes[theme].themePalette.card.background
+            return (
+              <SpeedDialAction
+                key={theme}
+                onClick={() => {
+                  localStorage.setItem('theme', theme)
+                  setTheme(theme as AvailableThemes)
+                }}
+                FabProps={{ style: { background: `linear-gradient(135deg, ${primary} 49%, ${secondary} 50%)` }, }}
+                tooltipTitle={title}
+              />
+            )
+          })}
         </SpeedDial>
         <Routes />
       </ThemeProvider>

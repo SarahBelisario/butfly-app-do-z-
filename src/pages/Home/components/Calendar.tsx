@@ -10,7 +10,7 @@ export function CalendarBar(props: BoxProps) {
   const theme = useTheme()
   const getDates = (): Date[] => {
     const range = isMobile ? 2 : 6
-    const dateArr = []
+    const dateArr: Date[] = []
     dateArr.push(addDays(today, 0))
     for (let i = 1; i <= range; i++) {
       dateArr.unshift(addDays(new Date(), i * -1))

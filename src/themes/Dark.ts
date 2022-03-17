@@ -53,7 +53,7 @@ const muiTheme = createTheme({
 
 const themePalette: GenericPaletteProps = {
   title: 'Escuro',
-  navbar: { background: '#6200ff' },
+  navbar: { background: '#00c8c5' },
   body: { background: '#303030' },
   card: { background: '#404040' },
 }
