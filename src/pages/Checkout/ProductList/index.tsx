@@ -1,4 +1,4 @@
-import { Box, BoxProps, Typography, useTheme } from '@mui/material'
+import { Box, BoxProps, Button, Typography, useTheme } from '@mui/material'
 import { useContext, useState } from 'react'
 import { CheckoutContext } from '..'
 import { RemoveProduct } from './Modals/RemoveProduct'
@@ -7,8 +7,17 @@ import { motion, AnimatePresence } from 'framer-motion'
 
 export function ProductList(props: BoxProps) {
   const [removeProductModalIsOpen, setRemoveProductModalIsOpen] = useState(false)
-  const { products } = useContext(CheckoutContext)
+  const { products, step, setStep } = useContext(CheckoutContext)
   const { palette } = useTheme()
+
+  function next() {
+    if (step >= 2) return
+    setStep(step + 1)
+  }
+  function previous() {
+    if (step <= 1) return
+    setStep(step - 1)
+  }
 
   return (
     <Box {...props}>
@@ -27,6 +36,14 @@ export function ProductList(props: BoxProps) {
         ))}
       </AnimatePresence>
       <RemoveProduct open={removeProductModalIsOpen} setOpen={setRemoveProductModalIsOpen} />
+      <Box display="flex" justifyContent={'flex-end'}>
+        <Button variant="contained" disabled={step === 1} onClick={previous}>
+          Voltar
+        </Button>
+        <Button variant="contained" sx={{ ml: 1 }} onClick={next}>
+          {step < 2 ? 'Continuar' : 'Finalizar'}
+        </Button>
+      </Box>
     </Box>
   )
 }
