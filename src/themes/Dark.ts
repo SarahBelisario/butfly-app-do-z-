@@ -1,6 +1,7 @@
 import { createTheme } from '@mui/material/styles'
 import { autocomplete } from './overrides/autocomplete'
 import { buttons } from './overrides/button'
+import { checkbox } from './overrides/checkbox'
 import { dialog } from './overrides/dialog'
 import { inputs } from './overrides/input'
 import { list } from './overrides/list'
@@ -9,7 +10,7 @@ import { GenericPaletteProps } from './types/Theme'
 
 const muiTheme = createTheme({
   palette: {
-    primary: { main: '#03fcf8' },
+    primary: { main: '#0077ff' },
     secondary: { main: '#03fcf8' },
     success: { main: '#03fcf8' },
     mode: 'dark',
@@ -26,6 +27,7 @@ const muiTheme = createTheme({
     ...list,
     ...table,
     ...dialog,
+    ...checkbox,
     MuiPaper: {
       styleOverrides: {
         root: {
@@ -53,7 +55,7 @@ const muiTheme = createTheme({
 
 const themePalette: GenericPaletteProps = {
   title: 'Escuro',
-  navbar: { background: '#00c8c5' },
+  navbar: { background: '#404040' },
   body: { background: '#303030' },
   card: { background: '#404040' },
 }

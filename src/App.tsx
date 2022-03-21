@@ -2,7 +2,7 @@ import { SpeedDial, SpeedDialAction, Theme } from '@mui/material'
 import { ThemeProvider } from '@mui/material/styles'
 import { useState } from 'react'
 import { IoIosColorPalette } from 'react-icons/io'
-import { ToastContainer } from 'react-toastify'
+import { ToastContainer, Slide } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { Routes } from './routes'
 import { availableThemes } from './themes'
@@ -24,10 +24,13 @@ export function App() {
     setTheme,
   }
 
+  
+  const colorMode =  availableThemes[theme].muiTheme.palette.mode
+
   return (
     <ThemeContext.Provider value={value}>
       <ThemeProvider theme={value.muiTheme}>
-        <ToastContainer limit={3} theme={'colored'} />
+        <ToastContainer limit={3} theme={colorMode} transition={Slide} hideProgressBar={false} />
         <SpeedDial
           ariaLabel="theme-selector"
           style={{ position: 'absolute', right: 16, bottom: 16 }}

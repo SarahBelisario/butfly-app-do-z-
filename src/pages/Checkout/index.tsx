@@ -4,6 +4,8 @@ import { ContentCard } from '../../components/ContentCard'
 import { NewProduct } from './NewProduct'
 import { ProductList } from './ProductList'
 import { ProductListProps } from './types/products'
+import { toast } from 'react-toastify'
+import { AdditionalInfo } from './AdditionalInfo'
 
 interface CheckoutContext {
   products: ProductListProps[]
@@ -32,6 +34,7 @@ export function Checkout() {
   const [step, setStep] = useState<number>(1)
 
   function addProduct(data: ProductListProps) {
+    if (products.find(product => product.product.uid === data.product.uid)) return toast.error('O produto informado ja existe.')
     setProducts([...products, data])
   }
 
@@ -42,12 +45,11 @@ export function Checkout() {
 
   return (
     <CheckoutContext.Provider value={{ products, addProduct, removeProduct, selectedProduct, setSelectedProduct, step, setStep }}>
-
       <Box>
         <Typography ml={2} mt={2} variant="h1" fontSize="28px" fontWeight="normal" sx={{ color: palette.text.primary }}>
           Frente de caixa
         </Typography>
-        <Typography ml={2} mt={2} sx={{ fontSize: '16px', color: palette.text.secondary, fontWeight: 'light', }}>
+        <Typography ml={2} mt={2} sx={{ fontSize: '16px', color: palette.text.secondary, fontWeight: 'light' }}>
           Mais agilidade na venda de seus produtos 🕺
         </Typography>
       </Box>
@@ -61,7 +63,7 @@ export function Checkout() {
 
         {step === 2 && (
           <ContentCard flex={{ xs: 1, md: 0.5 }} mr={{ xs: 0, lg: 2 }}>
-            a
+            <AdditionalInfo />
           </ContentCard>
         )}
         <ContentCard display="flex" flexDirection="column" flex={{ xs: 1, lg: 0.5 }} mt={{ xs: 2, lg: 0 }} overflow="scroll" boxSizing="border-box">

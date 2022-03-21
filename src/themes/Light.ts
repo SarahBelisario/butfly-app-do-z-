@@ -1,6 +1,7 @@
 import createTheme from '@mui/material/styles/createTheme'
 import { autocomplete } from './overrides/autocomplete'
 import { buttons } from './overrides/button'
+import { checkbox } from './overrides/checkbox'
 import { dialog } from './overrides/dialog'
 import { inputs } from './overrides/input'
 import { list } from './overrides/list'
@@ -24,6 +25,7 @@ const muiTheme = createTheme({
     ...list,
     ...table,
     ...dialog,
+    ...checkbox,
     MuiPaper: {
       styleOverrides: {
         root: {

@@ -3,6 +3,7 @@ import { useContext } from 'react'
 import { IoMdCart } from 'react-icons/io'
 import { MdDelete, MdEdit, MdReceipt } from 'react-icons/md'
 import { CheckoutContext } from '..'
+import { currencyFormat } from '../../../utils/currencyFormat'
 import { ProductListProps } from '../types/products'
 
 interface ProductCardProps extends BoxProps {
@@ -20,7 +21,7 @@ export function ProductCard({ product, openRemoveProduct, ...props }: ProductCar
           opacity: 0,
           transition: '.5s',
           '&:hover': {
-            opacity: 1,
+            opacity: 1
           },
           display: 'flex',
           width: '100%',
@@ -31,7 +32,7 @@ export function ProductCard({ product, openRemoveProduct, ...props }: ProductCar
           background: 'rgba(255, 255, 255, 0.05)',
           borderRadius: 3,
           backdropFilter: 'blur(10px)',
-          cursor: 'pointer',
+          cursor: 'pointer'
         }}
       >
         <Tooltip title="Visualizar resumo">
@@ -46,10 +47,13 @@ export function ProductCard({ product, openRemoveProduct, ...props }: ProductCar
           </IconButton>
         </Tooltip>
 
-        <Tooltip title="Remover item" onClick={() => {
-          openRemoveProduct(true)
-          setSelectedProduct(product)
-        }}>
+        <Tooltip
+          title="Remover item"
+          onClick={() => {
+            openRemoveProduct(true)
+            setSelectedProduct(product)
+          }}
+        >
           <IconButton sx={{ mx: 2 }} color="error">
             <MdDelete />
           </IconButton>
@@ -61,7 +65,7 @@ export function ProductCard({ product, openRemoveProduct, ...props }: ProductCar
           borderRadius: 3,
           background: palette.background.default,
           height: 80,
-          padding: 2,
+          padding: 2
         }}
       >
         <Grid item xs={1} my="auto" mx={1} fontSize={20}>
@@ -76,8 +80,11 @@ export function ProductCard({ product, openRemoveProduct, ...props }: ProductCar
           </Typography>
         </Grid>
         <Grid item xs={3} my="auto" ml="auto">
-          <Typography fontSize={12} fontWeight="bold" color={palette.success.main}>
-            R$ {product.amount} x{product.quantity}
+          <Typography fontSize={12} fontWeight="light" color={palette.success.main} textAlign="right">
+            {currencyFormat(product.amount)}
+          </Typography>
+          <Typography fontSize={12} fontWeight="light" color={palette.success.main} textAlign="right">
+            x{Number(product.quantity)}
           </Typography>
         </Grid>
       </Grid>
