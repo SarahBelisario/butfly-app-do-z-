@@ -6,6 +6,7 @@ import { ProductList } from './ProductList'
 import { ProductListProps } from './types/products'
 import { toast } from 'react-toastify'
 import { AdditionalInfo } from './AdditionalInfo'
+import { AddressProps } from './types/address'
 
 interface CheckoutContext {
   products: ProductListProps[]
@@ -15,6 +16,8 @@ interface CheckoutContext {
   setSelectedProduct: (product: ProductListProps) => void
   step: number
   setStep: (step: number) => void
+  address: AddressProps | null
+  setAddress: (address: AddressProps | null) => void
 }
 
 export const CheckoutContext = createContext<CheckoutContext>({
@@ -24,13 +27,16 @@ export const CheckoutContext = createContext<CheckoutContext>({
   selectedProduct: null,
   setSelectedProduct: (product: ProductListProps) => void product,
   step: 1,
-  setStep: (step: number) => void step
+  setStep: (step: number) => void step,
+  address: null,
+  setAddress: (address: AddressProps | null) => void address
 })
 
 export function Checkout() {
   const { palette } = useTheme()
   const [products, setProducts] = useState<ProductListProps[]>([])
   const [selectedProduct, setSelectedProduct] = useState<ProductListProps | null>(null)
+  const [address, setAddress] = useState<AddressProps | null>(null)
   const [step, setStep] = useState<number>(1)
 
   function addProduct(data: ProductListProps) {
@@ -44,7 +50,9 @@ export function Checkout() {
   }
 
   return (
-    <CheckoutContext.Provider value={{ products, addProduct, removeProduct, selectedProduct, setSelectedProduct, step, setStep }}>
+    <CheckoutContext.Provider
+      value={{ products, addProduct, removeProduct, selectedProduct, setSelectedProduct, step, setStep, address, setAddress }}
+    >
       <Box>
         <Typography ml={2} mt={2} variant="h1" fontSize="28px" fontWeight="normal" sx={{ color: palette.text.primary }}>
           Frente de caixa

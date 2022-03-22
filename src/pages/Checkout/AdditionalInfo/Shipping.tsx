@@ -1,9 +1,11 @@
 import { Grid, MenuItem, Select, TextField } from '@mui/material'
 import { Box } from '@mui/system'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import ReactInputMask from 'react-input-mask'
 import { toast } from 'react-toastify'
 import { ViaCepInstance } from '../../../services/cep'
+import { CheckoutContext } from '../../Checkout/index'
+import { AddressProps } from '../types/address'
 
 const MaskedInput = props => <ReactInputMask {...props}>{inputProps => <TextField {...inputProps} />}</ReactInputMask>
 const UFList = [
@@ -37,26 +39,32 @@ const UFList = [
 ]
 
 export function Shipping() {
-  const [cep, setCep] = useState('')
-  const [number, setNumber] = useState('')
-  const [neighborhood, setNeighborhood] = useState('')
-  const [additionalInfo, setAdditionalInfo] = useState('')
-  const [city, setCity] = useState('')
-  const [uf, setUf] = useState('')
-  const [street, setStreet] = useState('')
+  const { address, setAddress } = useContext(CheckoutContext)
   const handleChangeCep = async event => {
-    const inputValue = event.target.value
-    setCep(inputValue)
+    const inputValue: string = event?.target?.value
+    let addressInfo: AddressProps = {
+      cep: inputValue || '',
+      neighborhood: address?.neighborhood || '',
+      additionalInfo: address?.additionalInfo || '',
+      city: address?.city || '',
+      street: address?.street || '',
+      uf: address?.uf || '',
+      number: address?.number || ''
+    }
+    setAddress({ ...addressInfo })
     if (inputValue.length === 9) {
       await ViaCepInstance.get(`${inputValue}/json`)
         .then(response => {
           const { bairro, complemento, localidade, logradouro, uf, erro } = response.data
           if (erro) return toast.warn('Endereço não encontrado, verifique o CEP informado')
-          setNeighborhood(bairro)
-          setAdditionalInfo(complemento)
-          setCity(localidade)
-          setStreet(logradouro)
-          setUf(uf)
+          setAddress({
+            ...addressInfo,
+            neighborhood: bairro || '',
+            additionalInfo: complemento || '',
+            city: localidade || '',
+            street: logradouro || '',
+            uf: uf || ''
+          })
         })
         .catch(error => {
           toast.error('Erro de comunicação com o gateway, aguarde alguns instantes e tente novamente')
@@ -64,43 +72,51 @@ export function Shipping() {
     }
   }
 
+  const handleChangeAddress = event => {
+    const { name, value } = event.target
+    if (address) setAddress({ ...address, [name]: value })
+  }
+
   return (
     <Box p={2}>
       <Grid container spacing={2}>
         <Grid item xs={12}>
-          <MaskedInput required mask="99999-999" value={cep} maskChar="" label="CEP" fullWidth onChange={handleChangeCep} />
+          <MaskedInput required mask="99999-999" value={address?.cep} maskChar="" label="CEP" fullWidth onChange={handleChangeCep} />
         </Grid>
 
         <Grid item xs={8}>
           <TextField
+            name="street"
             label="Logradouro"
-            value={street}
-            onChange={e => setStreet(e.target.value)}
-            InputLabelProps={{ shrink: street ? true : false }}
+            value={address?.street}
+            onChange={handleChangeAddress}
+            InputLabelProps={{ shrink: address?.street ? true : false }}
             fullWidth
           />
         </Grid>
 
         <Grid item xs={4}>
-          <TextField label="Nº" value={number} fullWidth onChange={e => setNumber(e.target.value)} />
+          <TextField name="number" label="Nº" value={address?.number} fullWidth onChange={handleChangeAddress} />
         </Grid>
 
         <Grid item xs={12}>
           <TextField
+            name="additionalInfo"
             label="Complemento"
-            value={additionalInfo}
-            onChange={e => setAdditionalInfo(e.target.value)}
-            InputLabelProps={{ shrink: additionalInfo ? true : false }}
+            value={address?.additionalInfo}
+            onChange={handleChangeAddress}
+            InputLabelProps={{ shrink: address?.additionalInfo ? true : false }}
             fullWidth
           />
         </Grid>
 
         <Grid item xs={12}>
           <TextField
+            name="neighborhood"
             label="Bairro"
-            value={neighborhood}
-            onChange={e => setNeighborhood(e.target.value)}
-            InputLabelProps={{ shrink: neighborhood ? true : false }}
+            value={address?.neighborhood}
+            onChange={handleChangeAddress}
+            InputLabelProps={{ shrink: address?.neighborhood ? true : false }}
             fullWidth
           />
         </Grid>
@@ -108,15 +124,15 @@ export function Shipping() {
         <Grid item xs={8}>
           <TextField
             label="Cidade"
-            value={city}
-            onChange={e => setCity(e.target.value)}
-            InputLabelProps={{ shrink: city ? true : false }}
+            value={address?.city}
+            onChange={handleChangeAddress}
+            InputLabelProps={{ shrink: address?.city ? true : false }}
             fullWidth
           />
         </Grid>
 
         <Grid item xs={4}>
-          <Select value={uf} onChange={e => setUf(e.target.value)} fullWidth>
+          <Select value={address?.uf} onChange={handleChangeAddress} fullWidth>
             {UFList.map(state => (
               <MenuItem value={state}>{state}</MenuItem>
             ))}

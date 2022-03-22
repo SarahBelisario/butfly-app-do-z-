@@ -4,6 +4,7 @@ import { CheckoutContext } from '..'
 import { RemoveProduct } from './Modals/RemoveProduct'
 import { ProductCard } from './ProductCard'
 import { motion, AnimatePresence } from 'framer-motion'
+import { toast } from 'react-toastify'
 
 export function ProductList(props: BoxProps) {
   const [removeProductModalIsOpen, setRemoveProductModalIsOpen] = useState(false)
@@ -11,6 +12,7 @@ export function ProductList(props: BoxProps) {
   const { palette } = useTheme()
 
   function next() {
+    if (products.length < 1) return toast.info('Adicione ao menos um produto para prosseguir.')
     if (step >= 2) return
     setStep(step + 1)
   }
