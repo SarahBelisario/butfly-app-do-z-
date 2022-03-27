@@ -1,6 +1,6 @@
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material'
 import { useContext } from 'react'
-import { CheckoutContext } from '../../index'
+import { CheckoutContext } from '../Contexts/CheckoutContext'
 
 interface RemoveProductProps {
   open: boolean
@@ -20,11 +20,15 @@ export function RemoveProduct({ open, setOpen }: RemoveProductProps) {
           </DialogContent>
           <DialogActions>
             <Button onClick={() => setOpen(false)}>Cancelar</Button>
-            <Button autoFocus color="error" variant="contained" onClick={() => {
-              removeProduct(selectedProduct.product.uid)
-              setOpen(false)
-            }
-            }>
+            <Button
+              autoFocus
+              color="error"
+              variant="contained"
+              onClick={() => {
+                removeProduct(selectedProduct.product.uid)
+                setOpen(false)
+              }}
+            >
               Remover
             </Button>
           </DialogActions>

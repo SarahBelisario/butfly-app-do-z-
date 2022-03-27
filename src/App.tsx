@@ -8,6 +8,7 @@ import { Routes } from './routes'
 import { availableThemes } from './themes'
 import { ThemeContext } from './themes/ThemeContext'
 import { AvailableThemes, GenericPaletteProps } from './themes/types/Theme'
+import { Helmet } from 'react-helmet'
 
 export function App() {
   const userTheme = localStorage.getItem('theme') as AvailableThemes
@@ -21,17 +22,20 @@ export function App() {
     theme,
     genericPalette: availableThemes[theme].themePalette,
     muiTheme: availableThemes[theme].muiTheme,
-    setTheme,
+    setTheme
   }
 
-  
-  const colorMode =  availableThemes[theme].muiTheme.palette.mode
+  const colorMode = availableThemes[theme].muiTheme.palette.mode
 
+  const toastTheme = availableThemes[theme].themePalette.toast
   return (
     <ThemeContext.Provider value={value}>
       <ThemeProvider theme={value.muiTheme}>
-        <ToastContainer limit={3} theme={colorMode} transition={Slide} hideProgressBar={false} />
-        <SpeedDial
+        <Helmet>
+          <meta name="theme-color" content={`${availableThemes[theme].muiTheme.palette.primary.main}`} />
+        </Helmet>
+        <ToastContainer limit={3} theme={colorMode} transition={Slide} hideProgressBar={false} toastStyle={{ ...toastTheme }} />
+        {/*<SpeedDial
           ariaLabel="theme-selector"
           style={{ position: 'absolute', right: 16, bottom: 16 }}
           FabProps={{ color: 'primary' }}
@@ -48,12 +52,13 @@ export function App() {
                   localStorage.setItem('theme', theme)
                   setTheme(theme as AvailableThemes)
                 }}
-                FabProps={{ style: { background: `linear-gradient(135deg, ${primary} 49%, ${secondary} 50%)` }, }}
+                FabProps={{ style: { background: `linear-gradient(135deg, ${primary} 49%, ${secondary} 50%)` } }}
                 tooltipTitle={title}
               />
             )
           })}
         </SpeedDial>
+        */}
         <Routes />
       </ThemeProvider>
     </ThemeContext.Provider>

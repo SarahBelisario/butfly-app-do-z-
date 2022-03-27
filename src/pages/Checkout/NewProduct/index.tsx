@@ -1,22 +1,22 @@
 import { Box, Button, Grid, InputAdornment, MenuItem, Select, TextField, Typography, useTheme } from '@mui/material'
 import { SyntheticEvent, useContext, useState } from 'react'
-import { Controller, useForm } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import NumberFormat from 'react-number-format'
-import { CheckoutContext } from '..'
 import { AsyncAutoComplete } from '../../../components/AsyncAutoComplete'
 import { ApiInstance } from '../../../services/axios'
-import { ProductProps } from '../types/products'
+import { CheckoutContext } from '../Contexts/CheckoutContext'
+import { ProductListProps, ProductProps } from '../Types/products'
 
 export function NewProduct() {
   const { palette } = useTheme()
   const [product, setProduct] = useState<ProductProps | null>(null)
   const [products, setProducts] = useState([])
-  const [amount, setAmount] = useState()
-  const [quantity, setQuantity] = useState()
-  const [discount, setDiscount] = useState()
-  const [discountType, setDiscountType] = useState('')
+  const [amount, setAmount] = useState('')
+  const [quantity, setQuantity] = useState('')
+  const [discount, setDiscount] = useState('')
+  const [discountType, setDiscountType] = useState('percentage')
   const [, setProductLoading] = useState(false)
-  const { handleSubmit, control, reset, register } = useForm()
+  const { handleSubmit, register } = useForm()
   const { addProduct } = useContext(CheckoutContext)
 
   async function fetchProducts(event: SyntheticEvent<Element, Event>, value: string) {
@@ -33,13 +33,17 @@ export function NewProduct() {
 
   function addProductAndResetForm(data) {
     if (!product) return
-    const addProductData = {
-      quantity: Number(data.quantity.replace(',', '.')),
-      amount: Number(data.amount.replace(',', '.')),
-      discount: Number(data.discount.replace(',', '.')),
+    const addProductData: ProductListProps = {
+      quantity: Number(quantity.replace(',', '.')),
+      amount: Number(amount.replace(',', '.')),
+      discount: Number(discount.replace(',', '.')),
+      discountType: 'percentage',
       product: product
     }
     addProduct(addProductData)
+    setProduct(null)
+    setAmount('')
+    setQuantity('')
   }
 
   function currencyFormatter(value) {
@@ -54,6 +58,7 @@ export function NewProduct() {
   function handleChangeProduct(data) {
     setProduct(data)
   }
+
   return (
     <Box component={'form'} onSubmit={handleSubmit(addProductAndResetForm)} display="flex" flexDirection="column">
       <Box display="flex" mb={4}>
@@ -88,6 +93,7 @@ export function NewProduct() {
             decimalScale={2}
             decimalSeparator={','}
             fixedDecimalScale
+            value={amount}
             onChange={e => setAmount(e.target.value)}
             allowLeadingZeros={true}
             format={currencyFormatter}
@@ -107,6 +113,7 @@ export function NewProduct() {
             decimalScale={2}
             decimalSeparator={','}
             fixedDecimalScale
+            value={quantity}
             onChange={e => setQuantity(e.target.value)}
             allowNegative={false}
             InputProps={{
@@ -121,7 +128,13 @@ export function NewProduct() {
         </Grid>
 
         <Grid item xs={3}>
-          <Select fullWidth {...register('discountType')} defaultValue="percentage" onChange={(e: any) => setDiscountType(e.target?.value)}>
+          <Select
+            fullWidth
+            {...register('discountType')}
+            defaultValue="percentage"
+            value={discountType}
+            onChange={(e: any) => setDiscountType(e.target?.value)}
+          >
             <MenuItem value={'percentage'}>%</MenuItem>
             <MenuItem value={'money'}>R$</MenuItem>
           </Select>
@@ -131,6 +144,7 @@ export function NewProduct() {
           <NumberFormat
             name="discount"
             label="Desconto"
+            value={discount}
             onChange={e => setDiscount(e.target.value)}
             fullWidth
             decimalScale={1}

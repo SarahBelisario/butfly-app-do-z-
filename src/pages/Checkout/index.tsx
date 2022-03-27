@@ -1,43 +1,26 @@
-import { Box, Button, Typography, useTheme } from '@mui/material'
-import { createContext, useState } from 'react'
+import { Box, Typography, useTheme } from '@mui/material'
+import React, { useState } from 'react'
+import { toast } from 'react-toastify'
 import { ContentCard } from '../../components/ContentCard'
+import { ApiInstance } from '../../services/axios'
+import { AdditionalInfo } from './AdditionalInfo'
+import { CheckoutContext } from './Contexts/CheckoutContext'
+import { FinishModal } from './Modals/FinishModal'
 import { NewProduct } from './NewProduct'
 import { ProductList } from './ProductList'
-import { ProductListProps } from './types/products'
-import { toast } from 'react-toastify'
-import { AdditionalInfo } from './AdditionalInfo'
-import { AddressProps } from './types/address'
-
-interface CheckoutContext {
-  products: ProductListProps[]
-  selectedProduct: ProductListProps | null
-  addProduct: (data: ProductListProps) => void
-  removeProduct: (id: string) => void
-  setSelectedProduct: (product: ProductListProps) => void
-  step: number
-  setStep: (step: number) => void
-  address: AddressProps | null
-  setAddress: (address: AddressProps | null) => void
-}
-
-export const CheckoutContext = createContext<CheckoutContext>({
-  products: [],
-  addProduct: data => void data,
-  removeProduct: (id: string) => void id,
-  selectedProduct: null,
-  setSelectedProduct: (product: ProductListProps) => void product,
-  step: 1,
-  setStep: (step: number) => void step,
-  address: null,
-  setAddress: (address: AddressProps | null) => void address
-})
+import { AddressProps } from './Types/address'
+import { ProductListProps } from './Types/products'
 
 export function Checkout() {
   const { palette } = useTheme()
   const [products, setProducts] = useState<ProductListProps[]>([])
+  const [customer, setCustomer] = useState<{ name: string } | null>(null)
   const [selectedProduct, setSelectedProduct] = useState<ProductListProps | null>(null)
   const [address, setAddress] = useState<AddressProps | null>(null)
   const [step, setStep] = useState<number>(1)
+  const [useAddress, setUseAddress] = useState(false)
+  const [useCustomer, setUseCustomer] = useState(false)
+  const [finishModal, setFinishModal] = useState(false)
 
   function addProduct(data: ProductListProps) {
     if (products.find(product => product.product.uid === data.product.uid)) return toast.error('O produto informado ja existe.')
@@ -49,9 +32,45 @@ export function Checkout() {
     setProducts(newProductArray)
   }
 
+  function handleReset() {
+    setProducts([])
+    setCustomer(null)
+    setSelectedProduct(null)
+    setAddress(null)
+    setStep(1)
+    setUseAddress(false)
+    setUseCustomer(false)
+    setFinishModal(false)
+  }
+
+  const handleSubmitCheckout = () =>
+    ApiInstance.post('/sales', {
+      products,
+      address: useAddress ? address : null,
+      customer: useCustomer ? customer : null
+    })
+
   return (
     <CheckoutContext.Provider
-      value={{ products, addProduct, removeProduct, selectedProduct, setSelectedProduct, step, setStep, address, setAddress }}
+      value={{
+        products,
+        addProduct,
+        removeProduct,
+        selectedProduct,
+        setSelectedProduct,
+        step,
+        setStep,
+        useAddress,
+        setUseAddress,
+        address,
+        setAddress,
+        handleSubmitCheckout,
+        useCustomer,
+        setUseCustomer,
+        customer,
+        setCustomer,
+        handleReset
+      }}
     >
       <Box>
         <Typography ml={2} mt={2} variant="h1" fontSize="28px" fontWeight="normal" sx={{ color: palette.text.primary }}>
@@ -62,7 +81,7 @@ export function Checkout() {
         </Typography>
       </Box>
 
-      <Box display="flex" flexDirection={{ xs: 'column', lg: 'row' }} mt={3} height="100%">
+      <Box display="flex" flexDirection={{ xs: 'column', lg: 'row' }} pb={{ xs: 16, md: 0 }} mt={3} height="100%">
         {step === 1 && (
           <ContentCard flex={{ xs: 1, md: 0.5 }} mr={{ xs: 0, lg: 2 }}>
             <NewProduct />
@@ -72,10 +91,12 @@ export function Checkout() {
         {step === 2 && (
           <ContentCard flex={{ xs: 1, md: 0.5 }} mr={{ xs: 0, lg: 2 }}>
             <AdditionalInfo />
+            <FinishModal open={finishModal} setOpen={setFinishModal} />
           </ContentCard>
         )}
-        <ContentCard display="flex" flexDirection="column" flex={{ xs: 1, lg: 0.5 }} mt={{ xs: 2, lg: 0 }} overflow="scroll" boxSizing="border-box">
-          <ProductList sx={{ flexBasis: '100%', flexGrow: 1 }} />
+
+        <ContentCard display="flex" flexDirection="column" flex={{ xs: 1, lg: 0.5 }} mt={{ xs: 2, lg: 0 }} boxSizing="border-box">
+          <ProductList sx={{ flexBasis: '100%', flexGrow: 1 }} finishModal={setFinishModal} />
         </ContentCard>
       </Box>
     </CheckoutContext.Provider>

@@ -12,4 +12,6 @@ export interface ProductListProps {
   product: ProductProps
   amount: number
   quantity: number
+  discount: number
+  discountType: 'percentage' | 'money'
 }

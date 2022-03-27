@@ -2,9 +2,9 @@ import { Box, BoxProps, Grid, IconButton, Tooltip, Typography, useTheme } from '
 import { useContext } from 'react'
 import { IoMdCart } from 'react-icons/io'
 import { MdDelete, MdEdit, MdReceipt } from 'react-icons/md'
-import { CheckoutContext } from '..'
+import { CheckoutContext } from '../Contexts/CheckoutContext'
 import { currencyFormat } from '../../../utils/currencyFormat'
-import { ProductListProps } from '../types/products'
+import { ProductListProps } from '../Types/products'
 
 interface ProductCardProps extends BoxProps {
   product: ProductListProps

@@ -11,6 +11,9 @@ interface GenericPaletteProps {
   card: {
     [field: string]: string | number
   }
+  toast: {
+    [field: string]: string | number
+  }
 }
 
 export { AvailableThemes, GenericPaletteProps }

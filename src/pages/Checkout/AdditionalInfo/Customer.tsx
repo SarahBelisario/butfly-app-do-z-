@@ -1,6 +1,7 @@
 import { Box } from '@mui/material'
 import { useTheme } from '@mui/system'
-import { SyntheticEvent, useState } from 'react'
+import { SyntheticEvent, useContext, useState } from 'react'
+import { CheckoutContext } from '../Contexts/CheckoutContext'
 import { AsyncAutoComplete } from '../../../components/AsyncAutoComplete'
 import { ApiInstance } from '../../../services/axios'
 
@@ -8,7 +9,7 @@ export function Customer() {
   const { palette } = useTheme()
   const [customers, setCustomers] = useState([])
   const [customerLoading, setCustomerLoading] = useState(false)
-  const [value, setValue] = useState({ name: '' })
+  const { customer, setCustomer } = useContext(CheckoutContext)
 
   async function fetchCustomers(event: SyntheticEvent<Element, Event>, value: string) {
     setCustomerLoading(true)
@@ -30,8 +31,8 @@ export function Customer() {
         name="client"
         data={customers}
         setData={setCustomers}
-        value={value}
-        onChange={setValue}
+        value={customer}
+        onChange={setCustomer}
         fetchData={fetchCustomers}
       />
     </Box>
