@@ -11,8 +11,8 @@ const columns: { field: string; label: string; type?: 'currency' | 'date'; hidde
   { field: 'id', label: 'Id', hidden: true },
   { field: 'name', label: 'Nome' },
   { field: 'quantity', label: 'Quantidade' },
-  { field: 'price', label: 'Valor', type: 'currency' },
-  { field: 'createdAt', label: 'Data de criação', type: 'date' },
+  { field: 'amount', label: 'Valor', type: 'currency' },
+  { field: 'createdAt', label: 'Data de criação', type: 'date' }
 ]
 
 export function Products() {
@@ -26,8 +26,8 @@ export function Products() {
     if (totalPages && page >= totalPages) return
     await ApiInstance.get(`/products`, {
       params: {
-        page: !page ? 1 : Number(page) + 1,
-      },
+        page: !page ? 1 : Number(page) + 1
+      }
     })
       .then(response => {
         const newProducts = response.data.rows

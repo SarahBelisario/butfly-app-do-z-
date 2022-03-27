@@ -31,7 +31,7 @@ export function NewProduct() {
       })
   }
 
-  function addProductAndResetForm(data) {
+  function addProductAndResetForm() {
     if (!product) return
     const addProductData: ProductListProps = {
       quantity: Number(quantity.replace(',', '.')),
@@ -57,6 +57,8 @@ export function NewProduct() {
 
   function handleChangeProduct(data) {
     setProduct(data)
+    if (!amount) setAmount(data.amount)
+    if (!quantity) setQuantity('1')
   }
 
   return (

@@ -2,7 +2,7 @@ import { Autocomplete, CircularProgress, TextField } from '@mui/material'
 import { useState } from 'react'
 import { useDebouncedCallback } from 'use-debounce'
 
-export function AsyncAutoComplete({ name, data, fetchData, setData, control, label, isRequired, value, onChange }: any) {
+export function AsyncAutoComplete({ name, data, fetchData, setData, control, label, isRequired, value, onChange, ...props }: any) {
   const [loading, setLoading] = useState(false)
   const [isFocused, setIsFocused] = useState(false)
 
@@ -15,6 +15,7 @@ export function AsyncAutoComplete({ name, data, fetchData, setData, control, lab
 
   return (
     <Autocomplete
+      {...props}
       loading={loading}
       options={data}
       onInputChange={useDebouncedCallback(startFetch, 500)}
