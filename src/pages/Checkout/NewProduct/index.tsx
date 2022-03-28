@@ -2,6 +2,7 @@ import { Box, Button, Grid, InputAdornment, MenuItem, Select, TextField, Typogra
 import { SyntheticEvent, useContext, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import NumberFormat from 'react-number-format'
+import { toast } from 'react-toastify'
 import { AsyncAutoComplete } from '../../../components/AsyncAutoComplete'
 import { ApiInstance } from '../../../services/axios'
 import { CheckoutContext } from '../Contexts/CheckoutContext'
@@ -14,7 +15,7 @@ export function NewProduct() {
   const [amount, setAmount] = useState('')
   const [quantity, setQuantity] = useState('')
   const [discount, setDiscount] = useState('')
-  const [discountType, setDiscountType] = useState('percentage')
+  const [discountType, setDiscountType] = useState<'money' | 'percentage'>('percentage')
   const [, setProductLoading] = useState(false)
   const { handleSubmit, register } = useForm()
   const { addProduct } = useContext(CheckoutContext)
@@ -37,13 +38,14 @@ export function NewProduct() {
       quantity: Number(quantity.replace(',', '.')),
       amount: Number(amount.replace(',', '.')),
       discount: Number(discount.replace(',', '.')),
-      discountType: 'percentage',
+      discountType: discountType,
       product: product
     }
     addProduct(addProductData)
     setProduct(null)
     setAmount('')
     setQuantity('')
+    setDiscount('')
   }
 
   function currencyFormatter(value) {
@@ -59,6 +61,17 @@ export function NewProduct() {
     setProduct(data)
     if (!amount) setAmount(data.amount)
     if (!quantity) setQuantity('1')
+  }
+
+  function handleChangeDiscount(event) {
+    const toNumber = value => Number(value.replace(',', '.'))
+    const discountValue = toNumber(event.target.value)
+    if (discountType === 'money' && discountValue > Number(amount)) {
+      return setDiscount(amount)
+    }
+    if (discountType === 'percentage' && discountValue > 100) return setDiscount('100')
+
+    setDiscount(event.target.value)
   }
 
   return (
@@ -147,12 +160,23 @@ export function NewProduct() {
             name="discount"
             label="Desconto"
             value={discount}
-            onChange={e => setDiscount(e.target.value)}
+            onChange={handleChangeDiscount}
             fullWidth
-            decimalScale={1}
+            decimalScale={discountType === 'money' ? 2 : 0}
             decimalSeparator={','}
             allowNegative={false}
-            isAllowed={({ floatValue }) => (floatValue ? floatValue : 0) <= 100}
+            isAllowed={({ floatValue }) => {
+              const maxValue = discountType === 'money' ? Number(amount.replace(',', '.')) : 100
+              if (discountType === 'money' && !amount) {
+                toast.warning(`Defina um valor antes de inserir o desconto.`)
+                return false
+              }
+              const isValid = (floatValue ? floatValue : 0) <= maxValue
+              const maxValueFormatted = discountType === 'money' ? `R$ ${amount}` : `${100}%`
+              if (!isValid) toast.warning(`O valor máximo permitido é de ${maxValueFormatted}.`)
+              if (isValid) return true
+              return false
+            }}
             fixedDecimalScale
             InputProps={{
               endAdornment: (
