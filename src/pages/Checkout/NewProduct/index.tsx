@@ -6,7 +6,7 @@ import { toast } from 'react-toastify'
 import { AsyncAutoComplete } from '../../../components/AsyncAutoComplete'
 import { ApiInstance } from '../../../services/axios'
 import { CheckoutContext } from '../Contexts/CheckoutContext'
-import { ProductListProps, ProductProps } from '../Types/products'
+import { ProductListProps, ProductProps } from '../types/products'
 
 export function NewProduct() {
   const { palette } = useTheme()

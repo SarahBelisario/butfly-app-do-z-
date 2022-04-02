@@ -4,7 +4,7 @@ import { IoMdCart } from 'react-icons/io'
 import { MdDelete, MdEdit, MdReceipt } from 'react-icons/md'
 import { CheckoutContext } from '../Contexts/CheckoutContext'
 import { currencyFormat } from '../../../utils/currencyFormat'
-import { ProductListProps } from '../Types/products'
+import { ProductListProps } from '../types/products'
 
 interface ProductCardProps extends BoxProps {
   product: ProductListProps

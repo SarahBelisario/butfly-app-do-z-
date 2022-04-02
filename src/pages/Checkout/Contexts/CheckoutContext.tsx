@@ -1,7 +1,7 @@
 import { AxiosResponse } from 'axios'
 import { createContext } from 'react'
-import { AddressProps } from '../Types/address'
-import { ProductListProps } from '../Types/products'
+import { AddressProps } from '../types/address'
+import { ProductListProps } from '../types/products'
 
 interface CheckoutContext {
   products: ProductListProps[]

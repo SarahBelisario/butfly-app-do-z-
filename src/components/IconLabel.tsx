@@ -1,9 +1,9 @@
 import { Box, BoxProps, IconButton, Typography } from '@mui/material'
 import { IconType } from 'react-icons'
 
-interface IconLabelProps extends BoxProps {
+export interface IconLabelProps extends BoxProps {
   label: string
-  onSubmit: () => void
+  onSubmit?: () => void
   Icon: IconType
 }
 export function IconLabel({ label, onSubmit, Icon, ...props }: IconLabelProps) {

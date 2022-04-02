@@ -5,7 +5,7 @@ import ReactInputMask from 'react-input-mask'
 import { toast } from 'react-toastify'
 import { ViaCepInstance } from '../../../services/cep'
 import { CheckoutContext } from '../Contexts/CheckoutContext'
-import { AddressProps } from '../Types/address'
+import { AddressProps } from '../types/address'
 
 const MaskedInput = props => <ReactInputMask {...props}>{inputProps => <TextField {...inputProps} />}</ReactInputMask>
 const UFList = [

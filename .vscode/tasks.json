@@ -1,0 +1,13 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "npm",
+      "script": "typecheck:watch",
+      "group": "build",
+      "problemMatcher": [],
+      "label": "npm: typecheck:watch",
+      "detail": "tsc -w"
+    }
+  ]
+}

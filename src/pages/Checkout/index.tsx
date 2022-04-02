@@ -5,11 +5,11 @@ import { ContentCard } from '../../components/ContentCard'
 import { ApiInstance } from '../../services/axios'
 import { AdditionalInfo } from './AdditionalInfo'
 import { CheckoutContext } from './Contexts/CheckoutContext'
-import { FinishModal } from './Modals/FinishModal'
+import { FinishModal } from './Modals/FinishTransaction'
 import { NewProduct } from './NewProduct'
 import { ProductList } from './ProductList'
-import { AddressProps } from './Types/address'
-import { ProductListProps } from './Types/products'
+import { AddressProps } from './types/address'
+import { ProductListProps } from './types/products'
 
 export function Checkout() {
   const { palette } = useTheme()
@@ -23,7 +23,8 @@ export function Checkout() {
   const [finishModal, setFinishModal] = useState(false)
 
   function addProduct(data: ProductListProps) {
-    if (products.find(product => product.product.uid === data.product.uid)) return toast.error('O produto informado ja existe.')
+    if (products.find(product => product.product.uid === data.product.uid))
+      return toast.error('O produto informado já foi adicionado a lista, edite ou remova o produto já existente.')
     setProducts([...products, data])
   }
 

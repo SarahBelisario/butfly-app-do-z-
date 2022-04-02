@@ -1,11 +1,14 @@
 import { LoadingButton } from '@mui/lab'
 import { Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Divider, Typography, useTheme } from '@mui/material'
-import { useContext, useState } from 'react'
-import { IoMail, IoReceipt } from 'react-icons/io5'
+import { useContext, useRef, useState } from 'react'
+import { IoPrint } from 'react-icons/io5'
+import { useReactToPrint } from 'react-to-print'
+import { useMediaQuery } from '@mui/material'
 import { toast } from 'react-toastify'
 import { IconLabel } from '../../../components/IconLabel'
 import { currencyFormat } from '../../../utils/currencyFormat'
 import { CheckoutContext } from '../Contexts/CheckoutContext'
+import styled from 'styled-components'
 
 interface FinishModalProps {
   open: boolean
@@ -16,8 +19,14 @@ export function FinishModal({ open, setOpen }: FinishModalProps) {
   const { products, handleSubmitCheckout, handleReset } = useContext(CheckoutContext)
   const [isLoading, setIsLoading] = useState(false)
   const [isFinished, setIsFinished] = useState(false)
-  const theme = useTheme()
+  const match = useMediaQuery('print')
 
+  const componentRef = useRef(null)
+  const handlePrint = useReactToPrint({
+    content: () => componentRef.current
+  })
+
+  const theme = useTheme()
   const totalDiscount = products
     .map(products => {
       if (products.discountType === 'percentage') {
@@ -43,7 +52,7 @@ export function FinishModal({ open, setOpen }: FinishModalProps) {
     setIsLoading(false)
   }
   return (
-    <Dialog open={open} onClose={() => setOpen(false)}>
+    <Dialog open={open} onClose={() => !isFinished && setOpen(false)}>
       {!isFinished && (
         <>
           <DialogTitle>Deseja concluir esta venda?</DialogTitle>
@@ -66,10 +75,10 @@ export function FinishModal({ open, setOpen }: FinishModalProps) {
                 <Typography ml="auto" sx={{ fontSize: 14 }}>
                   {currencyFormat(product.amount * product.quantity)}
                 </Typography>
-                {product.discount && product.discountType === 'money' && (
+                {!!(product.discount && product.discountType === 'money') && (
                   <Typography sx={{ fontSize: 14, ml: 1, color: theme.palette.success.main }}>(-{currencyFormat(product.discount)})</Typography>
                 )}
-                {product.discount && product.discountType === 'percentage' && (
+                {!!(product.discount && product.discountType === 'percentage') && (
                   <Typography sx={{ fontSize: 14, ml: 1, color: theme.palette.success.main }}>(-{product.discount}%)</Typography>
                 )}
               </Box>
@@ -116,8 +125,9 @@ export function FinishModal({ open, setOpen }: FinishModalProps) {
         <>
           <DialogTitle>Venda concluída com sucesso</DialogTitle>
           <DialogContent>
-            <IconLabel Icon={IoReceipt} onSubmit={() => console.log('Recibo')} label="Visualizar resumo" />
-            <IconLabel Icon={IoMail} onSubmit={() => console.log('Mail')} label="Enviar resumo por email ao cliente" />
+            <PrintableArea ref={componentRef}>123456789</PrintableArea>
+
+            <IconLabel Icon={IoPrint} onSubmit={handlePrint} label="Imprimir resumo" />
           </DialogContent>
 
           <DialogActions>
@@ -130,3 +140,10 @@ export function FinishModal({ open, setOpen }: FinishModalProps) {
     </Dialog>
   )
 }
+
+export const PrintableArea = styled.div`
+  display: none;
+  @media print {
+    display: block;
+  }
+`
