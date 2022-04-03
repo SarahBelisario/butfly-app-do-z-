@@ -10,12 +10,12 @@ import { currencyFormat } from '../../../utils/currencyFormat'
 import { CheckoutContext } from '../Contexts/CheckoutContext'
 import styled from 'styled-components'
 
-interface FinishModalProps {
+interface FinishTransactionProps {
   open: boolean
   setOpen: (boolean) => void
 }
 
-export function FinishModal({ open, setOpen }: FinishModalProps) {
+export function FinishTransaction({ open, setOpen }: FinishTransactionProps) {
   const { products, handleSubmitCheckout, handleReset } = useContext(CheckoutContext)
   const [isLoading, setIsLoading] = useState(false)
   const [isFinished, setIsFinished] = useState(false)
@@ -29,15 +29,19 @@ export function FinishModal({ open, setOpen }: FinishModalProps) {
   const theme = useTheme()
   const totalDiscount = products
     .map(products => {
+      const discount = products.discount || 0
+      const quantity = products.quantity || 0
+      const amount = products.amount || 0
+
       if (products.discountType === 'percentage') {
-        const discountPercent = products.discount / 100
-        const discountValue = products.amount * discountPercent
-        return discountValue * products.quantity
+        const discountPercent = discount / 100
+        const discountValue = amount * discountPercent
+        return discountValue * quantity
       }
-      return products.discount * products.quantity
+      return discount * quantity
     })
     .reduce((prev, value) => prev + value)
-  const subtotal = products.map(products => products.amount * products.quantity).reduce((prev, value) => prev + value)
+  const subtotal = products.map(products => (products.amount || 0) * (products.quantity || 0)).reduce((prev, value) => prev + value)
   const total = subtotal - totalDiscount
 
   async function handleSubmit() {
@@ -67,13 +71,13 @@ export function FinishModal({ open, setOpen }: FinishModalProps) {
                 Total
               </Typography>
             </Box>
-            {products.map(product => (
-              <Box display="flex" p={2} py={0}>
+            {products.map((product, index) => (
+              <Box display="flex" p={2} py={0} key={index}>
                 <Typography sx={{ fontSize: 14 }}>
                   {product.product.name} x{product.quantity}
                 </Typography>
                 <Typography ml="auto" sx={{ fontSize: 14 }}>
-                  {currencyFormat(product.amount * product.quantity)}
+                  {currencyFormat((product.amount || 0) * (product.quantity || 0))}
                 </Typography>
                 {!!(product.discount && product.discountType === 'money') && (
                   <Typography sx={{ fontSize: 14, ml: 1, color: theme.palette.success.main }}>(-{currencyFormat(product.discount)})</Typography>

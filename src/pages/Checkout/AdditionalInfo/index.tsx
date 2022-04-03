@@ -44,7 +44,7 @@ export function AdditionalInfo(props) {
             <Box sx={collapseTitleStyle}>
               <Box sx={{ display: 'flex', alignItems: 'center' }}>
                 <Tooltip title="Incluir cliente">
-                  <Checkbox size="small" defaultChecked={true} checked={useCustomer} onChange={e => setUseCustomer(Boolean(e.target?.checked))} />
+                  <Checkbox size="small" checked={useCustomer} onChange={e => setUseCustomer(Boolean(e.target?.checked))} />
                 </Tooltip>
                 <Typography ml={1} justifySelf="flex-start" textAlign="center" fontWeight="light" fontSize="14px" color={palette.text.secondary}>
                   Cliente
@@ -60,7 +60,7 @@ export function AdditionalInfo(props) {
             <Box onClick={handleSetCollapsed} sx={collapseTitleStyle}>
               <Box sx={{ display: 'flex', alignItems: 'center' }}>
                 <Tooltip title="Incluir transporte/frete">
-                  <Checkbox size="small" defaultChecked={false} checked={useAddress} onChange={e => setUseAddress(Boolean(e.target?.checked))} />
+                  <Checkbox size="small" checked={useAddress} onChange={e => setUseAddress(Boolean(e.target?.checked))} />
                 </Tooltip>
                 <Typography fontWeight="light" fontSize="14px" color={palette.text.secondary}>
                   Transporte/Frete

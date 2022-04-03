@@ -36,7 +36,7 @@ export function ProductList(props: ProductListProps) {
         <AnimatePresence initial={false}>
           {products.map((product, index) => (
             <motion.div key={index} initial={{ opacity: 0, y: 50 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -100, height: 0 }}>
-              <ProductCard sx={{ mb: 2 }} product={product} openRemoveProduct={setRemoveProductModalIsOpen} />
+              <ProductCard sx={{ mb: 2 }} product={product} index={index} openRemoveProduct={setRemoveProductModalIsOpen} />
             </motion.div>
           ))}
         </AnimatePresence>

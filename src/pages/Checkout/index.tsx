@@ -5,7 +5,7 @@ import { ContentCard } from '../../components/ContentCard'
 import { ApiInstance } from '../../services/axios'
 import { AdditionalInfo } from './AdditionalInfo'
 import { CheckoutContext } from './Contexts/CheckoutContext'
-import { FinishModal } from './Modals/FinishTransaction'
+import { FinishTransaction } from './Modals/FinishTransaction'
 import { NewProduct } from './NewProduct'
 import { ProductList } from './ProductList'
 import { AddressProps } from './types/address'
@@ -29,8 +29,14 @@ export function Checkout() {
   }
 
   function removeProduct(id: string) {
-    const newProductArray = products.filter(({ product }) => product.uid !== id)
-    setProducts(newProductArray)
+    const newProductsArray = products.filter(({ product }) => product.uid !== id)
+    setProducts(newProductsArray)
+  }
+
+  function updateProduct(index: number, newData: ProductListProps) {
+    const newProductsArray = products
+    newProductsArray[index] = newData
+    setProducts(newProductsArray)
   }
 
   function handleReset() {
@@ -57,6 +63,7 @@ export function Checkout() {
         products,
         addProduct,
         removeProduct,
+        updateProduct,
         selectedProduct,
         setSelectedProduct,
         step,
@@ -92,7 +99,7 @@ export function Checkout() {
         {step === 2 && (
           <ContentCard flex={{ xs: 1, md: 0.5 }} mr={{ xs: 0, lg: 2 }}>
             <AdditionalInfo />
-            <FinishModal open={finishModal} setOpen={setFinishModal} />
+            <FinishTransaction open={finishModal} setOpen={setFinishModal} />
           </ContentCard>
         )}
 

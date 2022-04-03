@@ -10,8 +10,8 @@ export interface ProductProps {
 
 export interface ProductListProps {
   product: ProductProps
-  amount: number
-  quantity: number
-  discount: number
+  amount: number | undefined
+  quantity: number | undefined
+  discount: number | undefined
   discountType: 'percentage' | 'money'
 }
