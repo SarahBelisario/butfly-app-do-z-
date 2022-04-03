@@ -12,6 +12,7 @@ interface CheckoutContext {
   selectedProduct: ProductListProps | null
   addProduct: (data: ProductListProps) => void
   removeProduct: (id: string) => void
+  updateProduct: (index: number, data: ProductListProps) => void
   setSelectedProduct: (product: ProductListProps) => void
   step: number
   setStep: (step: number) => void
@@ -27,6 +28,7 @@ export const CheckoutContext = createContext<CheckoutContext>({
   products: [],
   addProduct: data => void data,
   removeProduct: (id: string) => void id,
+  updateProduct: (index: number, data: ProductListProps) => void index,
   selectedProduct: null,
   useCustomer: false,
   setUseCustomer: useCustomer => void useCustomer,

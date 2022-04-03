@@ -132,9 +132,11 @@ export function Shipping() {
         </Grid>
 
         <Grid item xs={4}>
-          <Select value={address?.uf} onChange={handleChangeAddress} fullWidth>
-            {UFList.map(state => (
-              <MenuItem value={state}>{state}</MenuItem>
+          <Select value={address?.uf || ''} onChange={handleChangeAddress} fullWidth>
+            {UFList.map((state, index) => (
+              <MenuItem key={index} value={state}>
+                {state}
+              </MenuItem>
             ))}
           </Select>
         </Grid>

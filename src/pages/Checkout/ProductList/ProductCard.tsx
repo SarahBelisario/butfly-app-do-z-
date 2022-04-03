@@ -1,19 +1,29 @@
 import { Box, BoxProps, Grid, IconButton, Tooltip, Typography, useTheme } from '@mui/material'
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { IoMdCart } from 'react-icons/io'
-import { MdDelete, MdEdit, MdReceipt } from 'react-icons/md'
+import { MdDelete, MdEdit } from 'react-icons/md'
 import { CheckoutContext } from '../Contexts/CheckoutContext'
 import { currencyFormat } from '../../../utils/currencyFormat'
 import { ProductListProps } from '../types/products'
+import { EditProduct } from '../Modals/EditProductModal'
 
 interface ProductCardProps extends BoxProps {
   product: ProductListProps
   openRemoveProduct: (boolean) => void
+  index: number
 }
 
-export function ProductCard({ product, openRemoveProduct, ...props }: ProductCardProps) {
+export function ProductCard({ product, index, openRemoveProduct, ...props }: ProductCardProps) {
   const { palette } = useTheme()
   const { setSelectedProduct } = useContext(CheckoutContext)
+  const [editProductIsOpen, setEditProductIsOpen] = useState(false)
+  const [editProductIndex, setEditProductIndex] = useState(-1)
+
+  function handleEditProduct() {
+    setEditProductIsOpen(true)
+    setEditProductIndex(index)
+  }
+
   return (
     <Box flex="1" position="relative" overflow="hidden" {...props}>
       <Box
@@ -35,14 +45,8 @@ export function ProductCard({ product, openRemoveProduct, ...props }: ProductCar
           cursor: 'pointer'
         }}
       >
-        <Tooltip title="Visualizar resumo">
-          <IconButton sx={{ mx: 2 }} color="info">
-            <MdReceipt />
-          </IconButton>
-        </Tooltip>
-
         <Tooltip title="Editar item">
-          <IconButton sx={{ mx: 2 }} color="warning">
+          <IconButton sx={{ mx: 2 }} color="warning" onClick={() => handleEditProduct()}>
             <MdEdit />
           </IconButton>
         </Tooltip>
@@ -88,6 +92,8 @@ export function ProductCard({ product, openRemoveProduct, ...props }: ProductCar
           </Typography>
         </Grid>
       </Grid>
+
+      <EditProduct open={editProductIsOpen} index={editProductIndex} onClose={() => setEditProductIsOpen(false)} />
     </Box>
   )
 }
