@@ -3,12 +3,11 @@ import { Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, D
 import { useContext, useRef, useState } from 'react'
 import { IoPrint } from 'react-icons/io5'
 import { useReactToPrint } from 'react-to-print'
-import { useMediaQuery } from '@mui/material'
 import { toast } from 'react-toastify'
+import styled from 'styled-components'
 import { IconLabel } from '../../../components/IconLabel'
 import { currencyFormat } from '../../../utils/currencyFormat'
 import { CheckoutContext } from '../Contexts/CheckoutContext'
-import styled from 'styled-components'
 
 interface FinishTransactionProps {
   open: boolean
@@ -16,15 +15,11 @@ interface FinishTransactionProps {
 }
 
 export function FinishTransaction({ open, setOpen }: FinishTransactionProps) {
-  const { products, handleSubmitCheckout, handleReset } = useContext(CheckoutContext)
+  const { useCustomer, useAddress, address, customer, products, handleSubmitCheckout, handleReset } = useContext(CheckoutContext)
   const [isLoading, setIsLoading] = useState(false)
   const [isFinished, setIsFinished] = useState(false)
-  const match = useMediaQuery('print')
-
   const componentRef = useRef(null)
-  const handlePrint = useReactToPrint({
-    content: () => componentRef.current
-  })
+  const handlePrint = useReactToPrint({ content: () => componentRef.current })
 
   const theme = useTheme()
   const totalDiscount = products
@@ -45,16 +40,15 @@ export function FinishTransaction({ open, setOpen }: FinishTransactionProps) {
   const total = subtotal - totalDiscount
 
   async function handleSubmit() {
+    if (useAddress && !address) return toast.error('O endereço deve ser informado, caso não deseje usar um, desmarque a opção.')
+    if (useCustomer && !customer) return toast.error('O cliente deve ser informado, caso não deseje usar um, desmarque a opção.')
     setIsLoading(true)
     await handleSubmitCheckout()
-      .then(() => {
-        setIsFinished(true)
-      })
-      .catch(e => {
-        toast.error('Falha ao concluir a venda, tente novamente ou entre em contato com nosso suporte.')
-      })
+      .then(() => setIsFinished(true))
+      .catch(e => toast.error('Falha ao concluir a venda, tente novamente ou entre em contato com nosso suporte.'))
     setIsLoading(false)
   }
+
   return (
     <Dialog open={open} onClose={() => !isFinished && setOpen(false)}>
       {!isFinished && (
@@ -87,12 +81,7 @@ export function FinishTransaction({ open, setOpen }: FinishTransactionProps) {
                 )}
               </Box>
             ))}
-            <Divider
-              sx={{
-                my: 2
-              }}
-            />
-
+            <Divider sx={{ my: 2 }} />
             <Box display="flex" p={2} py={0}>
               <Typography sx={{ fontSize: 14, fontWeight: 'light' }}>Subtotal</Typography>
               <Typography ml="auto" sx={{ fontSize: 14, fontWeight: 'light' }}>

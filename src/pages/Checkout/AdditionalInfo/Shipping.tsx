@@ -56,7 +56,7 @@ export function Shipping() {
       await ViaCepInstance.get(`${inputValue}/json`)
         .then(response => {
           const { bairro, complemento, localidade, logradouro, uf, erro } = response.data
-          if (erro) return toast.warn('Endereço não encontrado, verifique o CEP informado')
+          if (erro) return toast.warn('Endereço não encontrado, verifique o CEP informado ou informe o endereço manualmente.')
           setAddress({
             ...addressInfo,
             neighborhood: bairro || '',
@@ -86,6 +86,7 @@ export function Shipping() {
 
         <Grid item xs={8}>
           <TextField
+            required
             name="street"
             label="Logradouro"
             value={address?.street}
@@ -96,7 +97,7 @@ export function Shipping() {
         </Grid>
 
         <Grid item xs={4}>
-          <TextField name="number" label="Nº" value={address?.number} fullWidth onChange={handleChangeAddress} />
+          <TextField required name="number" label="Nº" value={address?.number} fullWidth onChange={handleChangeAddress} />
         </Grid>
 
         <Grid item xs={12}>
@@ -112,6 +113,7 @@ export function Shipping() {
 
         <Grid item xs={12}>
           <TextField
+            required
             name="neighborhood"
             label="Bairro"
             value={address?.neighborhood}
@@ -123,6 +125,7 @@ export function Shipping() {
 
         <Grid item xs={8}>
           <TextField
+            required
             label="Cidade"
             value={address?.city}
             onChange={handleChangeAddress}
