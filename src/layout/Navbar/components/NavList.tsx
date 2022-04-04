@@ -18,24 +18,12 @@ const availableRoutes: {
   selectedInRoutes?: string[]
   subItems?: { label: string; path: string }[]
 }[] = [
-    { Icon: BsBarChartFill, label: 'Dashboard', path: '/', isCollapse: false },
-    { Icon: MdPointOfSale, label: 'Frente de caixa', path: '/frente-de-caixa', isCollapse: false },
-    { Icon: FaShoppingCart, label: 'Produtos', path: '/produtos', isCollapse: false },
-    {
-      Icon: FaDollarSign,
-      label: 'Vendas',
-      path: '/vendas',
-      isCollapse: true,
-      subItems: [{ label: 'Listar', path: '/vendas/listar' }],
-    },
-    {
-      Icon: RiSettings2Fill,
-      label: 'Serviços',
-      path: '/serviços',
-      isCollapse: true,
-      subItems: [{ label: 'Listar', path: '/serviços/listar' }],
-    },
-  ]
+  { Icon: BsBarChartFill, label: 'Dashboard', path: '/', isCollapse: false },
+  { Icon: MdPointOfSale, label: 'Frente de caixa', path: '/frente-de-caixa', isCollapse: false },
+  { Icon: FaShoppingCart, label: 'Produtos', path: '/produtos', isCollapse: false },
+  { Icon: FaDollarSign, label: 'Vendas', path: '/vendas', isCollapse: false },
+  { Icon: RiSettings2Fill, label: 'Serviços', path: '/serviços', isCollapse: false }
+]
 
 export function NavList(props: NavListProps) {
   const theme = props.theme
@@ -74,13 +62,13 @@ export function NavList(props: NavListProps) {
               justifyContent: isMobile ? 'center' : 'flex-start',
               mb: 1,
               transition: '.5s',
-              background: isSelected(path) ? 'rgba(0, 0, 0, 0.15)' : '',
+              background: isSelected(path) ? 'rgba(0, 0, 0, 0.15)' : ''
             }}
           >
             <ListItemIcon
               sx={{
                 display: 'flex',
-                justifyContent: isMobile ? 'center' : 'flex-start',
+                justifyContent: isMobile ? 'center' : 'flex-start'
               }}
             >
               <Icon style={{ color: theme }} />
@@ -95,7 +83,7 @@ export function NavList(props: NavListProps) {
             sx={{
               mb: 1,
               borderRadius: 2,
-              transition: '.5s',
+              transition: '.5s'
             }}
           >
             <List component="div" disablePadding>
@@ -105,7 +93,7 @@ export function NavList(props: NavListProps) {
                   sx={{
                     display: 'flex',
                     justifyContent: isMobile ? 'center' : 'flex-start',
-                    background: isSelected(path) ? 'rgba(0, 0, 0, 0.15)' : '',
+                    background: isSelected(path) ? 'rgba(0, 0, 0, 0.15)' : ''
                   }}
                   onClick={() => {
                     setSelectedPath(path)
@@ -116,7 +104,7 @@ export function NavList(props: NavListProps) {
                     sx={{
                       display: isMobile ? 'flex' : 'block',
                       justifyContent: 'center',
-                      pl: 2,
+                      pl: 2
                     }}
                   >
                     <GoPrimitiveDot style={{ color: theme }} />

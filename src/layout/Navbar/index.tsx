@@ -8,6 +8,7 @@ import { ThemeContext } from '../../themes/ThemeContext'
 import { PageLogo } from './components/PageLogo'
 import { DesktopSidebar } from './DesktopSidebar'
 import { MobileNavbar } from './MobileNavbar'
+import styled from 'styled-components'
 
 export function Navbar(props: any) {
   const navigate = useNavigate()
@@ -17,15 +18,7 @@ export function Navbar(props: any) {
   const { genericPalette } = useContext(ThemeContext)
 
   return (
-    <Box
-      sx={{
-        display: 'flex',
-        background: genericPalette.navbar.background,
-        height: '100vh',
-        overflow: 'auto',
-        overflowX: 'hidden',
-      }}
-    >
+    <PageContainer sx={{ background: genericPalette.navbar.background }}>
       {!isMobile && <DesktopSidebar />}
       {isMobile && isOpen && <MobileNavbar setIsOpen={setIsOpen} />}
       <motion.div
@@ -46,7 +39,7 @@ export function Navbar(props: any) {
                 display: 'flex',
                 justifyContent: 'space-between',
                 alignItems: 'center',
-                my: 1.5,
+                my: 1.5
               }}
             />
             <Box my="auto">
@@ -65,7 +58,7 @@ export function Navbar(props: any) {
             backdropFilter: 'blur(7px)',
             overflowY: 'auto',
             flex: 1,
-            ...genericPalette.body,
+            ...genericPalette.body
           }}
         >
           <Box style={{ maxWidth: '100%', display: 'flex', flexDirection: 'column', height: '100%' }}>
@@ -73,6 +66,13 @@ export function Navbar(props: any) {
           </Box>
         </Box>
       </motion.div>
-    </Box>
+    </PageContainer>
   )
 }
+
+const PageContainer = styled(Box)`
+  display: flex;
+  height: 100vh;
+  overflow: auto;
+  overflow-x: hidden;
+`
