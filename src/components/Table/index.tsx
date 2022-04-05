@@ -7,7 +7,7 @@ export default function TableComponent({
   rows,
   columns,
   fetchMore,
-  onClickRow,
+  onClickRow
 }: {
   rows: Row[]
   columns: Column[]
@@ -42,7 +42,7 @@ export default function TableComponent({
       currency: (value?: string | number) => currencyFormat(value),
       date: (value?: string | number) => dateFormat(value),
       datetime: (value?: string | number) => dateTimeFormat(value),
-      string: (value?: string | number) => value,
+      string: (value?: string | number) => value
     }
     if (!map[type]) return value
     return map[type](value)

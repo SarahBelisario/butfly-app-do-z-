@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { MdExpandLess, MdExpandMore, MdPointOfSale } from 'react-icons/md'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { BsBarChartFill, BsCartFill } from 'react-icons/bs'
-import { FaDollarSign, FaShoppingCart } from 'react-icons/fa'
+import { FaDollarSign, FaPalette, FaShoppingCart } from 'react-icons/fa'
 import { RiSettings2Fill } from 'react-icons/ri'
 import { GoPrimitiveDot } from 'react-icons/go'
 
@@ -22,7 +22,8 @@ const availableRoutes: {
   { Icon: MdPointOfSale, label: 'Frente de caixa', path: '/frente-de-caixa', isCollapse: false },
   { Icon: FaShoppingCart, label: 'Produtos', path: '/produtos', isCollapse: false },
   { Icon: FaDollarSign, label: 'Vendas', path: '/vendas', isCollapse: false },
-  { Icon: RiSettings2Fill, label: 'Serviços', path: '/serviços', isCollapse: false }
+  { Icon: RiSettings2Fill, label: 'Serviços', path: '/serviços', isCollapse: false },
+  { Icon: FaPalette, label: 'Personalizar', path: '/personalizar', isCollapse: false }
 ]
 
 export function NavList(props: NavListProps) {
