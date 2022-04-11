@@ -16,7 +16,10 @@ export function FilterButton() {
 
   return (
     <>
-      <Button sx={{ background: '#fff', flexGrow: 0.5, boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.05)', height: 46, px: 1.5 }} onClick={onOpen}>
+      <Button
+        sx={{ background: palette.background.paper, flexGrow: 0.5, boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.05)', height: 46, px: 1.5 }}
+        onClick={onOpen}
+      >
         <IoFilter color={palette.text.primary} />
         <Typography color={palette.text.primary} fontSize={14} mx={1}>
           Filtrar

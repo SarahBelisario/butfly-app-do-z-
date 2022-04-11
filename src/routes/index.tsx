@@ -6,6 +6,7 @@ import { Home } from '../pages/Home'
 import { Checkout } from '../pages/Checkout'
 import { NotFound } from '../pages/NotFound'
 import { Products } from '../pages/Products'
+import { ThemeSelection } from 'pages/ThemeSelection'
 
 export function Routes() {
   return (
@@ -16,6 +17,7 @@ export function Routes() {
         <Route path="/" element={<Home />} />
         <Route path="/frente-de-caixa" element={<Checkout />} />
         <Route path="produtos" element={<Products />} />
+        <Route path="/personalizar" element={<ThemeSelection />} />
         <Route path="*" element={<NotFound />} />
       </Route>
     </BrowserRouter>

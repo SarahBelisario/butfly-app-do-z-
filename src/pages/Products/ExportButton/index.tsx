@@ -14,7 +14,11 @@ export function ExportButton() {
   }
   return (
     <>
-      <Button fullWidth style={{ height: 46, background: '#fff', boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.05)' }} onClick={open}>
+      <Button
+        fullWidth
+        style={{ height: 46, background: palette.background.paper, boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.05)' }}
+        onClick={open}
+      >
         <IoDocumentText size={20} color={palette.text.primary} />
         <IoChevronDown style={{ marginLeft: 4 }} color={palette.text.primary} />
       </Button>
