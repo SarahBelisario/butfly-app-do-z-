@@ -2,8 +2,9 @@ import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, useTh
 import React, { useRef, useState } from 'react'
 import { useDebouncedCallback } from 'use-debounce'
 import { currencyFormat, dateFormat, dateTimeFormat } from './functions'
+import { Row, Column } from './types'
 
-export default function TableComponent({
+export function TableComponent({
   rows,
   columns,
   fetchMore,

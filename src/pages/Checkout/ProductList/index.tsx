@@ -1,10 +1,10 @@
 import { Box, BoxProps, Button, Typography, useTheme } from '@mui/material'
-import { Dispatch, SetStateAction, useContext, useState } from 'react'
+import { AnimatePresence, motion } from 'framer-motion'
+import { Dispatch, useContext, useState } from 'react'
+import { toast } from 'react-toastify'
 import { CheckoutContext } from '../Contexts/CheckoutContext'
 import { RemoveProduct } from '../Modals/RemoveProduct'
 import { ProductCard } from './ProductCard'
-import { motion, AnimatePresence } from 'framer-motion'
-import { toast } from 'react-toastify'
 
 interface ProductListProps extends BoxProps {
   finishModal: Dispatch<React.SetStateAction<boolean>>
@@ -33,6 +33,7 @@ export function ProductList(props: ProductListProps) {
         Produtos adicionados
       </Typography>
       <Box style={{ minHeight: 'calc(100% - 82px)', height: '300px', overflowY: 'auto' }}>
+        {/* @ts-expect-error */}
         <AnimatePresence initial={false}>
           {products.map((product, index) => (
             <motion.div key={index} initial={{ opacity: 0, y: 50 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -100, height: 0 }}>

@@ -1,6 +1,6 @@
 import { Box } from '@mui/material'
 import { IconType } from 'react-icons'
-import { FormattedProducts, Products } from '../types/products'
+import { FormattedProducts, Products } from '../Types/products'
 import { getCategory } from '../utils/getCategory'
 
 export function productMapper(products: Products[]) {
@@ -14,7 +14,7 @@ export function productMapper(products: Products[]) {
           <Icon style={{ marginRight: 12, fontSize: 24, opacity: 0.8 }} />
           {product.name}
         </Box>
-      ),
+      )
     })
   })
   return productsFormatted

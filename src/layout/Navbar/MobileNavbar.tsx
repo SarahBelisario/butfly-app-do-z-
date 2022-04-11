@@ -6,6 +6,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 
 export function MobileNavbar({ setIsOpen }: { setIsOpen: (open: boolean) => void }) {
   return (
+    // @ts-expect-error
     <AnimatePresence exitBeforeEnter>
       <motion.div
         style={{
@@ -15,7 +16,7 @@ export function MobileNavbar({ setIsOpen }: { setIsOpen: (open: boolean) => void
           right: 0,
           bottom: 0,
           background: 'white',
-          zIndex: 1,
+          zIndex: 1
         }}
         animate={{ x: ['-100vw', '0vw'] }}
         transition={{ ease: [0.86, 0.03, 0.1, 1], duration: 1 }}

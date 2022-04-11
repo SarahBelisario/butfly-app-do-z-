@@ -9,3 +9,5 @@ interface Column {
   align?: 'left' | 'right' | 'center'
   hidden?: boolean
 }
+
+export { Row, Column }
