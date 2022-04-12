@@ -1,4 +1,4 @@
-import { Button, useTheme } from '@mui/material'
+import { Button, Hidden, Typography, useTheme } from '@mui/material'
 import { useState } from 'react'
 import { IoChevronDown, IoDocumentText } from 'react-icons/io5'
 import { ExportPopper } from './ExportPopper'
@@ -14,12 +14,13 @@ export function ExportButton() {
   }
   return (
     <>
-      <Button
-        fullWidth
-        style={{ height: 46, background: palette.background.paper, boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.05)' }}
-        onClick={open}
-      >
+      <Button style={{ height: 46, background: palette.background.paper, boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.05)' }} onClick={open}>
         <IoDocumentText size={20} color={palette.text.primary} />
+        <Hidden mdDown>
+          <Typography mx={1} color={palette.text.primary}>
+            Exportar
+          </Typography>
+        </Hidden>
         <IoChevronDown style={{ marginLeft: 4 }} color={palette.text.primary} />
       </Button>
       <ExportPopper isOpen={isOpen} anchorEl={anchorEl} onClose={() => setIsOpen(false)} />
