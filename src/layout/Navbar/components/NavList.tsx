@@ -6,6 +6,7 @@ import { BsBarChartFill, BsCartFill } from 'react-icons/bs'
 import { FaDollarSign, FaPalette, FaShoppingCart } from 'react-icons/fa'
 import { RiSettings2Fill } from 'react-icons/ri'
 import { GoPrimitiveDot } from 'react-icons/go'
+import { IoExtensionPuzzle } from 'react-icons/io5'
 
 interface NavListProps extends ListProps {
   theme: 'white' | 'dark'
@@ -23,6 +24,7 @@ const availableRoutes: {
   { Icon: FaShoppingCart, label: 'Produtos', path: '/produtos', isCollapse: false },
   { Icon: FaDollarSign, label: 'Vendas', path: '/vendas', isCollapse: false },
   { Icon: RiSettings2Fill, label: 'Serviços', path: '/serviços', isCollapse: false },
+  { Icon: IoExtensionPuzzle, label: 'Extensões', path: '/extensoes', isCollapse: false },
   { Icon: FaPalette, label: 'Personalizar', path: '/personalizar', isCollapse: false }
 ]
 

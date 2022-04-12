@@ -4,10 +4,8 @@ import { ThemeList } from './ThemeList'
 
 export function ThemeSelection() {
   return (
-    <Box>
-      <PageContainer mainText="Personalização" secondaryText="Explore temas incríveis, crie seus próprios temas e deixe o sistema com sua cara.">
-        <ThemeList />
-      </PageContainer>
-    </Box>
+    <PageContainer mainText="Personalização" secondaryText="Explore temas incríveis, e deixe a plataforma do seu jeitinho. 🎨">
+      <ThemeList />
+    </PageContainer>
   )
 }

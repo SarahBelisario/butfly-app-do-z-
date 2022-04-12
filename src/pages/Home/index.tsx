@@ -4,17 +4,10 @@ import { ContentCard } from '../../components/ContentCard'
 import { LineChart } from './components/MixedChart'
 import { EventCard } from './components/EventCard'
 import InfoCard from './components/InfoCard'
-export function Home(props: any) {
-  const { palette } = useTheme()
+import { PageContainer } from 'components/PageContainer'
+export function Home() {
   return (
-    <Box>
-      <Typography ml={2} mt={2} variant="h1" fontSize="28px" fontWeight="normal" sx={{ color: palette.text.primary }}>
-        Dashboard
-      </Typography>
-      <Typography ml={2} mt={2} sx={{ fontSize: '16px', color: palette.text.secondary, fontWeight: 'light' }}>
-        Aqui você poderá acompanhar os gráficos de sua empresa com atualizações em tempo real 😱
-      </Typography>
-
+    <PageContainer mainText="Dashboard" secondaryText="Aqui você poderá acompanhar os gráficos de sua empresa com atualizações em tempo real 😱">
       <Grid container spacing={2} my={1} sx={{ gridAutoFlow: 'column' }}>
         <Grid item xs={12} md={12}>
           <ContentCard>
@@ -42,6 +35,6 @@ export function Home(props: any) {
           </ContentCard>
         </Grid>
       </Grid>
-    </Box>
+    </PageContainer>
   )
 }
