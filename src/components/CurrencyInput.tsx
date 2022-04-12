@@ -18,6 +18,13 @@ export function CurrencyInput({ value, onChange, ...props }: CurrencyInputProps)
 
   return (
     <NumberFormat
+      name="amount"
+      label="Valor"
+      value={Number(value && value * 100)}
+      onChange={event => {
+        const value = Number(event.target.value.replace(',', '.'))
+        if (onChange) onChange(event, value)
+      }}
       decimalScale={2}
       decimalSeparator={','}
       fixedDecimalScale
@@ -25,6 +32,8 @@ export function CurrencyInput({ value, onChange, ...props }: CurrencyInputProps)
       format={currencyFormatter}
       allowNegative={false}
       customInput={TextField}
+      fullWidth
+      required
       InputProps={{
         startAdornment: (
           <InputAdornment position="start">
