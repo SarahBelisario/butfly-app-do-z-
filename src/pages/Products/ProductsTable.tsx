@@ -53,11 +53,11 @@ export function ProductsTable() {
             <ExportButton />
           </Grid>
 
-          <Grid item xs={8} md={7} lg={4}>
+          <Grid item xs={8} md={7} lg={5}>
             <SearchInput />
           </Grid>
 
-          <Grid item xs={2} md={2} lg={2}>
+          <Grid item xs={2} md={2} lg={1}>
             <NewProduct />
           </Grid>
         </Grid>

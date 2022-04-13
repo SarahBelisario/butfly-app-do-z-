@@ -9,16 +9,25 @@ interface ImageSwap extends BoxProps {
 export function ImageSwap({ images, ...props }: ImageSwap) {
   const [index, setIndex] = useState(0)
 
-  const nextImage = () => {
-    setIndex((index + 1) % images.length)
-  }
+  const nextImage = () => setIndex((index + 1) % images.length)
 
-  const prevImage = () => {
-    setIndex((index - 1 + images.length) % images.length)
-  }
+  const prevImage = () => setIndex((index - 1 + images.length) % images.length)
 
   return (
-    <Box {...props} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', position: 'relative' }}>
+    <Box
+      {...props}
+      sx={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        overflow: 'hidden',
+        borderRadius: 4,
+        alignItems: 'center',
+        position: 'relative',
+        height: 300,
+        '-webkitClipPath': 'inset(0 0 0 0 round 0px)',
+        clipPath: 'inset(0 0 0 0 round 0px)'
+      }}
+    >
       <Fab size="small" onClick={nextImage} sx={{ m: 1 }} color="primary">
         <IoChevronBack />
       </Fab>
@@ -41,6 +50,10 @@ export function ImageSwap({ images, ...props }: ImageSwap) {
                   position: 'absolute',
                   borderRadius: 16,
                   objectFit: 'cover'
+                }}
+                whileHover={{
+                  scale: 1.1,
+                  transition: { duration: 1 }
                 }}
                 src={item}
                 initial={{ x: 0, opacity: 1 }}
