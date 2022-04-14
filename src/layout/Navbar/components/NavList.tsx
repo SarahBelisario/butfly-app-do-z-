@@ -2,8 +2,8 @@ import { Box, Collapse, List, ListItemButton, ListItemIcon, ListItemText, ListPr
 import { useState } from 'react'
 import { MdExpandLess, MdExpandMore, MdPointOfSale } from 'react-icons/md'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { BsBarChartFill, BsCartFill } from 'react-icons/bs'
-import { FaDollarSign, FaPalette, FaShoppingCart } from 'react-icons/fa'
+import { BsBarChartFill } from 'react-icons/bs'
+import { FaDollarSign, FaPalette, FaShoppingCart, FaUser } from 'react-icons/fa'
 import { RiSettings2Fill } from 'react-icons/ri'
 import { GoPrimitiveDot } from 'react-icons/go'
 import { IoExtensionPuzzle } from 'react-icons/io5'
@@ -20,10 +20,10 @@ const availableRoutes: {
   subItems?: { label: string; path: string }[]
 }[] = [
   { Icon: BsBarChartFill, label: 'Dashboard', path: '/', isCollapse: false },
-  { Icon: MdPointOfSale, label: 'Frente de caixa', path: '/frente-de-caixa', isCollapse: false },
+  { Icon: MdPointOfSale, label: 'Ponto de venda', path: '/ponto-de-venda', isCollapse: false },
+  { Icon: FaUser, label: 'Clientes', path: '/clientes', isCollapse: false },
   { Icon: FaShoppingCart, label: 'Produtos', path: '/produtos', isCollapse: false },
   { Icon: FaDollarSign, label: 'Vendas', path: '/vendas', isCollapse: false },
-  { Icon: RiSettings2Fill, label: 'Serviços', path: '/serviços', isCollapse: false },
   { Icon: IoExtensionPuzzle, label: 'Extensões', path: '/extensoes', isCollapse: false },
   { Icon: FaPalette, label: 'Personalizar', path: '/personalizar', isCollapse: false }
 ]

@@ -8,6 +8,7 @@ import { NotFound } from 'pages/NotFound'
 import { Products } from 'pages/Products'
 import { ThemeSelection } from 'pages/ThemeSelection'
 import { Product } from 'pages/Product'
+import { Customer } from 'pages/Customer'
 
 export function Routes() {
   return (
@@ -17,6 +18,7 @@ export function Routes() {
       <Route element={<Navbar />}>
         <Route path="/" element={<Home />} />
         <Route path="/frente-de-caixa" element={<Checkout />} />
+        <Route path="/clientes" element={<Customer />} />
         <Route path="/produtos" element={<Products />} />
         <Route path="/produtos/:id" element={<Product />} />
         <Route path="/personalizar" element={<ThemeSelection />} />
