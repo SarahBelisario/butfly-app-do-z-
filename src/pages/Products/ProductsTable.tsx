@@ -6,16 +6,17 @@ import { useNavigate } from 'react-router-dom'
 import { ApiInstance } from 'services/axios'
 import { ExportButton } from './ExportButton'
 import { NewProduct } from './NewProduct'
-import { productMapper } from './Schemas/ProductMapper'
+import { ProductMapper } from './Mapper/ProductMapper'
 import { SearchInput } from './SearchInput'
-import { FormattedProducts } from './Types/products'
+import { FormattedProducts } from './Types/Products'
 
-const columns: { field: string; label: string; type?: 'currency' | 'date'; hidden?: boolean }[] = [
+const columns: { field: string; label: string; type?: 'currency' | 'date' | 'datetime'; hidden?: boolean }[] = [
   { field: 'id', label: 'Id', hidden: true },
   { field: 'name', label: 'Nome' },
+  { field: 'category', label: 'Categoria' },
   { field: 'quantity', label: 'Quantidade' },
   { field: 'amount', label: 'Valor', type: 'currency' },
-  { field: 'createdAt', label: 'Data de criação', type: 'date' }
+  { field: 'createdAt', label: 'Data de criação', type: 'datetime' }
 ]
 
 export function ProductsTable() {
@@ -32,7 +33,7 @@ export function ProductsTable() {
         const newProducts = response.data.rows
         setPage(response.data.page)
         setTotalPages(response.data.totalPages)
-        setProducts([...products, ...newProducts])
+        setProducts([...products, ...ProductMapper(newProducts)])
       })
       .catch(error => {
         console.log('error', error)
@@ -63,7 +64,7 @@ export function ProductsTable() {
         </Grid>
       </Box>
       <ContentCard sx={{ p: 0, height: '100%', overflow: 'hidden' }}>
-        <TableComponent rows={productMapper(products)} columns={columns} fetchMore={fetchData} onClickRow={handleClickRow} />
+        <TableComponent rows={products} columns={columns} fetchMore={fetchData} onClickRow={handleClickRow} />
       </ContentCard>
     </>
   )

@@ -1,17 +1,19 @@
-export interface Products {
+export interface RawProducts {
   id: string
   name: string
-  value: number
+  amount: number
   quantity: number
-  category: string
+  category?: {
+    name: string
+    icon: string
+  }
   createdAt: string | number
 }
 
 export interface FormattedProducts {
-  id: string
   name: any
-  value: number
+  amount: number
   quantity: number
-  category: any
+  category?: string
   createdAt: string | number
 }
