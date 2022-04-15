@@ -17,7 +17,7 @@ export function Routes() {
       <Route path="registro" element={<Register />} />
       <Route element={<Navbar />}>
         <Route path="/" element={<Home />} />
-        <Route path="/frente-de-caixa" element={<Checkout />} />
+        <Route path="/ponto-de-venda" element={<Checkout />} />
         <Route path="/clientes" element={<Customer />} />
         <Route path="/produtos" element={<Products />} />
         <Route path="/produtos/:id" element={<Product />} />
