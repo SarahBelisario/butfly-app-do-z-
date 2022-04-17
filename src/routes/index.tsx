@@ -9,6 +9,7 @@ import { Products } from 'pages/Products'
 import { ThemeSelection } from 'pages/ThemeSelection'
 import { Product } from 'pages/Product'
 import { Customer } from 'pages/Customer'
+import { NewCustomer } from 'pages/NewCustomer'
 
 export function Routes() {
   return (
@@ -19,6 +20,7 @@ export function Routes() {
         <Route path="/" element={<Home />} />
         <Route path="/ponto-de-venda" element={<Checkout />} />
         <Route path="/clientes" element={<Customer />} />
+        <Route path="/clientes/novo-cliente" element={<NewCustomer />} />
         <Route path="/produtos" element={<Products />} />
         <Route path="/produtos/:id" element={<Product />} />
         <Route path="/personalizar" element={<ThemeSelection />} />
