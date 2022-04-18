@@ -1,20 +1,21 @@
-import { Box, useMediaQuery, useTheme } from '@mui/material'
+import { Box, useMediaQuery } from '@mui/material'
 import { BoxProps } from '@mui/system'
-import React from 'react'
+import { useContext } from 'react'
+import { ThemeContext } from '../themes/ThemeContext'
 
 export function ContentCard(props: BoxProps) {
   const isMobile = useMediaQuery('(max-width:600px)')
-  const theme = useTheme();
+  const { genericPalette } = useContext(ThemeContext)
   return (
     <Box
       {...props}
       sx={{
-        ...props.sx,
         borderRadius: 2,
         boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.05)',
         py: 4,
         px: isMobile ? 2 : 4,
-        background: theme.palette.background.paper
+        ...genericPalette.card,
+        ...props.sx,
       }}
     >
       {props.children}
