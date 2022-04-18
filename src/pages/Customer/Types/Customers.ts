@@ -1,6 +1,4 @@
-import React from 'react'
-
-interface RawCustomers {
+export interface RawCustomers {
   uid: number
   name: string
   email: string
@@ -10,12 +8,10 @@ interface RawCustomers {
   updatedAt: string
 }
 
-interface FormattedCustomers {
+export interface FormattedCustomers {
   name: string
   email: string
   phone: string
   createdAt: string
   contact: JSX.Element
 }
-
-export { FormattedCustomers, RawCustomers }

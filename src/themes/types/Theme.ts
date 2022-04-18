@@ -1,6 +1,6 @@
-type AvailableThemes = 'light' | 'dark' | 'unicorn' | 'dracula'
+export type AvailableThemes = 'light' | 'dark' | 'unicorn' | 'dracula'
 
-interface GenericPaletteProps {
+export interface GenericPaletteProps {
   title: string
   navbar: {
     [field: string]: string | number
@@ -15,5 +15,3 @@ interface GenericPaletteProps {
     [field: string]: string | number
   }
 }
-
-export { AvailableThemes, GenericPaletteProps }

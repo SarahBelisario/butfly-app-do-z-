@@ -1,4 +1,3 @@
-import { Box } from '@mui/material'
 import { FormattedProducts, RawProducts } from '../Types/Products'
 
 export function ProductMapper(products: RawProducts[]) {
