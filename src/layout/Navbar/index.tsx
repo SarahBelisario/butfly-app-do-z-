@@ -4,11 +4,11 @@ import { useContext, useState } from 'react'
 import { HiMenu } from 'react-icons/hi'
 import { IoLogOutOutline } from 'react-icons/io5'
 import { Outlet, useNavigate } from 'react-router-dom'
+import styled from 'styled-components'
 import { ThemeContext } from '../../themes/ThemeContext'
 import { PageLogo } from './components/PageLogo'
 import { DesktopSidebar } from './DesktopSidebar'
 import { MobileNavbar } from './MobileNavbar'
-import styled from 'styled-components'
 
 export function Navbar(props: any) {
   const navigate = useNavigate()
