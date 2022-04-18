@@ -4,7 +4,7 @@ export const inputs: Components = {
   MuiInputBase: {
     styleOverrides: {
       root: {
-        height: 46
+        minHeight: 46
       }
     }
   },
@@ -17,7 +17,6 @@ export const inputs: Components = {
       input: {
         padding: '16px 14px',
         height: 46,
-        minHeight: '100%',
         boxSizing: 'border-box'
       }
     }

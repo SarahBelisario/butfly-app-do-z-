@@ -65,7 +65,13 @@ export function CustomerTable() {
           </Grid>
 
           <Grid item xs={2} md={2} lg={1}>
-            <Button fullWidth color="primary" variant="contained" style={{ height: 46, boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.05)' }}>
+            <Button
+              fullWidth
+              color="primary"
+              variant="contained"
+              style={{ height: 46, boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.05)' }}
+              onClick={() => navigate('/clientes/novo-cliente')}
+            >
               <HiPlusSm size={22} />
             </Button>
           </Grid>

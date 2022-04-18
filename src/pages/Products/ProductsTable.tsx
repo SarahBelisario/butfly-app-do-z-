@@ -39,6 +39,7 @@ export function ProductsTable() {
         console.log('error', error)
       })
   }
+
   const handleClickRow = (data: { [field: string]: string | number }) => {
     navigate(`/produtos/${data.id}`)
   }
@@ -46,6 +47,7 @@ export function ProductsTable() {
   useEffect(() => {
     fetchData()
   }, [])
+
   return (
     <>
       <Box mb={2} mt={3}>
