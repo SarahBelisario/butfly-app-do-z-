@@ -1,6 +1,7 @@
 import { Box, IconButton, Tooltip } from '@mui/material'
 import { IoLogoWhatsapp } from 'react-icons/io'
 import { MdMail } from 'react-icons/md'
+import { Router } from 'react-router-dom'
 import { FormattedCustomers, RawCustomers } from '../Types/Customers'
 
 export function CustomerMapper(data: RawCustomers[]): FormattedCustomers[] {
@@ -8,7 +9,15 @@ export function CustomerMapper(data: RawCustomers[]): FormattedCustomers[] {
     const contact = (
       <Box sx={{ h: 200 }}>
         <Tooltip title="Whatsapp">
-          <IconButton sx={{ color: '#25d366' }}>
+          <IconButton
+            sx={{ color: '#25d366' }}
+            onClick={event => {
+              event.preventDefault()
+              event.stopPropagation()
+              const phone = customer.phone.replace(/\D/, '')
+              window.open(`https://api.whatsapp.com/send?phone=55${phone}`)
+            }}
+          >
             <IoLogoWhatsapp style={{ fontSize: 22 }} />
           </IconButton>
         </Tooltip>
