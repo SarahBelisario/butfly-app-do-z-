@@ -1,4 +1,4 @@
-interface ViaCepResponse {
+export interface ViaCepResponse {
   cep: string
   logradouro: string
   complemento: string
