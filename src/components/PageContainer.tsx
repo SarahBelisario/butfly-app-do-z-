@@ -1,4 +1,4 @@
-import { Box, BoxProps, Typography, useTheme } from '@mui/material'
+import { Box, BoxProps, Typography, useMediaQuery, useTheme } from '@mui/material'
 
 interface PageContainerProps extends BoxProps {
   mainText: string
@@ -7,8 +7,9 @@ interface PageContainerProps extends BoxProps {
 
 export function PageContainer({ children, mainText, secondaryText, ...props }: PageContainerProps) {
   const { palette } = useTheme()
+  const isMobile = useMediaQuery('(max-width:600px)')
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', flex: 1, height: '100%' }}>
+    <Box id="pageContainer" sx={{ h: '100%', p: isMobile ? 2 : 6 }}>
       <Typography ml={2} mt={2} variant="h1" fontSize="28px" fontWeight="normal" sx={{ color: palette.text.primary }}>
         {mainText}
       </Typography>

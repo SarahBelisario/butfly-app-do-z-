@@ -1,4 +1,4 @@
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, useTheme } from '@mui/material'
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography, useTheme } from '@mui/material'
 import React, { useRef, useState } from 'react'
 import { useDebouncedCallback } from 'use-debounce'
 import { currencyFormat, dateFormat, dateTimeFormat } from './functions'
@@ -50,7 +50,7 @@ export function TableComponent({
   }
 
   return (
-    <TableContainer sx={{ height: '100%' }} onScroll={onScroll} ref={ref}>
+    <TableContainer onScroll={onScroll} ref={ref} sx={{ maxHeight: '350px' }}>
       <Table stickyHeader>
         <TableHead>
           <TableRow>
@@ -77,6 +77,14 @@ export function TableComponent({
               })}
             </TableRow>
           ))}
+          {!rows.length && (
+            <TableRow>
+              <TableCell colSpan={columns.length} align="center" height={200}>
+                <Typography fontSize={20}>Whoops</Typography>
+                Não há dados para serem exibidos.
+              </TableCell>
+            </TableRow>
+          )}
         </TableBody>
       </Table>
     </TableContainer>
