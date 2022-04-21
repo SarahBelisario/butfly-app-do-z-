@@ -1,4 +1,5 @@
 import { Box, Typography, useTheme } from '@mui/material'
+import { PageContainer } from 'components/PageContainer'
 import React, { useState } from 'react'
 import { toast } from 'react-toastify'
 import { ContentCard } from '../../components/ContentCard'
@@ -80,33 +81,26 @@ export function Checkout() {
         handleReset
       }}
     >
-      <Box>
-        <Typography ml={2} mt={2} variant="h1" fontSize="28px" fontWeight="normal" sx={{ color: palette.text.primary }}>
-          Frente de caixa
-        </Typography>
-        <Typography ml={2} mt={2} sx={{ fontSize: '16px', color: palette.text.secondary, fontWeight: 'light' }}>
-          Mais agilidade na venda de seus produtos 🕺
-        </Typography>
-      </Box>
+      <PageContainer mainText="Frente de caixa" secondaryText="Mais agilidade na venda de seus produtos 🕺">
+        <Box display="flex" flexDirection={{ xs: 'column', lg: 'row' }} pb={{ xs: 16, md: 0 }} mt={3} height="100%">
+          {step === 1 && (
+            <ContentCard flex={{ xs: 1, md: 0.5 }} mr={{ xs: 0, lg: 2 }}>
+              <NewProduct />
+            </ContentCard>
+          )}
 
-      <Box display="flex" flexDirection={{ xs: 'column', lg: 'row' }} pb={{ xs: 16, md: 0 }} mt={3} height="100%">
-        {step === 1 && (
-          <ContentCard flex={{ xs: 1, md: 0.5 }} mr={{ xs: 0, lg: 2 }}>
-            <NewProduct />
+          {step === 2 && (
+            <ContentCard flex={{ xs: 1, md: 0.5 }} mr={{ xs: 0, lg: 2 }}>
+              <AdditionalInfo />
+              <FinishTransaction open={finishModal} setOpen={setFinishModal} />
+            </ContentCard>
+          )}
+
+          <ContentCard display="flex" flexDirection="column" flex={{ xs: 1, lg: 0.5 }} mt={{ xs: 2, lg: 0 }} boxSizing="border-box">
+            <ProductList sx={{ flexBasis: '100%', flexGrow: 1 }} finishModal={setFinishModal} />
           </ContentCard>
-        )}
-
-        {step === 2 && (
-          <ContentCard flex={{ xs: 1, md: 0.5 }} mr={{ xs: 0, lg: 2 }}>
-            <AdditionalInfo />
-            <FinishTransaction open={finishModal} setOpen={setFinishModal} />
-          </ContentCard>
-        )}
-
-        <ContentCard display="flex" flexDirection="column" flex={{ xs: 1, lg: 0.5 }} mt={{ xs: 2, lg: 0 }} boxSizing="border-box">
-          <ProductList sx={{ flexBasis: '100%', flexGrow: 1 }} finishModal={setFinishModal} />
-        </ContentCard>
-      </Box>
+        </Box>
+      </PageContainer>
     </CheckoutContext.Provider>
   )
 }

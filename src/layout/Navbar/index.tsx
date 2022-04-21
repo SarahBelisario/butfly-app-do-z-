@@ -52,22 +52,22 @@ export function Navbar() {
         <Box
           sx={{
             mt: isMobile ? 0 : 1.5,
-            padding: isMobile ? 2 : 6,
-            paddingBottom: 2,
             borderRadius: isMobile ? '30px 30px 0 0' : '30px 0 0 0',
             boxShadow: '0 8px 32px 0 rgba(64, 64, 64, 0.40)',
             backdropFilter: 'blur(7px)',
             overflowY: 'auto',
             flex: 1,
+            maxWidth: '100%',
+            height: '100%',
             ...genericPalette.body
           }}
         >
-          <Box style={{ maxWidth: '100%', display: 'flex', flexDirection: 'column', minHeight: '90%' }}>
+          <Box>
             <Outlet />
+            <Typography textAlign="center" pb={6} color="gray" sx={{ opacity: 0.6 }}>
+              &copy; Butfly - {format(new Date(), 'yyyy')}
+            </Typography>
           </Box>
-          <Typography textAlign="center" mt={2} color="gray" sx={{ opacity: 0.6 }}>
-            &copy; Butfly - {format(new Date(), 'yyyy')}
-          </Typography>
         </Box>
       </motion.div>
     </PageContainer>

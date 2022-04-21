@@ -65,7 +65,7 @@ export function ProductsTable() {
           </Grid>
         </Grid>
       </Box>
-      <ContentCard sx={{ p: 0, height: '100%', overflow: 'hidden' }}>
+      <ContentCard sx={{ p: 0, overflow: 'hidden' }}>
         <TableComponent rows={products} columns={columns} fetchMore={fetchData} onClickRow={handleClickRow} />
       </ContentCard>
     </>
