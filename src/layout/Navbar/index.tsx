@@ -1,4 +1,5 @@
-import { Box, IconButton, useMediaQuery, useTheme } from '@mui/material'
+import { Box, IconButton, Typography, useMediaQuery } from '@mui/material'
+import { format } from 'date-fns'
 import { motion } from 'framer-motion'
 import { useContext, useState } from 'react'
 import { HiMenu } from 'react-icons/hi'
@@ -10,11 +11,10 @@ import { PageLogo } from './components/PageLogo'
 import { DesktopSidebar } from './DesktopSidebar'
 import { MobileNavbar } from './MobileNavbar'
 
-export function Navbar(props: any) {
+export function Navbar() {
   const navigate = useNavigate()
   const isMobile = useMediaQuery('(max-width:600px)')
   const [isOpen, setIsOpen] = useState(false)
-  const theme = useTheme()
   const { genericPalette } = useContext(ThemeContext)
 
   return (
@@ -53,6 +53,7 @@ export function Navbar(props: any) {
           sx={{
             mt: isMobile ? 0 : 1.5,
             padding: isMobile ? 2 : 6,
+            paddingBottom: 2,
             borderRadius: isMobile ? '30px 30px 0 0' : '30px 0 0 0',
             boxShadow: '0 8px 32px 0 rgba(64, 64, 64, 0.40)',
             backdropFilter: 'blur(7px)',
@@ -61,9 +62,12 @@ export function Navbar(props: any) {
             ...genericPalette.body
           }}
         >
-          <Box style={{ maxWidth: '100%', display: 'flex', flexDirection: 'column', height: '100%' }}>
+          <Box style={{ maxWidth: '100%', display: 'flex', flexDirection: 'column', minHeight: '90%' }}>
             <Outlet />
           </Box>
+          <Typography textAlign="center" mt={2} color="gray" sx={{ opacity: 0.6 }}>
+            &copy; Butfly - {format(new Date(), 'yyyy')}
+          </Typography>
         </Box>
       </motion.div>
     </PageContainer>
