@@ -1,14 +1,13 @@
-import { SpeedDial, SpeedDialAction, Theme } from '@mui/material'
+import { Theme } from '@mui/material'
 import { ThemeProvider } from '@mui/material/styles'
 import { useState } from 'react'
-import { IoIosColorPalette } from 'react-icons/io'
-import { ToastContainer, Slide } from 'react-toastify'
+import { Helmet } from 'react-helmet'
+import { Slide, ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { Routes } from './routes'
 import { availableThemes } from './themes'
 import { ThemeContext } from './themes/ThemeContext'
 import { AvailableThemes, GenericPaletteProps } from './themes/types/Theme'
-import { Helmet } from 'react-helmet'
 
 export function App() {
   const userTheme = localStorage.getItem('theme') as AvailableThemes
