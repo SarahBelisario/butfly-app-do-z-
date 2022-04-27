@@ -6,6 +6,7 @@ import { IoEyeOffOutline, IoEyeOutline } from 'react-icons/io5'
 import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { ApiInstance } from '../../../services/axios'
+import { toast } from 'react-toastify'
 
 export default function Form(props: any) {
   const navigate = useNavigate()
@@ -16,12 +17,15 @@ export default function Form(props: any) {
   const { palette } = useTheme()
   const submit = async (data: any) => {
     setIsLoading(true)
-    await ApiInstance.post('/login', { email: data.email, password: data.password })
+    await ApiInstance.post('/signin', { email: data.email, password: data.password })
       .then(response => {
+        localStorage.setItem('token', response.data.token)
         navigate('/')
+        toast.success('Login realizado com sucesso.')
       })
       .catch(error => {
-        console.log(error)
+        setIsLoading(false)
+        toast.error('Verifique seus dados e tente novamente.')
       })
   }
 
@@ -41,7 +45,7 @@ export default function Form(props: any) {
                 {showPassword ? <IoEyeOutline /> : <IoEyeOffOutline />}
               </IconButton>
             </InputAdornment>
-          ),
+          )
         }}
         required
         fullWidth
@@ -58,13 +62,13 @@ export default function Form(props: any) {
               position: 'absolute',
               borderRadius: 5000,
               width: 0,
-              height: 0,
+              height: 0
             }}
             whileInView={{
               width: '300vh',
               height: '300vh',
               zIndex: 1,
-              placeItems: 'center',
+              placeItems: 'center'
             }}
             transition={{ ease: [0.86, 0.03, 0.1, 1], duration: 2 }}
           />
@@ -80,7 +84,7 @@ export default function Form(props: any) {
           mt: 2,
           fontSize: 13,
           fontWeight: 'normal',
-          textAlign: 'center',
+          textAlign: 'center'
         }}
       >
         É novo por aqui?
@@ -94,7 +98,7 @@ export default function Form(props: any) {
             fontSize: 13,
             fontWeight: 'bold',
             textAlign: 'center',
-            cursor: 'pointer',
+            cursor: 'pointer'
           }}
         >
           Registre-se
