@@ -24,7 +24,7 @@ export default function Form(props: any) {
   })
   const [isLogged, setIsLogged] = useState(false)
   const { palette } = useTheme()
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(-1)
 
   useEffect(() => {
     count > -1 && setTimeout(() => setCount(count - 1), 1000)

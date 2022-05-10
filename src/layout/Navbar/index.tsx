@@ -22,6 +22,7 @@ export function Navbar() {
       {!isMobile && <DesktopSidebar />}
       {isMobile && isOpen && <MobileNavbar setIsOpen={setIsOpen} />}
       <motion.div
+        initial={{ x: '2000px' }}
         animate={{ x: ['2000px', '0px'] }}
         transition={{ ease: [0.86, 0.03, 0.1, 1], duration: 1 }}
         style={{ flex: 1, display: 'flex', flexDirection: 'column', maxWidth: '100%' }}

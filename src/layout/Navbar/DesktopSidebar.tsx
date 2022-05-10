@@ -11,6 +11,7 @@ export function DesktopSidebar() {
     <motion.div
       style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}
       transition={{ ease: [0.86, 0.03, 0.1, 1], duration: 1 }}
+      initial={{ x: '-1000px' }}
       animate={{ x: ['-1000px', '0px'] }}
     >
       <Box
@@ -18,7 +19,7 @@ export function DesktopSidebar() {
           display: 'flex',
           flexDirection: 'column',
           width: isMobile ? 80 : 300,
-          alignItems: 'center',
+          alignItems: 'center'
         }}
       >
         <PageLogo sx={{ display: 'flex', alignItems: 'center', mt: 5 }} />
