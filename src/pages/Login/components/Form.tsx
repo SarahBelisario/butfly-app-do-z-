@@ -1,36 +1,60 @@
 import { LoadingButton } from '@mui/lab'
-import { IconButton, InputAdornment, TextField, Typography, useTheme } from '@mui/material'
-import { useState } from 'react'
+import { Alert, IconButton, InputAdornment, TextField, Typography, useTheme } from '@mui/material'
+import { motion } from 'framer-motion'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { IoEyeOffOutline, IoEyeOutline } from 'react-icons/io5'
 import { useNavigate } from 'react-router-dom'
-import { motion } from 'framer-motion'
 import { ApiInstance } from '../../../services/axios'
-import { toast } from 'react-toastify'
 
 export default function Form(props: any) {
+  const errorMessages = {
+    'User not found.': 'Usuário não encontrado, verifique seu email',
+    'Invalid password.': 'Sua senha está incorreta',
+    'Internal server error': 'Erro interno no servidor'
+  }
   const navigate = useNavigate()
   const { register, handleSubmit } = useForm()
   const [showPassword, setShowPassword] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
-  const [isLogged] = useState(false)
+  const [notification, setNotification] = useState<{ display: boolean; status: 'success' | 'error' | 'warning'; message: string }>({
+    display: false,
+    status: 'success',
+    message: ''
+  })
+  const [isLogged, setIsLogged] = useState(false)
   const { palette } = useTheme()
+  const [count, setCount] = useState(0)
+
+  useEffect(() => {
+    count > -1 && setTimeout(() => setCount(count - 1), 1000)
+    if (count > -1) {
+      setNotification({
+        display: true,
+        message: `Logado com sucesso, redirecionando em ${count}s...`,
+        status: 'success'
+      })
+    }
+    isLogged && count === -1 && navigate('/')
+  }, [count])
+
   const submit = async (data: any) => {
     setIsLoading(true)
     await ApiInstance.post('/signin', { email: data.email, password: data.password })
-      .then(response => {
+      .then(async response => {
         localStorage.setItem('token', response.data.token)
-        navigate('/')
-        toast.success('Login realizado com sucesso.')
+        setIsLogged(true)
+        setCount(3)
       })
       .catch(error => {
+        const errorMessage = errorMessages[error.response.data.message]
         setIsLoading(false)
-        toast.error('Verifique seus dados e tente novamente.')
+        setNotification({ display: true, message: errorMessage, status: 'error' })
       })
   }
 
   return (
-    <form onSubmit={handleSubmit(submit)} {...props}>
+    <form onSubmit={handleSubmit(submit)} {...props} style={{ width: 400 }}>
       <TextField id="email" disabled={isLoading} type="email" label="Email" fullWidth required sx={{ mt: 2 }} {...register('email')} />
 
       <TextField
@@ -53,9 +77,15 @@ export default function Form(props: any) {
         {...register('password')}
       />
 
+      {notification.display && (
+        <Alert severity={notification.status} sx={{ mt: 2 }}>
+          {notification.message}
+        </Alert>
+      )}
+
       <LoadingButton fullWidth color="primary" variant="contained" type="submit" sx={{ mt: 2, position: 'relative' }} loading={isLoading}>
         Login
-        {isLogged ? (
+        {isLogged && count === 0 ? (
           <motion.div
             style={{
               background: palette.primary.main,
