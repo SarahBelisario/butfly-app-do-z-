@@ -1,6 +1,6 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import { LoadingButton } from '@mui/lab'
-import { IconButton, InputAdornment, TextField, Typography, useTheme } from '@mui/material'
+import { Alert, IconButton, InputAdornment, TextField, Typography, useTheme } from '@mui/material'
 import { signUpLocale } from 'locale/Signup'
 import { FormHTMLAttributes, useState } from 'react'
 import { useForm } from 'react-hook-form'
@@ -11,6 +11,11 @@ import { ApiInstance } from 'services/axios'
 import { NewUserSchema } from '../schemas/NewUserSchema'
 
 export default function Form(props: FormHTMLAttributes<HTMLFormElement>) {
+  const errorMessages = {
+    'Email already registered.': 'Email já cadastrado',
+    'Invalid password.': 'Sua senha está incorreta'
+  }
+
   const navigate = useNavigate()
   const {
     register,
@@ -21,6 +26,11 @@ export default function Form(props: FormHTMLAttributes<HTMLFormElement>) {
   })
   const [showPassword, setShowPassword] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
+  const [notification, setNotification] = useState<{ display: boolean; status: 'success' | 'error' | 'warning'; message: string }>({
+    display: false,
+    status: 'success',
+    message: ''
+  })
   const submit = async (data: { [field: string]: string }) => {
     setIsLoading(true)
     await ApiInstance.post(`signup`, data)
@@ -30,8 +40,8 @@ export default function Form(props: FormHTMLAttributes<HTMLFormElement>) {
         navigate('/login')
       })
       .catch(error => {
-        const errorMessage = error?.response?.data?.message
-        toast.error(signUpLocale(errorMessage) || 'Falha ao cadastrar usuário.')
+        const errorMessage = errorMessages[error.response.data.message]
+        setNotification({ display: true, message: errorMessage, status: 'error' })
         setIsLoading(false)
       })
   }
@@ -106,6 +116,12 @@ export default function Form(props: FormHTMLAttributes<HTMLFormElement>) {
         sx={{ mt: 2 }}
         {...register('confirmPassword')}
       />
+
+      {notification.display && (
+        <Alert severity={notification.status} sx={{ mt: 2 }}>
+          {notification.message}
+        </Alert>
+      )}
 
       <LoadingButton fullWidth color="primary" variant="contained" type="submit" sx={{ mt: 2 }} loading={isLoading}>
         Cadastrar
