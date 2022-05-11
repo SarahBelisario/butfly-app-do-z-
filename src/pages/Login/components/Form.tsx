@@ -54,7 +54,7 @@ export default function Form(props: any) {
   }
 
   return (
-    <form onSubmit={handleSubmit(submit)} {...props} style={{ width: 400 }}>
+    <form onSubmit={handleSubmit(submit)} {...props}>
       <TextField id="email" disabled={isLoading} type="email" label="Email" fullWidth required sx={{ mt: 2 }} {...register('email')} />
 
       <TextField
