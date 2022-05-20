@@ -4,9 +4,9 @@ import { Button, Dialog, DialogActions, DialogContent, DialogContentText, Dialog
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
-import { AsyncAutoComplete } from 'components/HookFormInputs/FormAsyncAutoComplete'
-import { FormCurrencyInput } from 'components/HookFormInputs/FormCurrencyInput'
-import { ApiInstance } from 'services/axios'
+import { AsyncAutoComplete } from '../../../components/HookFormInputs/FormAsyncAutoComplete'
+import { FormCurrencyInput } from '../../../components/HookFormInputs/FormCurrencyInput'
+import { ApiInstance } from '../../../services/axios'
 import { schema } from './NewProductSchema'
 
 interface NewProductDialogProps extends Omit<DialogProps, 'open'> {

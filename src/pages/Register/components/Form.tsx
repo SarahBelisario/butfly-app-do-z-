@@ -1,13 +1,12 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import { LoadingButton } from '@mui/lab'
 import { Alert, IconButton, InputAdornment, TextField, Typography, useTheme } from '@mui/material'
-import { signUpLocale } from 'locale/Signup'
 import { FormHTMLAttributes, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { IoEyeOffOutline, IoEyeOutline } from 'react-icons/io5'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
-import { ApiInstance } from 'services/axios'
+import { ApiInstance } from '../../../services/axios'
 import { NewUserSchema } from '../schemas/NewUserSchema'
 
 export default function Form(props: FormHTMLAttributes<HTMLFormElement>) {
@@ -40,7 +39,7 @@ export default function Form(props: FormHTMLAttributes<HTMLFormElement>) {
         navigate('/login')
       })
       .catch(error => {
-        const errorMessage = errorMessages[error.response.data.message]
+        const errorMessage = errorMessages[error.response?.data.message]
         setNotification({ display: true, message: errorMessage, status: 'error' })
         setIsLoading(false)
       })

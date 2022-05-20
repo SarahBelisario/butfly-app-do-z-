@@ -1,5 +1,5 @@
 import { Box } from '@mui/material'
-import { PageContainer } from 'components/PageContainer'
+import { PageContainer } from '../../components/PageContainer'
 import { ThemeList } from './ThemeList'
 
 export function ThemeSelection() {

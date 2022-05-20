@@ -1,5 +1,5 @@
 import { Box, Typography } from '@mui/material'
-import { PageContainer } from 'components/PageContainer'
+import { PageContainer } from '../../components/PageContainer'
 import { Color } from './Color/Color'
 import { MoreColors } from './Color/MoreColors'
 import { Size } from './Size'

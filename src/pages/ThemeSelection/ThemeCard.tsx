@@ -1,7 +1,7 @@
 import { Box, ButtonBase } from '@mui/material'
-import { ContentCard } from 'components/ContentCard'
+import { ContentCard } from '../../components/ContentCard'
 import { useContext } from 'react'
-import { ThemeContext } from 'themes/ThemeContext'
+import { ThemeContext } from '../../themes/ThemeContext'
 
 interface ThemeCard {
   mainColor: string

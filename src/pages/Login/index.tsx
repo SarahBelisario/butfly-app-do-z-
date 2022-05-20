@@ -4,6 +4,7 @@ import LeftContainer from './LeftContainer'
 
 export function Login() {
   const theme = useTheme()
+
   return (
     <Box p={0} display="flex" height="100vh" style={{ background: theme.palette.background.default, overflow: 'hidden' }}>
       <LeftContainer />

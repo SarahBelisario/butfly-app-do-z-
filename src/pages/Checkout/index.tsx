@@ -1,5 +1,5 @@
 import { Box, Typography, useTheme } from '@mui/material'
-import { PageContainer } from 'components/PageContainer'
+import { PageContainer } from '../../components/PageContainer'
 import React, { useState } from 'react'
 import { toast } from 'react-toastify'
 import { ContentCard } from '../../components/ContentCard'
