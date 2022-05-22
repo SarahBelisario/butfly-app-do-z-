@@ -14,7 +14,7 @@ export function User() {
   useEffect(() => {
     async function fetchData() {
       if (!user.name) {
-        await ApiInstance.get('/companies')
+        await ApiInstance.get('/me')
           .then(({ data }) => signIn(data.user, data.companies, () => null))
           .catch(error => navigate('/login'))
       }
@@ -26,10 +26,10 @@ export function User() {
   }
   return (
     <Box sx={{ display: 'flex', alignItems: 'center' }}>
-      <Avatar>{user?.name}</Avatar>
+      <Avatar>{user?.name[0]}</Avatar>
       <Box sx={{ display: isMobile ? 'none' : 'initial' }}>
         <Typography sx={{ color: 'white', ml: 2, fontWeight: 'bold', fontSize: 13 }}>{user?.name}</Typography>
-        <Typography sx={{ color: 'white', ml: 2, fontWeight: 'normal', fontSize: 11 }}>{companies[0].name}</Typography>
+        <Typography sx={{ color: 'white', ml: 2, fontWeight: 'normal', fontSize: 11 }}>{companies[0]?.name}</Typography>
       </Box>
       <IconButton sx={{ ml: 'auto', display: isMobile ? 'none' : 'initial' }} onClick={() => signOut(() => navigate('/login'))}>
         <IoLogOut color="white"></IoLogOut>

@@ -29,7 +29,7 @@ export default function Form(props: any) {
     setIsLoading(true)
     try {
       const response = await ApiInstance.post('/signin', { email: data.email, password: data.password })
-      const userRequest = await ApiInstance.get('/companies', {
+      const userRequest = await ApiInstance.get('/me', {
         headers: { authorization: `Bearer ${response.data.token}` }
       })
 
