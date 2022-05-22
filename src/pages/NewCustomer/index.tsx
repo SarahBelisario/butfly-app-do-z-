@@ -36,7 +36,8 @@ export function NewCustomer() {
 
   async function handleStoreCustomer(data: NewCustomerSubmit) {
     setIsLoading(true)
-    await ApiInstance.post('/customers', data)
+    const companyUid = localStorage.getItem('@Butfly:companyUid')
+    await ApiInstance.post(`/companies/${companyUid}/customers`, data)
       .then(() => {
         setIsLoading(false)
         methods.reset()

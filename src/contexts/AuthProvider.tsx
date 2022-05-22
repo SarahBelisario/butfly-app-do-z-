@@ -7,6 +7,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [companies, setCompanies] = useState<any[]>([])
 
   const signIn = (user: { name: string }, companies: any[], callback: VoidFunction) => {
+    const companyUid = localStorage.getItem('@Butfly:companyUid')
+    if (!companyUid) localStorage.setItem('@Butfly:companyUid', companies[0]?.uid)
     setUser(user)
     setCompanies(companies)
     callback()

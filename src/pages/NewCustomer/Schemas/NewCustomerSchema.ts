@@ -2,7 +2,16 @@ import * as yup from 'yup'
 import UFList from '../../../utils/UFlist.json'
 
 export const NewUserSchema = yup.object({
-  name: yup.string().min(2, 'O nome do cliente precisa ter no mínimo 2 caracteres.').required('É necessário informar o nome do cliente.'),
+  name: yup
+    .string()
+    .min(2, 'O nome do cliente precisa ter no mínimo 2 caracteres.')
+    .required('É necessário informar o nome do cliente.')
+    .test('lastName', 'O nome do cliente precisa ter um sobrenome.', function (value?: string) {
+      if (!value) return false
+      let nameParts = value.split(' ')
+      if (!nameParts[1]) return false
+      return value.split(' ').length > 1 ? true : false
+    }),
   surname: yup.string().max(20, 'O apelido pode ter no máximo 20 caracteres.'),
   email: yup.string().email('O email precisa ser válido.'),
   observation: yup.string().max(500, 'A observação não pode ter mais de 500 caracteres.'),

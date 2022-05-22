@@ -11,6 +11,8 @@ export function User() {
   const navigate = useNavigate()
   const { user, companies, signIn, signOut } = useContext(AuthContext)
 
+  const selectedCompany = companies.find(company => company.uid === localStorage.getItem('@Butfly:companyUid'))
+
   useEffect(() => {
     async function fetchData() {
       if (!user.name) {
@@ -21,15 +23,12 @@ export function User() {
     }
     fetchData()
   }, [])
-  {
-    console.log(user)
-  }
   return (
     <Box sx={{ display: 'flex', alignItems: 'center' }}>
       <Avatar>{user?.name[0]}</Avatar>
       <Box sx={{ display: isMobile ? 'none' : 'initial' }}>
         <Typography sx={{ color: 'white', ml: 2, fontWeight: 'bold', fontSize: 13 }}>{user?.name}</Typography>
-        <Typography sx={{ color: 'white', ml: 2, fontWeight: 'normal', fontSize: 11 }}>{companies[0]?.name}</Typography>
+        <Typography sx={{ color: 'white', ml: 2, fontWeight: 'normal', fontSize: 11 }}>{selectedCompany?.name}</Typography>
       </Box>
       <IconButton sx={{ ml: 'auto', display: isMobile ? 'none' : 'initial' }} onClick={() => signOut(() => navigate('/login'))}>
         <IoLogOut color="white"></IoLogOut>
