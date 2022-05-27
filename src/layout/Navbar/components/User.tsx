@@ -18,7 +18,7 @@ export function User() {
       if (!user.name) {
         await ApiInstance.get('/me')
           .then(({ data }) => signIn(data.user, data.companies, () => null))
-          .catch(error => navigate('/login'))
+          .catch(error => {})
       }
     }
     fetchData()

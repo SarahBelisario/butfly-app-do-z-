@@ -4,7 +4,7 @@ import { AuthContext } from '../../../contexts/AuthProvider'
 import { useContext, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { IoEyeOffOutline, IoEyeOutline } from 'react-icons/io5'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { ApiInstance } from '../../../services/axios'
 
 export default function Form(props: any) {
@@ -24,6 +24,9 @@ export default function Form(props: any) {
   })
   const { palette } = useTheme()
   const { signIn } = useContext(AuthContext)
+  const location: { state: { from?: { pathname: string } } } = useLocation() as any
+  const from = location?.state?.from?.pathname || '/'
+  console.log('From: ', from)
 
   const submit = async (data: any) => {
     setIsLoading(true)
@@ -35,7 +38,7 @@ export default function Form(props: any) {
 
       signIn(userRequest.data.user, userRequest.data.companies, () => {
         localStorage.setItem('token', response.data.token)
-        navigate('/')
+        navigate(from)
       })
     } catch (error: any) {
       const errorMessage = errorMessages[error?.response?.data.message]

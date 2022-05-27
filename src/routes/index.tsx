@@ -20,71 +20,22 @@ export function Routes() {
       <BrowserRouter>
         <Route path="login" element={<Login />} />
         <Route path="registro" element={<Register />} />
+
+        <Route path="/primeiros-passos" element={<InitialSetup />} />
         <Route
-          path="/primeiros-passos"
           element={
             <RequireAuth>
-              <InitialSetup />
+              <Navbar />
             </RequireAuth>
           }
-        />
-        <Route element={<Navbar />}>
-          <Route
-            path="/"
-            element={
-              <RequireAuth>
-                <Home />
-              </RequireAuth>
-            }
-          />
-          <Route
-            path="/ponto-de-venda"
-            element={
-              <RequireAuth>
-                <Checkout />
-              </RequireAuth>
-            }
-          />
-          <Route
-            path="/clientes"
-            element={
-              <RequireAuth>
-                <Customer />
-              </RequireAuth>
-            }
-          />
-          <Route
-            path="/clientes/novo-cliente"
-            element={
-              <RequireAuth>
-                <NewCustomer />
-              </RequireAuth>
-            }
-          />
-          <Route
-            path="/produtos"
-            element={
-              <RequireAuth>
-                <Products />
-              </RequireAuth>
-            }
-          />
-          <Route
-            path="/produtos/:id"
-            element={
-              <RequireAuth>
-                <Product />
-              </RequireAuth>
-            }
-          />
-          <Route
-            path="/personalizar"
-            element={
-              <RequireAuth>
-                <ThemeSelection />
-              </RequireAuth>
-            }
-          />
+        >
+          <Route path="/" element={<Home />} />
+          <Route path="/ponto-de-venda" element={<Checkout />} />
+          <Route path="/clientes" element={<Customer />} />
+          <Route path="/clientes/novo-cliente" element={<NewCustomer />} />
+          <Route path="/produtos" element={<Products />} />
+          <Route path="/produtos/:id" element={<Product />} />
+          <Route path="/personalizar" element={<ThemeSelection />} />
         </Route>
         <Route path="*" element={<NotFound />} />
       </BrowserRouter>
