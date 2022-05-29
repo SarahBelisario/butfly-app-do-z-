@@ -10,15 +10,20 @@ export function User() {
   const isMobile = useMediaQuery('(max-width:600px)')
   const navigate = useNavigate()
   const { user, companies, signIn, signOut } = useContext(AuthContext)
-
   const selectedCompany = companies.find(company => company.uid === localStorage.getItem('@Butfly:companyUid'))
 
   useEffect(() => {
     async function fetchData() {
       if (!user.name) {
-        await ApiInstance.get('/me')
-          .then(({ data }) => signIn(data.user, data.companies, () => null))
-          .catch(error => {})
+        await ApiInstance.get('/me', { headers: { authorization: `Bearer ${localStorage.getItem('@Butfly:token')}` } })
+          .then(({ data }) => {
+            signIn(data.user, data.companies, () => null)
+            if (!data.companies[0]) navigate('/primeiros-passos')
+            if (!selectedCompany && companies[0]?.uid) localStorage.setItem('@Butfly:companyUid', companies[0]?.uid)
+          })
+          .catch(() => {
+            signOut(() => navigate('/login'))
+          })
       }
     }
     fetchData()
@@ -31,7 +36,7 @@ export function User() {
         <Typography sx={{ color: 'white', ml: 2, fontWeight: 'normal', fontSize: 11 }}>{selectedCompany?.name}</Typography>
       </Box>
       <IconButton sx={{ ml: 'auto', display: isMobile ? 'none' : 'initial' }} onClick={() => signOut(() => navigate('/login'))}>
-        <IoLogOut color="white"></IoLogOut>
+        <IoLogOut color="white" />
       </IconButton>
     </Box>
   )

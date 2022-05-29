@@ -52,11 +52,15 @@ export function Checkout() {
   }
 
   const handleSubmitCheckout = () =>
-    ApiInstance.post('/sales', {
-      products,
-      address: useAddress ? address : null,
-      customer: useCustomer ? customer : null
-    })
+    ApiInstance.post(
+      '/sales',
+      {
+        products,
+        address: useAddress ? address : null,
+        customer: useCustomer ? customer : null
+      },
+      { headers: { authorization: `Bearer ${localStorage.getItem('@Butfly:token')}` } }
+    )
 
   return (
     <CheckoutContext.Provider

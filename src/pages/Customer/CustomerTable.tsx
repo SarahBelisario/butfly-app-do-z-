@@ -29,7 +29,10 @@ export function CustomerTable() {
 
   const fetchData = async () => {
     if (totalPages && page >= totalPages) return
-    await ApiInstance.get(`/customers`, { params: { page: !page ? 1 : Number(page) + 1 } })
+    await ApiInstance.get(`/customers`, {
+      params: { page: !page ? 1 : Number(page) + 1 },
+      headers: { authorization: `Bearer ${localStorage.getItem('@Butfly:token')}` }
+    })
       .then(response => {
         const newCustomers = response.data.rows
         setPage(response.data.page)

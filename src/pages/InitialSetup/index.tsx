@@ -1,5 +1,6 @@
 import { Box, useTheme } from '@mui/material'
-import { useState } from 'react'
+import { AuthContext } from '../../contexts/AuthProvider'
+import { useContext, useEffect, useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import { ApiInstance } from '../../services/axios'
@@ -11,6 +12,16 @@ export function InitialSetup() {
   const [step, setStep] = useState(1)
   const [isLoading, setIsLoading] = useState(false)
   const navigate = useNavigate()
+  useEffect(() => {
+    async function fetchData() {
+      if (!localStorage.getItem('@Butfly:token')) navigate('/login')
+      await ApiInstance.get('/me', { headers: { authorization: `Bearer ${localStorage.getItem('@Butfly:token')}` } }).then(response => {
+        if (response.data.companies.length) navigate('/')
+      })
+    }
+
+    fetchData()
+  }, [])
 
   const methods = useForm({ defaultValues: { name: '', fieldOfWork: '' } })
 
@@ -22,10 +33,12 @@ export function InitialSetup() {
     if (step !== 3) return
     const { name, fieldOfWork } = data
     setIsLoading(true)
-    await ApiInstance.post('/companies', {
-      name,
-      fieldOfWork
-    })
+    const companies = await ApiInstance.post(
+      '/companies',
+      { name, fieldOfWork },
+      { headers: { authorization: `Bearer ${localStorage.getItem('@Butfly:token')}` } }
+    )
+    localStorage.setItem('@Butfly:companyUid', companies.data.uid)
     navigate('/')
   }
   const { palette } = useTheme()

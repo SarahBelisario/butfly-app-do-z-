@@ -13,7 +13,7 @@ export function Customer() {
 
   async function fetchCustomers(event: SyntheticEvent<Element, Event>, value: string) {
     setCustomerLoading(true)
-    await ApiInstance.get(`customers`, { params: { name: value } })
+    await ApiInstance.get(`customers`, { params: { name: value }, headers: { authorization: `Bearer ${localStorage.getItem('@Butfly:token')}` } })
       .then(response => {
         setCustomers(response.data.rows)
         setCustomerLoading(false)

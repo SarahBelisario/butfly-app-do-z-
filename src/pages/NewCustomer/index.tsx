@@ -37,7 +37,9 @@ export function NewCustomer() {
   async function handleStoreCustomer(data: NewCustomerSubmit) {
     setIsLoading(true)
     const companyUid = localStorage.getItem('@Butfly:companyUid')
-    await ApiInstance.post(`/companies/${companyUid}/customers`, data)
+    await ApiInstance.post(`/companies/${companyUid}/customers`, data, {
+      headers: { authorization: `Bearer ${localStorage.getItem('@Butfly:token')}` }
+    })
       .then(() => {
         setIsLoading(false)
         methods.reset()

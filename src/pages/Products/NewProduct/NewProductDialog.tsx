@@ -29,7 +29,7 @@ export function NewProductDialog({ isOpen, onClose, onSuccess, ...props }: NewPr
   async function onSubmit(data) {
     const { name, price, category } = data
     setIsLoading(true)
-    await ApiInstance.post('/products', { name, price, category })
+    await ApiInstance.post('/products', { name, price, category }, { headers: { authorization: `Bearer ${localStorage.getItem('@Butfly:token')}` } })
       .then(response => {
         toast('Produto criado com sucesso', { type: 'success' })
         onClose()
@@ -42,7 +42,7 @@ export function NewProductDialog({ isOpen, onClose, onSuccess, ...props }: NewPr
   }
 
   async function fetchCategories() {
-    const categories = await ApiInstance.get('/categories')
+    const categories = await ApiInstance.get('/categories', { headers: { authorization: `Bearer ${localStorage.getItem('@Butfly:token')}` } })
     return categories.data
   }
   return (

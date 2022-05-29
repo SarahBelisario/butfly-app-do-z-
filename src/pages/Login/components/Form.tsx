@@ -37,7 +37,7 @@ export default function Form(props: any) {
       })
 
       signIn(userRequest.data.user, userRequest.data.companies, () => {
-        localStorage.setItem('token', response.data.token)
+        localStorage.setItem('@Butfly:token', response.data.token)
         navigate(from)
       })
     } catch (error: any) {

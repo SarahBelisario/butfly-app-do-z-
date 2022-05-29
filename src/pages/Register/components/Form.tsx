@@ -32,7 +32,7 @@ export default function Form(props: FormHTMLAttributes<HTMLFormElement>) {
   })
   const submit = async (data: { [field: string]: string }) => {
     setIsLoading(true)
-    await ApiInstance.post(`signup`, data)
+    await ApiInstance.post(`signup`, data, { headers: { authorization: `Bearer ${localStorage.getItem('@Butfly:token')}` } })
       .then(() => {
         toast.success('Cadastro realizado com sucesso.')
         setIsLoading(false)

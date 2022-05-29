@@ -28,7 +28,10 @@ export function ProductsTable() {
 
   const fetchData = async () => {
     if (totalPages && page >= totalPages) return
-    await ApiInstance.get(`/products`, { params: { page: !page ? 1 : Number(page) + 1 } })
+    await ApiInstance.get(`/products`, {
+      params: { page: !page ? 1 : Number(page) + 1 },
+      headers: { authorization: `Bearer ${localStorage.getItem('@Butfly:token')}` }
+    })
       .then(response => {
         const newProducts = response.data.rows
         setPage(response.data.page)
