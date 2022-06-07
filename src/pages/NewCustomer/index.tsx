@@ -1,13 +1,13 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import { LoadingButton } from '@mui/lab'
-import { Box, Button, Checkbox, Collapse, Grid, TextField, Tooltip, Typography, useTheme } from '@mui/material'
-import { ContentCard } from 'components/ContentCard'
-import { AddressForm } from 'components/Form/AddressForm'
-import { PageContainer } from 'components/PageContainer'
+import { Box, Checkbox, Collapse, Grid, TextField, Tooltip, Typography, useTheme } from '@mui/material'
 import { useEffect, useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
-import { ApiInstance } from 'services/axios'
+import { ContentCard } from '../../components/ContentCard'
+import { AddressForm } from '../../components/Form/AddressForm'
+import { PageContainer } from '../../components/PageContainer'
+import { ApiInstance } from '../../services/axios'
 import { NewUserSchema } from './Schemas/NewCustomerSchema'
 import { NewCustomerSubmit } from './Types/NewCustomerSubmit'
 
@@ -36,7 +36,10 @@ export function NewCustomer() {
 
   async function handleStoreCustomer(data: NewCustomerSubmit) {
     setIsLoading(true)
-    await ApiInstance.post('/customers', data)
+    const companyUid = localStorage.getItem('@Butfly:companyUid')
+    await ApiInstance.post(`/companies/${companyUid}/customers`, data, {
+      headers: { authorization: `Bearer ${localStorage.getItem('@Butfly:token')}` }
+    })
       .then(() => {
         setIsLoading(false)
         methods.reset()

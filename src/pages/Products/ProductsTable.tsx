@@ -1,9 +1,9 @@
 import { Box, Grid } from '@mui/material'
-import { ContentCard } from 'components/ContentCard'
-import { TableComponent } from 'components/Table'
+import { ContentCard } from '../../components/ContentCard'
+import { TableComponent } from '../../components/Table'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { ApiInstance } from 'services/axios'
+import { ApiInstance } from '../../services/axios'
 import { ExportButton } from './ExportButton'
 import { NewProduct } from './NewProduct'
 import { ProductMapper } from './Mapper/ProductMapper'
@@ -28,7 +28,10 @@ export function ProductsTable() {
 
   const fetchData = async () => {
     if (totalPages && page >= totalPages) return
-    await ApiInstance.get(`/products`, { params: { page: !page ? 1 : Number(page) + 1 } })
+    await ApiInstance.get(`/products`, {
+      params: { page: !page ? 1 : Number(page) + 1 },
+      headers: { authorization: `Bearer ${localStorage.getItem('@Butfly:token')}` }
+    })
       .then(response => {
         const newProducts = response.data.rows
         setPage(response.data.page)
@@ -65,7 +68,7 @@ export function ProductsTable() {
           </Grid>
         </Grid>
       </Box>
-      <ContentCard sx={{ p: 0, height: '100%', overflow: 'hidden' }}>
+      <ContentCard sx={{ p: 0, overflow: 'hidden' }}>
         <TableComponent rows={products} columns={columns} fetchMore={fetchData} onClickRow={handleClickRow} />
       </ContentCard>
     </>

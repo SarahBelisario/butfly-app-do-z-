@@ -1,28 +1,50 @@
 import { LoadingButton } from '@mui/lab'
-import { IconButton, InputAdornment, TextField, Typography, useTheme } from '@mui/material'
-import { useState } from 'react'
+import { Alert, IconButton, InputAdornment, TextField, Typography, useTheme } from '@mui/material'
+import { AuthContext } from '../../../contexts/AuthProvider'
+import { useContext, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { IoEyeOffOutline, IoEyeOutline } from 'react-icons/io5'
-import { useNavigate } from 'react-router-dom'
-import { motion } from 'framer-motion'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { ApiInstance } from '../../../services/axios'
 
 export default function Form(props: any) {
+  const errorMessages = {
+    'User not found.': 'Usuário não encontrado, verifique seu email',
+    'Invalid password.': 'Sua senha está incorreta',
+    'Internal server error': 'Erro interno no servidor'
+  }
   const navigate = useNavigate()
   const { register, handleSubmit } = useForm()
   const [showPassword, setShowPassword] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
-  const [isLogged] = useState(false)
+  const [notification, setNotification] = useState<{ display: boolean; status: 'success' | 'error' | 'warning'; message: string }>({
+    display: false,
+    status: 'success',
+    message: ''
+  })
   const { palette } = useTheme()
+  const { signIn } = useContext(AuthContext)
+  const location: { state: { from?: { pathname: string } } } = useLocation() as any
+  const from = location?.state?.from?.pathname || '/'
+  console.log('From: ', from)
+
   const submit = async (data: any) => {
     setIsLoading(true)
-    await ApiInstance.post('/login', { email: data.email, password: data.password })
-      .then(response => {
-        navigate('/')
+    try {
+      const response = await ApiInstance.post('/signin', { email: data.email, password: data.password })
+      const userRequest = await ApiInstance.get('/me', {
+        headers: { authorization: `Bearer ${response.data.token}` }
       })
-      .catch(error => {
-        console.log(error)
+
+      signIn(userRequest.data.user, userRequest.data.companies, () => {
+        localStorage.setItem('@Butfly:token', response.data.token)
+        navigate(from)
       })
+    } catch (error: any) {
+      const errorMessage = errorMessages[error?.response?.data.message]
+      setIsLoading(false)
+      setNotification({ display: true, message: errorMessage, status: 'error' })
+    }
   }
 
   return (
@@ -41,7 +63,7 @@ export default function Form(props: any) {
                 {showPassword ? <IoEyeOutline /> : <IoEyeOffOutline />}
               </IconButton>
             </InputAdornment>
-          ),
+          )
         }}
         required
         fullWidth
@@ -49,28 +71,14 @@ export default function Form(props: any) {
         {...register('password')}
       />
 
+      {notification.display && (
+        <Alert severity={notification.status} sx={{ mt: 2 }}>
+          {notification.message}
+        </Alert>
+      )}
+
       <LoadingButton fullWidth color="primary" variant="contained" type="submit" sx={{ mt: 2, position: 'relative' }} loading={isLoading}>
         Login
-        {isLogged ? (
-          <motion.div
-            style={{
-              background: palette.primary.main,
-              position: 'absolute',
-              borderRadius: 5000,
-              width: 0,
-              height: 0,
-            }}
-            whileInView={{
-              width: '300vh',
-              height: '300vh',
-              zIndex: 1,
-              placeItems: 'center',
-            }}
-            transition={{ ease: [0.86, 0.03, 0.1, 1], duration: 2 }}
-          />
-        ) : (
-          <></>
-        )}
       </LoadingButton>
 
       <Typography
@@ -80,7 +88,7 @@ export default function Form(props: any) {
           mt: 2,
           fontSize: 13,
           fontWeight: 'normal',
-          textAlign: 'center',
+          textAlign: 'center'
         }}
       >
         É novo por aqui?
@@ -94,7 +102,7 @@ export default function Form(props: any) {
             fontSize: 13,
             fontWeight: 'bold',
             textAlign: 'center',
-            cursor: 'pointer',
+            cursor: 'pointer'
           }}
         >
           Registre-se

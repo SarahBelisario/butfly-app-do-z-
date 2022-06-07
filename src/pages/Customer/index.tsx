@@ -1,4 +1,4 @@
-import { PageContainer } from 'components/PageContainer'
+import { PageContainer } from '../../components/PageContainer'
 import React from 'react'
 import { CustomerTable } from './CustomerTable'
 

@@ -1,4 +1,4 @@
-import { PageContainer } from 'components/PageContainer'
+import { PageContainer } from '../../components/PageContainer'
 import { ProductsTable } from './ProductsTable'
 
 export function Products() {

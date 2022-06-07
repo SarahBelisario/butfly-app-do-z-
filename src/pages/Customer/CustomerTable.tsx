@@ -1,10 +1,10 @@
 import { Box, Button, Grid, InputBase, useTheme } from '@mui/material'
-import { ContentCard } from 'components/ContentCard'
-import { TableComponent } from 'components/Table'
+import { ContentCard } from '../../components/ContentCard'
+import { TableComponent } from '../../components/Table'
 import { FormattedCustomers } from './Types/Customers'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { ApiInstance } from 'services/axios'
+import { ApiInstance } from '../../services/axios'
 import { ExportButton } from '../../components/ExportButton'
 import { CustomerMapper } from './Mapper/CustomerMapper'
 import { HiPlusSm } from 'react-icons/hi'
@@ -29,7 +29,10 @@ export function CustomerTable() {
 
   const fetchData = async () => {
     if (totalPages && page >= totalPages) return
-    await ApiInstance.get(`/customers`, { params: { page: !page ? 1 : Number(page) + 1 } })
+    await ApiInstance.get(`/customers`, {
+      params: { page: !page ? 1 : Number(page) + 1 },
+      headers: { authorization: `Bearer ${localStorage.getItem('@Butfly:token')}` }
+    })
       .then(response => {
         const newCustomers = response.data.rows
         setPage(response.data.page)

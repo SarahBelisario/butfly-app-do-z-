@@ -23,7 +23,7 @@ export function NewProduct() {
 
   async function fetchProducts(event: SyntheticEvent<Element, Event>, value: string) {
     setProductLoading(true)
-    await ApiInstance.get(`products`, { params: { name: value } })
+    await ApiInstance.get(`products`, { params: { name: value }, headers: { authorization: `Bearer ${localStorage.getItem('@Butfly:token')}` } })
       .then(response => {
         setProducts(response.data.rows)
         setProductLoading(false)
