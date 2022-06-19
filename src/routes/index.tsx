@@ -8,11 +8,12 @@ import { NotFound } from '../pages/NotFound'
 import { Products } from '../pages/Products'
 import { ThemeSelection } from '../pages/ThemeSelection'
 import { Product } from '../pages/Product'
-import { Customer } from '../pages/Customer'
+import { Customers } from '../pages/Customers'
 import { NewCustomer } from '../pages/NewCustomer'
 import { InitialSetup } from '../pages/InitialSetup'
 import { AuthProvider } from '../contexts/AuthProvider'
 import { RequireAuth } from '../components/RequireAuth'
+import Customer from '../pages/Customer'
 
 export function Routes() {
   return (
@@ -31,7 +32,8 @@ export function Routes() {
         >
           <Route path="/" element={<Home />} />
           <Route path="/ponto-de-venda" element={<Checkout />} />
-          <Route path="/clientes" element={<Customer />} />
+          <Route path="/clientes/:uid" element={<Customer />} />
+          <Route path="/clientes" element={<Customers />} />
           <Route path="/clientes/novo-cliente" element={<NewCustomer />} />
           <Route path="/produtos" element={<Products />} />
           <Route path="/produtos/:id" element={<Product />} />

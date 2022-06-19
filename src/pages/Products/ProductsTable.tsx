@@ -52,7 +52,7 @@ export function ProductsTable() {
   }, [])
 
   return (
-    <>
+    <Box height="100%" display={'flex'} flexGrow="1" flexDirection={'column'}>
       <Box mb={2} mt={3}>
         <Grid container spacing={2}>
           <Grid item xs={2} md={3} lg={6}>
@@ -68,9 +68,9 @@ export function ProductsTable() {
           </Grid>
         </Grid>
       </Box>
-      <ContentCard sx={{ p: 0, overflow: 'hidden' }}>
+      <ContentCard sx={{ p: 0, display: 'flex', overflow: 'hidden', flexGrow: 1 }}>
         <TableComponent rows={products} columns={columns} fetchMore={fetchData} onClickRow={handleClickRow} />
       </ContentCard>
-    </>
+    </Box>
   )
 }

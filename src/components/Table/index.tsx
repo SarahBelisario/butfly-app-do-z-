@@ -8,7 +8,8 @@ export function TableComponent({
   rows,
   columns,
   fetchMore,
-  onClickRow
+  onClickRow,
+  style
 }: {
   rows: Row[]
   columns: Column[]
@@ -20,6 +21,7 @@ export function TableComponent({
       function: (rowData: string) => void
     }
   }
+  style?: React.CSSProperties
   onClickRow: (rowData: { [field: string]: string | number }) => void
 }) {
   const { palette } = useTheme()
@@ -50,7 +52,7 @@ export function TableComponent({
   }
 
   return (
-    <TableContainer onScroll={onScroll} ref={ref} sx={{ maxHeight: '350px' }}>
+    <TableContainer onScroll={onScroll} ref={ref} style={{ ...style, height: '100%' }}>
       <Table stickyHeader>
         <TableHead>
           <TableRow>
@@ -79,7 +81,7 @@ export function TableComponent({
           ))}
           {!rows.length && (
             <TableRow>
-              <TableCell colSpan={columns.length} align="center" height={200}>
+              <TableCell colSpan={columns.length} align="center">
                 <Typography fontSize={20}>Whoops</Typography>
                 Não há dados para serem exibidos.
               </TableCell>

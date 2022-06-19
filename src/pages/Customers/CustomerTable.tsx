@@ -1,22 +1,22 @@
 import { Box, Button, Grid, InputBase, useTheme } from '@mui/material'
-import { ContentCard } from '../../components/ContentCard'
-import { TableComponent } from '../../components/Table'
-import { FormattedCustomers } from './Types/Customers'
-import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { ApiInstance } from '../../services/axios'
-import { ExportButton } from '../../components/ExportButton'
-import { CustomerMapper } from './Mapper/CustomerMapper'
+import { useEffect, useRef, useState } from 'react'
 import { HiPlusSm } from 'react-icons/hi'
 import { IoSearch } from 'react-icons/io5'
+import { useNavigate } from 'react-router-dom'
+import { useDebouncedCallback } from 'use-debounce'
+import { ContentCard } from '../../components/ContentCard'
+import { ExportButton } from '../../components/ExportButton'
+import { TableComponent } from '../../components/Table'
+import { ApiInstance } from '../../services/axios'
+import { CustomerMapper } from './Mapper/CustomerMapper'
+import { FormattedCustomers } from './Types/Customers'
 
 const columns: { field: string; label: string; type?: 'currency' | 'date' | 'datetime'; hidden?: boolean }[] = [
   { field: 'id', label: 'Id', hidden: true },
+  { field: 'uid', label: 'Uid', hidden: true },
   { field: 'name', label: 'Nome' },
-  { field: 'email', label: 'Email' },
-  { field: 'phone', label: 'Telefone' },
-  { field: 'createdAt', label: 'Cadastro', type: 'datetime' },
-  { field: 'contact', label: 'Contato' }
+  { field: 'surname', label: 'Apelido' },
+  { field: 'createdAt', label: 'Cadastro', type: 'datetime' }
 ]
 
 export function CustomerTable() {
@@ -24,13 +24,15 @@ export function CustomerTable() {
   const [page, setPage] = useState(0)
   const [totalPages, setTotalPages] = useState(null)
   const { palette } = useTheme()
+  const [search, setSearch] = useState()
 
   const navigate = useNavigate()
 
   const fetchData = async () => {
+    const selectedCompany = localStorage.getItem('@Butfly:companyUid')
     if (totalPages && page >= totalPages) return
-    await ApiInstance.get(`/customers`, {
-      params: { page: !page ? 1 : Number(page) + 1 },
+    await ApiInstance.get(`/companies/${selectedCompany}/customers`, {
+      params: { page: !page ? 1 : Number(page) + 1, search, include: '(phones;emails)' },
       headers: { authorization: `Bearer ${localStorage.getItem('@Butfly:token')}` }
     })
       .then(response => {
@@ -45,14 +47,22 @@ export function CustomerTable() {
   }
 
   const handleClickRow = (data: { [field: string]: string | number }) => {
-    navigate(`/clientes/${data.id}`)
+    navigate(`/clientes/${data.uid}`)
   }
 
   useEffect(() => {
     fetchData()
-  }, [])
+  }, [search])
+
+  function filterCustomer(event) {
+    const { value } = event.target
+    setPage(0)
+    setCustomers([])
+    setSearch(value)
+  }
+
   return (
-    <>
+    <Box height="100%" display={'flex'} flexGrow="1" flexDirection={'column'}>
       <Box mb={2} mt={3}>
         <Grid container spacing={2}>
           <Grid item xs={2} md={3} lg={6}>
@@ -64,6 +74,7 @@ export function CustomerTable() {
               startAdornment={<IoSearch style={{ marginRight: 8 }} />}
               placeholder="Pesquise um cliente..."
               sx={{ borderRadius: '12px', px: 2, background: palette.background.paper, color: palette.text.primary }}
+              onChange={useDebouncedCallback(filterCustomer, 500)}
             />
           </Grid>
 
@@ -80,9 +91,9 @@ export function CustomerTable() {
           </Grid>
         </Grid>
       </Box>
-      <ContentCard sx={{ p: 0, height: '100%', overflow: 'hidden' }}>
-        <TableComponent rows={customers} columns={columns} fetchMore={fetchData} onClickRow={handleClickRow} />
+      <ContentCard sx={{ p: 0, display: 'flex', overflow: 'hidden', flexGrow: 1 }}>
+        <TableComponent rows={customers} columns={columns} style={{ height: '100%' }} fetchMore={fetchData} onClickRow={handleClickRow} />
       </ContentCard>
-    </>
+    </Box>
   )
 }

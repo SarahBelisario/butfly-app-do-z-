@@ -1,17 +1,12 @@
 export interface RawCustomers {
   uid: number
   name: string
-  email: string
-  phone: string
-  address: string
+  surname: string
   createdAt: string
-  updatedAt: string
 }
 
 export interface FormattedCustomers {
   name: string
-  email: string
-  phone: string
+  surname: string
   createdAt: string
-  contact: JSX.Element
 }
