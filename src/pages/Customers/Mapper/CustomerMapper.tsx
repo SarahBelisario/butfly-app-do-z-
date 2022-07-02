@@ -6,7 +6,7 @@ export function CustomerMapper(data: RawCustomers[]): FormattedCustomers[] {
       uid: customer.uid,
       name: customer.name,
       surname: customer.surname,
-      createdAt: customer.createdAt,
+      createdAt: new Date(customer.createdAt)
     }
   })
 

@@ -8,5 +8,5 @@ export interface RawCustomers {
 export interface FormattedCustomers {
   name: string
   surname: string
-  createdAt: string
+  createdAt: Date
 }

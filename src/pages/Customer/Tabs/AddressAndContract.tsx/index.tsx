@@ -2,43 +2,17 @@ import { Box, Button, Grid, Typography, useTheme } from '@mui/material'
 import { ContentCard } from '../../../../components/ContentCard'
 import { Phones } from './Phones'
 
-export default function AddressAndContact({
-  customer
-}: {
-  customer: {
-    emails: { uid: string; email: string }[]
-    phones: { uid: string; phone: string }[]
-  }
-}) {
+export default function AddressAndContact() {
   const { palette } = useTheme()
   return (
     <Grid container spacing={2}>
-      <Grid item xs={12} md={5} lg={4}>
+      <Grid item xs={12} md={6} lg={5} xl={4}>
         <ContentCard mb={2}>
-          <Phones phones={customer.phones} />
-        </ContentCard>
-
-        <ContentCard>
-          <Typography fontWeight="light" fontSize="14px" color={palette.text.secondary}>
-            Emails
-          </Typography>
-
-          <Box my={2}>
-            {customer.emails.map(value => (
-              <Typography fontSize={14}>{value.email}</Typography>
-            ))}
-            {!customer.emails.length && <Typography fontSize={14}>Não há emails cadastrados para este cliente</Typography>}
-          </Box>
-
-          <Box width="100%" display="flex" justifyContent={'flex-end'}>
-            <Button size="small" variant="contained">
-              Novo email
-            </Button>
-          </Box>
+          <Phones />
         </ContentCard>
       </Grid>
 
-      <Grid item xs={12} md={7} lg={8}>
+      <Grid item xs={12} md={6} lg={7} xl={8}>
         <ContentCard>
           <Typography fontWeight="light" fontSize="14px" color={palette.text.secondary}>
             Endereços

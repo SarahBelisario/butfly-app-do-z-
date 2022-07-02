@@ -16,7 +16,14 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "noImplicitAny": false,
-    "baseUrl": "src"
+    "baseUrl": "./src",
+    "paths": {
+      "@pages/*": ["./pages/*"],
+      "@components/*": ["./components/*"],
+      "@services/*": ["./services/*"],
+      "@utils/*": ["./utils/*"],
+      "@contexts/*": ["./contexts/*"]
+    }
   },
   "include": ["src"],
   "exclude": ["**/node_modules", "**/.*/"]

@@ -1,5 +1,4 @@
-import React from 'react'
-import { PageContainer } from '../../components/PageContainer'
+import { PageContainer } from '@components/PageContainer'
 import { CustomerTable } from './CustomerTable'
 
 export function Customers() {
