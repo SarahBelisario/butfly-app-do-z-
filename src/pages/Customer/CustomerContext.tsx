@@ -6,7 +6,15 @@ type CustomerContextType = {
   surname?: string
   observations?: string
   createdAt: Date
-  addresses: {}[]
+  addresses: {
+    city: string
+    state: string
+    neighborhood: string
+    street: string
+    number: string
+    complement?: string
+    uid: string
+  }[]
   phones: { uid: string; phone: string }[]
   emails: { uid: string; email: string }[]
 }

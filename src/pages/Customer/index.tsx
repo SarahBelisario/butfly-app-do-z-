@@ -25,7 +25,7 @@ export default function Customer() {
 
   return (
     <CustomerContext.Provider value={{ customer, setCustomer }}>
-      <PageContainer mainText={customer?.name} secondaryText={customer?.surname || ''}>
+      <PageContainer mainText={customer?.name} secondaryText={customer?.email || ''}>
         <Box mt={3} mb={2}>
           <Tabs
             value={tab}
