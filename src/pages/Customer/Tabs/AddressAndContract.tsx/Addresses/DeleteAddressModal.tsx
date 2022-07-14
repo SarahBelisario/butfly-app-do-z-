@@ -24,7 +24,7 @@ export function DeleteAddressModal({ isOpen, onClose, addressUid }: { isOpen: bo
       })
       .catch(error => {
         setIsLoading(false)
-        toast(`Erro ao deletar o telefone.`, { type: 'error' })
+        toast(`Erro ao deletar o endereço.`, { type: 'error' })
       })
   }
 

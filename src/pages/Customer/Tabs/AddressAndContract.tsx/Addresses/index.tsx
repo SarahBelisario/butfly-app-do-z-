@@ -3,12 +3,14 @@ import { CustomerContext } from '@pages/Customer/CustomerContext'
 import { useContext, useState } from 'react'
 import { MdDelete, MdEdit } from 'react-icons/md'
 import { DeleteAddressModal } from './DeleteAddressModal'
+import { NewAddressModal } from './NewAddressModal'
 
 export function Addresses() {
   const { palette } = useTheme()
-  const { customer } = useContext(CustomerContext)
+  const { customer, setCustomer } = useContext(CustomerContext)
   const [isOpen, setIsOpen] = useState(false)
   const [addressUid, setAddressUid] = useState('')
+  const [newAddressModal, setNewAddressModal] = useState(false)
   return (
     <>
       <Typography fontWeight="light" fontSize="14px" color={palette.text.secondary}>
@@ -34,7 +36,7 @@ export function Addresses() {
                     Bairro
                   </Typography>
                   <Typography fontSize={14} fontWeight="bold" color={palette.text.primary}>
-                    {value.state}
+                    {value.neighborhood}
                   </Typography>
                 </Grid>
 
@@ -84,12 +86,13 @@ export function Addresses() {
       </Box>
 
       <Box width="100%" display="flex" justifyContent={'flex-end'}>
-        <Button size="small" variant="contained">
+        <Button variant="contained" onClick={() => setNewAddressModal(true)}>
           Novo endereço
         </Button>
       </Box>
 
       <DeleteAddressModal isOpen={isOpen} onClose={() => setIsOpen(false)} addressUid={addressUid} />
+      <NewAddressModal customer={customer} isOpen={newAddressModal} onClose={() => setNewAddressModal(false)} setCustomer={setCustomer} />
     </>
   )
 }

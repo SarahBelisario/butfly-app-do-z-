@@ -1,5 +1,6 @@
 import { useTheme } from '@mui/material'
 import { createTable } from '@tanstack/react-table'
+import { format } from 'date-fns'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { TableComponent } from '../../components/TanstackTable'
@@ -7,19 +8,10 @@ import { ApiInstance } from '../../services/axios'
 import { CustomerMapper } from './Mapper/CustomerMapper'
 import { FormattedCustomers } from './Types/Customers'
 
-const columns: { field: string; label: string; type?: 'currency' | 'date' | 'datetime'; hidden?: boolean }[] = [
-  { field: 'id', label: 'Id', hidden: true },
-  { field: 'uid', label: 'Uid', hidden: true },
-  { field: 'name', label: 'Nome' },
-  { field: 'surname', label: 'Apelido' },
-  { field: 'createdAt', label: 'Cadastro', type: 'datetime' }
-]
-
 export function CustomerTable() {
   const [customers, setCustomers] = useState<FormattedCustomers[]>([])
   const [page, setPage] = useState(0)
   const [totalPages, setTotalPages] = useState(null)
-  const { palette } = useTheme()
   const [search, setSearch] = useState<string | undefined>()
 
   const navigate = useNavigate()
@@ -36,13 +28,6 @@ export function CustomerTable() {
       setTotalPages(response.data.totalPages)
       setCustomers([...customers, ...CustomerMapper(newCustomers)])
     })
-  }
-
-  const searchFunction = async () => {
-    setCustomers([])
-    setPage(0)
-    setTotalPages(null)
-    await fetchData()
   }
 
   const handleClickRow = (data: { [field: string]: string | number }) => {
@@ -68,7 +53,8 @@ export function CustomerTable() {
       header: 'Apelido'
     }),
     table.createDataColumn('createdAt', {
-      header: 'Cadastro'
+      header: 'Cadastro',
+      cell: ({ row }) => <>{row.original?.createdAt ? format(row.original.createdAt, 'dd/MM/yyyy hh:mm:ss') : '-'}</>
     })
   ]
 

@@ -86,7 +86,11 @@ export function Phones() {
           ))}
         </Box>
 
-        {!customer?.phones.length && !isCreating && <Typography fontSize={14}>Não há telefones cadastrados para este cliente</Typography>}
+        {!customer?.phones.length && !isCreating && (
+          <Typography my={2} fontSize={14}>
+            Não há telefones cadastrados para este cliente
+          </Typography>
+        )}
         {isCreating && (
           <form id="newPhone" onSubmit={handleSubmit(handleCreatePhone)}>
             <Box display="flex" alignItems={'center'}>
@@ -105,18 +109,18 @@ export function Phones() {
       </Box>
       <Box width="100%" display="flex" justifyContent={'flex-end'}>
         {isCreating && (
-          <Button size="small" variant="outlined" sx={{ ml: 'auto', mr: 1 }} onClick={() => setIsCreating(false)}>
+          <Button variant="outlined" sx={{ ml: 'auto', mr: 1 }} onClick={() => setIsCreating(false)}>
             Cancelar
           </Button>
         )}
         {isCreating && (
-          <Button size="small" type="submit" form="newPhone" variant="contained" onClick={() => setIsCreating(true)}>
+          <Button type="submit" form="newPhone" variant="contained" onClick={() => setIsCreating(true)}>
             Salvar
           </Button>
         )}
 
         {!isCreating && (
-          <Button size="small" variant="contained" sx={{ ml: 'auto' }} onClick={() => setIsCreating(true)}>
+          <Button variant="contained" sx={{ ml: 'auto' }} onClick={() => setIsCreating(true)}>
             Adicionar telefone
           </Button>
         )}
