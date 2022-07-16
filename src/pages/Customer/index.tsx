@@ -1,16 +1,15 @@
-import { Box, Grid, Tab, Tabs, Typography, useTheme } from '@mui/material'
-import { ContentCard } from '../../components/ContentCard'
+import { Box, Tab, Tabs, useTheme } from '@mui/material'
+import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { PageContainer } from '../../components/PageContainer'
-import { useEffect, useState } from 'react'
 import { ApiInstance } from '../../services/axios'
+import { CustomerContext, CustomerContextType } from './CustomerContext'
 import AddressAndContact from './Tabs/AddressAndContract'
-import { CustomerContext } from './CustomerContext'
 
 export default function Customer() {
   const { uid } = useParams()
   const [tab, setTab] = useState(0)
-  const [customer, setCustomer] = useState<any>(null)
+  const [customer, setCustomer] = useState<CustomerContextType>({ addresses: [], createdAt: new Date(), email: '', name: '', phones: [], uid: '' })
   const { palette } = useTheme()
   const companyUid = localStorage.getItem('@Butfly:companyUid')
   useEffect(() => {
