@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom'
 import { PageContainer } from '../../components/PageContainer'
 import { useEffect, useState } from 'react'
 import { ApiInstance } from '../../services/axios'
-import AddressAndContact from './Tabs/AddressAndContract.tsx'
+import AddressAndContact from './Tabs/AddressAndContract'
 import { CustomerContext } from './CustomerContext'
 
 export default function Customer() {
@@ -42,10 +42,9 @@ export default function Customer() {
             <Tab style={{ borderRadius: 12 }} label="Resumo" />
             <Tab style={{ borderRadius: 12, overflow: 'hidden' }} label="Compras" />
             <Tab style={{ borderRadius: 12 }} label="Serviços" />
-            <Tab style={{ borderRadius: 12 }} label="Endereço & contato" />
           </Tabs>
 
-          <Box mt={3}>{tab === 3 && <AddressAndContact />}</Box>
+          <Box mt={3}>{tab === 0 && <AddressAndContact />}</Box>
         </Box>
       </PageContainer>
     </CustomerContext.Provider>

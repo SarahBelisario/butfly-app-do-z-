@@ -34,7 +34,7 @@ export function DeleteAddressModal({ isOpen, onClose, addressUid }: { isOpen: bo
       <DialogContent>
         <DialogContentText>
           Você tem certeza que deseja excluir este endereço? Esta ação irá remove-lo permanentemente da lista de endereços do cliente{' '}
-          <b>{customer.name}</b>, e não será possível recuperá-lo.
+          <b>{customer?.name}</b>, e não será possível recuperá-lo.
         </DialogContentText>
       </DialogContent>
       <DialogActions>

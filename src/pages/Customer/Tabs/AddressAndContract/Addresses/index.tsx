@@ -18,8 +18,8 @@ export function Addresses() {
       </Typography>
 
       <Box sx={{ maxHeight: 250, overflow: 'auto' }}>
-        {customer?.addresses.map((value, index) => (
-          <Box sx={{ my: 1, background: palette.background.default, p: 3, borderRadius: 4, display: 'flex' }}>
+        {customer?.addresses.map((address, index) => (
+          <Box key={index} sx={{ my: 1, background: palette.background.default, p: 3, borderRadius: 4, display: 'flex' }}>
             <>
               <Grid container>
                 <Grid item xs={5} mb={2}>
@@ -27,7 +27,7 @@ export function Addresses() {
                     Cidade
                   </Typography>
                   <Typography fontSize={14} fontWeight="bold" color={palette.text.primary}>
-                    {value.city} - {value.state}
+                    {address.city} - {address.state}
                   </Typography>
                 </Grid>
 
@@ -36,7 +36,7 @@ export function Addresses() {
                     Bairro
                   </Typography>
                   <Typography fontSize={14} fontWeight="bold" color={palette.text.primary}>
-                    {value.neighborhood}
+                    {address.neighborhood}
                   </Typography>
                 </Grid>
 
@@ -45,17 +45,17 @@ export function Addresses() {
                     Logradouro
                   </Typography>
                   <Typography fontSize={14} fontWeight="bold" color={palette.text.primary}>
-                    {value.street}, {value.number}
+                    {address?.street}, {address?.number}
                   </Typography>
                 </Grid>
 
-                {value.complement && (
+                {address?.complement && (
                   <Grid item xs={6}>
                     <Typography color="gray" fontSize={14}>
                       Complemento
                     </Typography>
                     <Typography fontSize={14} fontWeight="bold" color={palette.text.primary}>
-                      {value.complement}
+                      {address?.complement}
                     </Typography>
                   </Grid>
                 )}
@@ -68,7 +68,7 @@ export function Addresses() {
                   size="small"
                   color="error"
                   onClick={() => {
-                    setAddressUid(value.uid)
+                    setAddressUid(address?.uid)
                     setIsOpen(true)
                   }}
                 >
@@ -78,7 +78,7 @@ export function Addresses() {
             </>
           </Box>
         ))}
-        {!customer.addresses.length && (
+        {!customer?.addresses.length && (
           <Typography color="gray" fontSize={14}>
             Nenhum endereço cadastrado.
           </Typography>
