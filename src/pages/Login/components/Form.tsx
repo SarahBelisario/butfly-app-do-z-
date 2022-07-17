@@ -8,7 +8,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { ApiInstance } from '../../../services/axios'
 
 export default function Form(props: any) {
-  const errorMessages = {
+  const errorMessages: { [val: string]: string } = {
     'User not found.': 'Usuário não encontrado, verifique seu email',
     'Invalid password.': 'Sua senha está incorreta',
     'Internal server error': 'Erro interno no servidor'

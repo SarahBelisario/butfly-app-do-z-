@@ -17,7 +17,7 @@ export function QuantityInput({ onChange, value, ...props }: QuantityInputProps)
       decimalSeparator={','}
       fixedDecimalScale
       value={value}
-      onChange={event => {
+      onChange={(event: any) => {
         const value = Number(event.target.value.replace(',', '.'))
         if (onChange) onChange(event, value)
       }}

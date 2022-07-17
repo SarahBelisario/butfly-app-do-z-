@@ -11,8 +11,8 @@ interface DiscountInputProps extends NumberFormatProps {
 }
 
 export function DiscountInput({ discountType, amount, discount, setDiscount, ...props }: DiscountInputProps) {
-  function handleChangeDiscount(event) {
-    const toNumber = value => Number(value.replace(',', '.'))
+  function handleChangeDiscount(event: any) {
+    const toNumber = (value: any) => Number(value.replace(',', '.'))
     const discountValue = toNumber(event.target.value)
     if (discountType === 'money' && amount && discountValue > amount) {
       return setDiscount(amount)

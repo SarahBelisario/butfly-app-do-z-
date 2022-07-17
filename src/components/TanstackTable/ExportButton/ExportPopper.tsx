@@ -1,7 +1,7 @@
 import { Box, Grid, List, ListItemButton, ListItemIcon, ListItemText, Popover, Typography } from '@mui/material'
 import { FaFileCsv, FaFilePdf } from 'react-icons/fa'
 
-export function ExportPopper({ isOpen, anchorEl, onClose, ...props }) {
+export function ExportPopper({ isOpen, anchorEl, onClose, ...props }: { isOpen: boolean; anchorEl: any; onClose: VoidFunction }) {
   return (
     <Popover
       id="export-popover"

@@ -1,77 +1,62 @@
+import { MaskedInput } from '@components/Inputs/MaskedInput'
 import { LoadingButton } from '@mui/lab'
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Grid, TextField } from '@mui/material'
 import { ApiInstance } from '@services/axios'
-import { ViaCepInstance } from '@services/cep'
-import { AddressType, CustomerType } from '../../../../../types/GlobalProps'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import ReactInputMask from 'react-input-mask'
 import { toast } from 'react-toastify'
-import { MaskedInput } from '@components/Inputs/MaskedInput'
+import { AddressType, CustomerType } from '../../../../../types/GlobalProps'
 
-export function NewAddressModal({
+export function EditAddressModal({
+  addressUid,
   isOpen,
   customer,
   setCustomer,
   onClose
 }: {
-  isOpen: boolean
+  addressUid: string
   customer: CustomerType
+  isOpen: boolean
   setCustomer: (customer: CustomerType) => void
   onClose: VoidFunction
 }) {
+  const oldAddress = customer.addresses.find(address => address.uid === addressUid)
+  if (!oldAddress) return null
   const {
     register,
     handleSubmit,
     watch,
-    setValue,
     control,
     formState: { errors }
   } = useForm({
     defaultValues: {
       uid: '',
-      zipCode: '',
-      neighborhood: '',
-      complement: '',
-      street: '',
-      state: '',
-      city: '',
-      number: ''
+      zipCode: oldAddress?.zipCode || '',
+      neighborhood: oldAddress?.neighborhood || '',
+      complement: oldAddress?.complement || '',
+      street: oldAddress?.street || '',
+      state: oldAddress?.state || '',
+      city: oldAddress?.city || '',
+      number: oldAddress?.number || ''
     }
   })
   const [focusedInput, setFocusedInput] = useState('')
   const [isLoading, setIsLoading] = useState(false)
 
-  useEffect(() => {
-    const zipCode = watch('zipCode')
-    if (zipCode?.length === 9) {
-      ViaCepInstance(`${zipCode}/json`).then((response: { data: any }) => {
-        setValue('neighborhood', response.data.bairro || '')
-        setValue('complement', response.data.complemento || '')
-        setValue('street', response.data.logradouro || '')
-        setValue('state', response.data.uf || '')
-        setValue('city', response.data.localidade || '')
-      })
-    }
-  }, [watch('zipCode')])
-
-  function handleCheckFocus(field: any): boolean {
-    return focusedInput === field || watch(field) ? true : false
-  }
-
-  async function handleStoreAddress(data: AddressType) {
+  async function handleUpdateAddress(address: AddressType) {
     const companyUid = localStorage.getItem('@Butfly:companyUid')
 
     await ApiInstance.post(
       `/companies/${companyUid}/customers/${customer?.uid}/addresses`,
       {
-        zipCode: data.zipCode,
-        city: data.city,
-        state: data.state,
-        neighborhood: data.neighborhood,
-        street: data.street,
-        number: data.number,
-        complement: data.complement
+        zipCode: address.zipCode,
+        city: address.city,
+        state: address.state,
+        neighborhood: address.neighborhood,
+        street: address.street,
+        number: address.number,
+        complement: address.complement
       },
       {
         headers: { authorization: 'Bearer ' + localStorage.getItem('@Butfly:token') }
@@ -94,15 +79,19 @@ export function NewAddressModal({
       })
       .catch(error => {
         setIsLoading(false)
-        toast(`Erro ao cadastrar o endereço.`, { type: 'error' })
+        toast(`Erro ao atualizar o endereço.`, { type: 'error' })
       })
+  }
+
+  function handleCheckFocus(field: any): boolean {
+    return focusedInput === field || watch(field) ? true : false
   }
 
   return (
     <Dialog open={isOpen} maxWidth={'xs'} onClose={onClose}>
-      <DialogTitle>Cadastro de endereço</DialogTitle>
+      <DialogTitle>Edição de endereço</DialogTitle>
       <DialogContent>
-        <form id="address-form" onSubmit={handleSubmit(handleStoreAddress)}>
+        <form id="address-form" onSubmit={handleSubmit(handleUpdateAddress)}>
           <Grid container spacing={1} mt={0}>
             <Grid item xs={12} md={4}>
               <Controller
@@ -174,8 +163,8 @@ export function NewAddressModal({
             <Grid item xs={3}>
               <TextField
                 fullWidth
-                label="Nº"
                 {...register('number')}
+                label="Nº"
                 onFocus={() => setFocusedInput('number')}
                 onBlur={() => setFocusedInput('')}
                 InputLabelProps={{ shrink: handleCheckFocus('number') }}
@@ -200,7 +189,7 @@ export function NewAddressModal({
           Cancelar
         </Button>
         <LoadingButton loading={isLoading} variant="contained" color="primary" type="submit" form="address-form">
-          Cadastrar
+          Atualizar
         </LoadingButton>
       </DialogActions>
     </Dialog>

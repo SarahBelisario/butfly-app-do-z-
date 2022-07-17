@@ -1,5 +1,5 @@
 function signUpLocale(message: string) {
-  const messages = {
+  const messages: { [message: string]: string } = {
     'Email already registered.': 'Email já cadastrado'
   }
   return messages[message]

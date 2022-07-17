@@ -11,7 +11,7 @@ import { CheckoutContext } from '../Contexts/CheckoutContext'
 
 interface FinishTransactionProps {
   open: boolean
-  setOpen: (boolean) => void
+  setOpen: (val: boolean) => void
 }
 
 export function FinishTransaction({ open, setOpen }: FinishTransactionProps) {

@@ -1,13 +1,12 @@
+import { MaskedInput } from '@components/Inputs/MaskedInput'
 import { Grid, MenuItem, Select, TextField } from '@mui/material'
 import { Box } from '@mui/system'
-import { useContext, useState } from 'react'
-import ReactInputMask from 'react-input-mask'
+import { useContext } from 'react'
 import { toast } from 'react-toastify'
 import { ViaCepInstance } from '../../../services/cep'
 import { CheckoutContext } from '../Contexts/CheckoutContext'
 import { AddressProps } from '../types/address'
 
-const MaskedInput = props => <ReactInputMask {...props}>{inputProps => <TextField {...inputProps} />}</ReactInputMask>
 const UFList = [
   'AC',
   'AL',
@@ -40,7 +39,7 @@ const UFList = [
 
 export function Shipping() {
   const { address, setAddress } = useContext(CheckoutContext)
-  const handleChangeCep = async event => {
+  const handleChangeCep = async (event: any) => {
     const inputValue: string = event?.target?.value
     let addressInfo: AddressProps = {
       cep: inputValue || '',
@@ -72,7 +71,7 @@ export function Shipping() {
     }
   }
 
-  const handleChangeAddress = event => {
+  const handleChangeAddress = (event: any) => {
     const { name, value } = event.target
     if (address) setAddress({ ...address, [name]: value })
   }

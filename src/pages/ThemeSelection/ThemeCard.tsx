@@ -9,7 +9,17 @@ interface ThemeCard {
   backgroundColor: string
   theme: string
 }
-export function ThemeCard({ mainColor, secondaryColor, backgroundColor, theme }) {
+export function ThemeCard({
+  mainColor,
+  secondaryColor,
+  backgroundColor,
+  theme
+}: {
+  mainColor: string
+  secondaryColor: string
+  backgroundColor: string
+  theme: any
+}) {
   const { setTheme } = useContext(ThemeContext)
   return (
     <ButtonBase onClick={() => setTheme(theme)}>

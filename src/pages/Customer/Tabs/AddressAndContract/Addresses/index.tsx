@@ -3,6 +3,7 @@ import { CustomerContext } from '@pages/Customer/CustomerContext'
 import { useContext, useState } from 'react'
 import { MdDelete, MdEdit } from 'react-icons/md'
 import { DeleteAddressModal } from './DeleteAddressModal'
+import { EditAddressModal } from './EditAddressModal'
 import { NewAddressModal } from './NewAddressModal'
 
 export function Addresses() {
@@ -10,6 +11,7 @@ export function Addresses() {
   const { customer, setCustomer } = useContext(CustomerContext)
   const [isOpen, setIsOpen] = useState(false)
   const [addressUid, setAddressUid] = useState('')
+  const [editAddressModal, setEditAddressModal] = useState(false)
   const [newAddressModal, setNewAddressModal] = useState(false)
   return (
     <>
@@ -61,7 +63,14 @@ export function Addresses() {
                 )}
               </Grid>
               <Box display="flex" sx={{ mb: 1 }} alignItems="flex-start">
-                <IconButton size="small" color="info">
+                <IconButton
+                  size="small"
+                  color="info"
+                  onClick={() => {
+                    setAddressUid(address?.uid)
+                    setEditAddressModal(true)
+                  }}
+                >
                   <MdEdit />
                 </IconButton>
                 <IconButton
@@ -92,6 +101,13 @@ export function Addresses() {
       </Box>
 
       <DeleteAddressModal isOpen={isOpen} onClose={() => setIsOpen(false)} addressUid={addressUid} />
+      <EditAddressModal
+        customer={customer}
+        addressUid={addressUid}
+        isOpen={editAddressModal}
+        setCustomer={setCustomer}
+        onClose={() => setEditAddressModal(false)}
+      />
       <NewAddressModal customer={customer} isOpen={newAddressModal} onClose={() => setNewAddressModal(false)} setCustomer={setCustomer} />
     </>
   )

@@ -15,7 +15,7 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "noImplicitAny": false,
+    "noImplicitAny": true,
     "baseUrl": "./src",
     "paths": {
       "@pages/*": ["./pages/*"],
@@ -23,7 +23,8 @@
       "@services/*": ["./services/*"],
       "@utils/*": ["./utils/*"],
       "@contexts/*": ["./contexts/*"],
-      "@themes/*": ["./themes/*"]
+      "@themes/*": ["./themes/*"],
+      "@types/*": ["./types/*"]
     }
   },
   "include": ["src"],
