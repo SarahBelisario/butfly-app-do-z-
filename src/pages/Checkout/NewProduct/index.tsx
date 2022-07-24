@@ -49,7 +49,7 @@ export function NewProduct() {
     setDiscount(undefined)
   }
 
-  function handleChangeProduct(data) {
+  function handleChangeProduct(data: any) {
     setProduct(data)
     if (!amount) setAmount(data.amount)
     if (!quantity) setQuantity(1)

@@ -10,7 +10,9 @@ import { ApiInstance } from '../../../services/axios'
 import { NewUserSchema } from '../schemas/NewUserSchema'
 
 export default function Form(props: FormHTMLAttributes<HTMLFormElement>) {
-  const errorMessages = {
+  const errorMessages: {
+    [value: string]: string
+  } = {
     'Email already registered.': 'Email já cadastrado',
     'Invalid password.': 'Sua senha está incorreta'
   }

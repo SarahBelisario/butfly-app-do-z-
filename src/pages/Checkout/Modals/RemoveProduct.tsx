@@ -4,7 +4,7 @@ import { CheckoutContext } from '../Contexts/CheckoutContext'
 
 interface RemoveProductProps {
   open: boolean
-  setOpen: (boolean) => void
+  setOpen: (val: boolean) => void
 }
 
 export function RemoveProduct({ open, setOpen }: RemoveProductProps) {

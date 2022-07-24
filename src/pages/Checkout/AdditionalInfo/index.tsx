@@ -6,7 +6,7 @@ import { CheckoutContext } from '../Contexts/CheckoutContext'
 import { Customer } from './Customer'
 import { Shipping } from './Shipping'
 
-export function AdditionalInfo(props) {
+export function AdditionalInfo(props: any) {
   const { palette } = useTheme()
   const controls = useAnimation()
   const [isCollapsed, setIsCollapsed] = useState(true)

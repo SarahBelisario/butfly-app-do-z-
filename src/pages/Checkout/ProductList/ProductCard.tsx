@@ -9,7 +9,7 @@ import { EditProduct } from '../Modals/EditProductModal'
 
 interface ProductCardProps extends BoxProps {
   product: ProductListProps
-  openRemoveProduct: (boolean) => void
+  openRemoveProduct: (val: boolean) => void
   index: number
 }
 

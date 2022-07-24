@@ -21,7 +21,7 @@ export function CurrencyInput({ value, onChange, ...props }: CurrencyInputProps)
       name="amount"
       label="Valor"
       value={Number(value && value * 100)}
-      onChange={event => {
+      onChange={(event: any) => {
         const value = Number(event.target.value.replace(',', '.'))
         if (onChange) onChange(event, value)
       }}

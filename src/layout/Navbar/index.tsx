@@ -63,8 +63,10 @@ export function Navbar() {
             ...genericPalette.body
           }}
         >
-          <Box>
-            <Outlet />
+          <Box display="flex" flexDirection={'column'} minHeight="100%">
+            <Box display="flex" flexDirection={'column'} style={{ flexGrow: 1 }}>
+              <Outlet />
+            </Box>
             <Typography textAlign="center" pb={6} color="gray" sx={{ opacity: 0.6 }}>
               &copy; Butfly - {format(new Date(), 'yyyy')}
             </Typography>

@@ -1,13 +1,11 @@
+import { MaskedInput } from '@components/Inputs/MaskedInput'
 import { FormControl, Grid, MenuItem, TextField } from '@mui/material'
 import { Box } from '@mui/system'
 import { useEffect, useState } from 'react'
 import { Controller, useFormContext } from 'react-hook-form'
-import ReactInputMask from 'react-input-mask'
 import { ViaCepInstance } from '../../../services/cep'
 import UFList from '../../../utils/UFlist.json'
 import { ViaCepResponse } from './Types/ViaCepResponse'
-
-const MaskedInput = props => <ReactInputMask {...props}>{inputProps => <TextField {...inputProps} />}</ReactInputMask>
 
 export function AddressForm() {
   const {

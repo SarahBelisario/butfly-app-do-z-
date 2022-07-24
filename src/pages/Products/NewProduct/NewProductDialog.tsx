@@ -12,7 +12,7 @@ import { schema } from './NewProductSchema'
 interface NewProductDialogProps extends Omit<DialogProps, 'open'> {
   isOpen: boolean
   onClose: () => void
-  onSuccess?: (data) => void
+  onSuccess?: (data: any) => void
 }
 export function NewProductDialog({ isOpen, onClose, onSuccess, ...props }: NewProductDialogProps) {
   const {
@@ -26,7 +26,7 @@ export function NewProductDialog({ isOpen, onClose, onSuccess, ...props }: NewPr
 
   const [isLoading, setIsLoading] = useState(false)
 
-  async function onSubmit(data) {
+  async function onSubmit(data: any) {
     const { name, price, category } = data
     setIsLoading(true)
     await ApiInstance.post('/products', { name, price, category }, { headers: { authorization: `Bearer ${localStorage.getItem('@Butfly:token')}` } })
