@@ -1,7 +1,8 @@
+import { getApiUrl } from '@utils/getBaseUrl'
 import axios from 'axios'
 
 const ApiInstance = axios.create({
-  baseURL: 'http://localhost:3333',
+  baseURL: getApiUrl(),
   timeout: 10000
 })
 
